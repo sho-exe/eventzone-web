@@ -2,7 +2,7 @@
   <% // Invalidate session before generating any HTML output if (session !=null) { session.invalidate(); } %>
     <!DOCTYPE html>
     <html>
-    <jsp:include page="header_sneat.jsp" />
+    <jsp:include page="header.jsp" />
 
     <head>
       <meta http-equiv="refresh" content="3;url=Login.jsp">

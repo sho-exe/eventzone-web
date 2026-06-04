@@ -4,7 +4,7 @@
             <%@page contentType="text/html" pageEncoding="UTF-8" %>
                 <% String role=(String) session.getAttribute("accountType"); %>
 
-                    <jsp:include page="header_sneat.jsp" />
+                    <jsp:include page="header.jsp" />
 
                     <body>
                         <% if (role==null) { %>
@@ -19,11 +19,11 @@
                                 <!-- Layout wrapper -->
                                 <div class="layout-wrapper layout-content-navbar">
                                     <div class="layout-container">
-                                        <jsp:include page="sidebar_sneat.jsp" />
+                                        <jsp:include page="sidebar.jsp" />
 
                                         <!-- Layout container -->
                                         <div class="layout-page">
-                                            <jsp:include page="navbar_sneat.jsp" />
+                                            <jsp:include page="navbar.jsp" />
 
 
                                             <!--SINI-->
@@ -198,7 +198,7 @@
                                 </div>
                                 <!-- / Layout wrapper -->
 
-                                <jsp:include page="footer_sneat.jsp" />
+                                <jsp:include page="footer.jsp" />
 
                                 <% } %>
                     </body>

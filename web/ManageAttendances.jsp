@@ -2,7 +2,7 @@
     <%@page import="com.lab.model.Attendance" %>
         <%@page import="com.lab.model.Event" %>
             <%@page contentType="text/html" pageEncoding="UTF-8" %>
-                <jsp:include page="header_sneat.jsp" />
+                <jsp:include page="header.jsp" />
 
                 <body class="bg-light">
 

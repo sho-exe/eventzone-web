@@ -3,7 +3,7 @@
         <%@page contentType="text/html" pageEncoding="UTF-8" %>
             <% String role=(String) session.getAttribute("accountType"); %>
 
-                <jsp:include page="header_sneat.jsp" />
+                <jsp:include page="header.jsp" />
 
                 <body>
                     <% if (role==null) { %>
@@ -18,11 +18,11 @@
                             <!-- Layout wrapper -->
                             <div class="layout-wrapper layout-content-navbar">
                                 <div class="layout-container">
-                                    <jsp:include page="sidebar_sneat.jsp" />
+                                    <jsp:include page="sidebar.jsp" />
 
                                     <!-- Layout container -->
                                     <div class="layout-page">
-                                        <jsp:include page="navbar_sneat.jsp" />
+                                        <jsp:include page="navbar.jsp" />
 
 
                                         <!--SINI-->
@@ -36,7 +36,7 @@
                                                     <span class="text-muted fw-light">SERS /</span> Explore
                                                     Campus Events
                                                 </h4>
-                                                
+
 
                                                 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
                                                     <% List<Event> eventCatalog = (List<Event>)
@@ -151,8 +151,7 @@
                                                                                                 +
                                                                                                 e.getEventName().replace("'", "\\'"
                                                                                                 ) + "?" ; %>
-                                                                                                <form
-                                                                                                    action="events"
+                                                                                                <form action="events"
                                                                                                     method="POST"
                                                                                                     class="m-0"
                                                                                                     onsubmit="return confirm('<%= confirmMsg %>');">
@@ -202,7 +201,7 @@
                             </div>
                             <!-- / Layout wrapper -->
 
-                            <jsp:include page="footer_sneat.jsp" />
+                            <jsp:include page="footer.jsp" />
 
                             <% } %>
                 </body>

@@ -5,16 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    // Database configuration for the SERS application
     private static final String URL = "jdbc:mysql://localhost:3306/sers?useSSL=false&serverTimezone=UTC";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
-    
-    // Establishing the Singleton connection instance
+
     private static Connection connection = null;
 
     private DBConnection() {
-        // private constructor to prevent instantiation
     }
 
     public static Connection getConnection() {

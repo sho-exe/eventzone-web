@@ -56,7 +56,7 @@ public class AuthController extends HttpServlet {
                     request.getSession().setAttribute("userId", validUser.getUserId());
                     request.getSession().setAttribute("totalMerits", meritDAO.getTotalMerits(validUser.getUserId()));
 
-                    response.sendRedirect("Homepage_sneat.jsp");
+                    response.sendRedirect("Homepage.jsp");
 
                 } else {
                     // FAILURE: Send back to login.jsp with a message

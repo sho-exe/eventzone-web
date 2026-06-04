@@ -118,7 +118,7 @@ let menu, animate;
 
   // Set active menu item based on current URL
   let currentUrl = window.location.pathname.split('/').pop() + window.location.search;
-  if (currentUrl === "" || currentUrl === "/") currentUrl = "Homepage_sneat.jsp";
+  if (currentUrl === "" || currentUrl === "/") currentUrl = "Homepage.jsp";
 
   // Remove active class from all menu items initially
   document.querySelectorAll('.menu-inner .menu-item.active').forEach(item => {
@@ -139,7 +139,7 @@ let menu, animate;
 
   // If no match found, default to dashboard
   if (!activeSet) {
-    let dashboardLink = document.querySelector('.menu-inner .menu-link[href="Homepage_sneat.jsp"]');
+    let dashboardLink = document.querySelector('.menu-inner .menu-link[href="Homepage.jsp"]');
     if (dashboardLink) {
       dashboardLink.closest('.menu-item').classList.add('active');
     }
