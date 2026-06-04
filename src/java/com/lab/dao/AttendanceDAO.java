@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class AttendanceDAO {
     
     // Adapted from previous Registration logic to use a unified `attendance` table mapped precisely to custom schema
-    private static final String INSERT_ATTENDANCE = "INSERT INTO attendances (event_id, user_id, registration_date, status) VALUES (?, ?, NOW(), 'REGISTERED')";
+    private static final String INSERT_ATTENDANCE = "INSERT INTO attendances (event_id, user_id, registration_date, status) VALUES (?, ?, NOW(), 'PENDING')";
     private static final String CHECK_IF_REGISTERED = "SELECT COUNT(*) FROM attendances WHERE event_id = ? AND user_id = ?";
     private static final String COUNT_REGISTRATIONS_FOR_EVENT = "SELECT COUNT(*) FROM attendances WHERE event_id = ?";
     

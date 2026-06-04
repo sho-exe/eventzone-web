@@ -88,15 +88,20 @@ public class AttendanceController extends HttpServlet {
         String accountType = (String) session.getAttribute("accountType");
         int userId = (int) session.getAttribute("userId");
 
-        if (("approveAttendance".equals(action) || "rejectAttendance".equals(action))
+        if (("approveAttendance".equals(action) || "rejectAttendance".equals(action) ||
+             "acceptRegistration".equals(action) || "declineRegistration".equals(action))
                 && ("CHAIRPERSON".equals(accountType) || "HEPA".equals(accountType))) {
             int eventId = Integer.parseInt(request.getParameter("eventId"));
             int attendanceId = Integer.parseInt(request.getParameter("attendanceId"));
 
             if ("approveAttendance".equals(action)) {
                 attendanceDAO.updateAttendanceStatus(attendanceId, "ATTENDED", userId);
-            } else {
+            } else if ("rejectAttendance".equals(action)) {
                 attendanceDAO.updateAttendanceStatus(attendanceId, "MISSED", userId);
+            } else if ("acceptRegistration".equals(action)) {
+                attendanceDAO.updateAttendanceStatus(attendanceId, "REGISTERED", userId);
+            } else if ("declineRegistration".equals(action)) {
+                attendanceDAO.updateAttendanceStatus(attendanceId, "DECLINED", userId);
             }
             response.sendRedirect("attendances?action=manageAttendances&eventId=" + eventId);
 

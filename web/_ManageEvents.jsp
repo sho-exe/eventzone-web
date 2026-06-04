@@ -103,7 +103,7 @@
                                                     </span>
 
                                                     <% if("APPROVED".equals(e.getStatus())) { %>
-                                                        <a href="AttendanceController?action=manageAttendances&eventId=<%= e.getEventId() %>"
+                                                        <a href="attendances?action=manageAttendances&eventId=<%= e.getEventId() %>"
                                                             class="btn btn-sm btn-outline-primary fw-bold w-100">
                                                             <i class="fas fa-users me-1"></i>
                                                             Attendances

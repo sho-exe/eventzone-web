@@ -53,7 +53,15 @@
                 }
 
                 .timeline-item.pending::before {
+                    background: var(--bs-secondary);
+                }
+
+                .timeline-item.registered::before {
                     background: var(--bs-warning);
+                }
+
+                .timeline-item.declined::before {
+                    background: var(--bs-dark);
                 }
             </style>
 
@@ -74,41 +82,49 @@
                                     if(myRegistrations != null &&
                                     !myRegistrations.isEmpty()) {
                                     for(Attendance a : myRegistrations) {
-                                    boolean isPending =
-                                    "REGISTERED".equals(a.getStatus());
-                                    boolean isAttended =
-                                    "ATTENDED".equals(a.getStatus());
-                                    boolean isMissed =
-                                    "MISSED".equals(a.getStatus());
+                                    boolean isPending = "PENDING".equals(a.getStatus());
+                                    boolean isRegistered = "REGISTERED".equals(a.getStatus());
+                                    boolean isDeclined = "DECLINED".equals(a.getStatus());
+                                    boolean isAttended = "ATTENDED".equals(a.getStatus());
+                                    boolean isMissed = "MISSED".equals(a.getStatus());
 
-                                    String statusIndicatorClass = isPending ?
-                                    "pending" : (isAttended ? "attended" :
-                                    "missed");
+                                    String statusIndicatorClass = isPending ? "pending" : 
+                                                                  (isRegistered ? "registered" : 
+                                                                  (isDeclined ? "declined" : 
+                                                                  (isAttended ? "attended" : "missed")));
                                     %>
                                     <div class="timeline-item <%= statusIndicatorClass %>">
                                         <div class="card border-0 shadow-sm overflow-hidden bg-white">
                                             <% String cardBodyClass="card-body p-4 " + (isPending
+                                                ? "border-start border-secondary border-4" : (isRegistered
                                                 ? "border-start border-warning border-4" : (isAttended
-                                                ? "border-start border-success border-4" : "" )); %>
+                                                ? "border-start border-success border-4" : "" ))); %>
                                                 <div class="<%= cardBodyClass %>">
                                                     <div class="d-flex justify-content-between align-items-start mb-2">
                                                         <h5 class="fw-bold text-dark mb-0">
                                                             <%= a.getEventName() %>
                                                         </h5>
                                                         <% if(isPending) { %>
-                                                            <span class="badge bg-warning text-dark"><i
+                                                            <span class="badge bg-secondary text-white"><i
                                                                     class="fas fa-hourglass-half"></i>
-                                                                PENDING
-                                                                VERIFICATION</span>
-                                                            <% } else if(isAttended) { %>
-                                                                <span class="badge bg-success"><i
-                                                                        class="fas fa-check-double"></i>
-                                                                    ATTENDED</span>
-                                                                <% } else { %>
-                                                                    <span class="badge bg-danger"><i
-                                                                            class="fas fa-times"></i>
-                                                                        MISSED</span>
-                                                                    <% } %>
+                                                                PENDING APPROVAL</span>
+                                                        <% } else if(isRegistered) { %>
+                                                            <span class="badge bg-warning text-dark"><i
+                                                                    class="fas fa-check"></i>
+                                                                APPROVED & AWAITING EVENT</span>
+                                                        <% } else if(isAttended) { %>
+                                                            <span class="badge bg-success"><i
+                                                                    class="fas fa-check-double"></i>
+                                                                ATTENDED</span>
+                                                        <% } else if(isMissed) { %>
+                                                            <span class="badge bg-danger"><i
+                                                                    class="fas fa-times"></i>
+                                                                MISSED EVENT</span>
+                                                        <% } else if(isDeclined) { %>
+                                                            <span class="badge bg-dark"><i
+                                                                    class="fas fa-ban"></i>
+                                                                DECLINED</span>
+                                                        <% } %>
                                                     </div>
                                                     <p class="small text-muted mb-3">
                                                         <i class="fas fa-flag text-primary me-1"></i>

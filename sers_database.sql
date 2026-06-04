@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 07, 2026 at 12:57 PM
+-- Generation Time: Jun 04, 2026 at 01:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,12 +41,7 @@ CREATE TABLE `attendances` (
 --
 
 INSERT INTO `attendances` (`attendance_id`, `event_id`, `user_id`, `registration_date`, `status`, `verified_by`) VALUES
-(1, 1, 3, '2026-04-26 03:25:43', 'REGISTERED', NULL),
-(2, 1, 4, '2026-04-26 03:25:43', 'REGISTERED', NULL),
-(3, 2, 3, '2026-04-26 03:25:43', 'REGISTERED', NULL),
-(4, 2, 4, '2026-04-26 03:25:43', 'REGISTERED', NULL),
-(5, 3, 3, '2026-04-26 03:25:43', 'REGISTERED', NULL),
-(6, 3, 4, '2026-04-26 03:25:43', 'REGISTERED', NULL);
+(9, 1, 3, '2026-06-04 10:59:39', 'ATTENDED', 3);
 
 -- --------------------------------------------------------
 
@@ -96,7 +91,7 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`event_id`, `event_name`, `description`, `date`, `venue`, `quota`, `criteria`, `category`, `club_id`, `status`) VALUES
-(1, 'Annual Hackathon', 'A 24 hour coding marathon for innovative students.', '2026-05-10', 'Main Hall', 50, 'Tier 1 Merit', 'entrepreneurship', 1, 'PENDING'),
+(1, 'Annual Hackathon', 'A 24 hour coding marathon for innovative students.', '2026-05-10', 'Main Hall', 50, 'Tier 1 Merit', 'entrepreneurship', 1, 'APPROVED'),
 (2, 'Math Olympiad', 'Inter-faculty mathematics competition.', '2026-06-01', 'Lecture Hall A', 30, 'Tier 2 Merit', 'academic', 2, 'APPROVED'),
 (3, 'Debate Championship', 'Annual inter-club debate tournament.', '2026-06-15', 'Auditorium', 40, 'Tier 1 Merit', 'leadership', 3, 'PENDING'),
 (4, 'Startup Pitch Night', 'Students pitch business ideas to industry panels.', '2026-07-01', 'Innovation Hub', 25, 'Tier 1 Merit', 'entrepreneurship', 4, 'APPROVED');
@@ -146,7 +141,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `full_name`, `role`) VALUES
 (1, 'ahmad', 'ahmad123', 'admin@hepa.edu', 'Ahmad', 'HEPA'),
 (2, 'sarah', 'sarah123', 'advisor_cs@edu', 'Sarah (Advisor)', 'ADVISOR'),
-(3, 'sho', 'sho123', 'john@student.edu', 'sho (Chairperson)', 'STUDENT'),
+(3, 'sho', 'sho123', 'sho@student.edu', 'sho (Chairperson)', 'CHAIRPERSON'),
 (4, 'ali', 'ali123', 'ali@student.edu', 'Ali (Student)', 'STUDENT');
 
 --
@@ -200,7 +195,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `clubs`
@@ -212,7 +207,7 @@ ALTER TABLE `clubs`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `merits`
