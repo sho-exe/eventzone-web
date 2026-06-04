@@ -97,7 +97,7 @@ public class AttendanceController extends HttpServlet {
             } else {
                 attendanceDAO.updateAttendanceStatus(attendanceId, "MISSED", userId);
             }
-            response.sendRedirect("AttendanceController?action=manageAttendances&eventId=" + eventId);
+            response.sendRedirect("attendances?action=manageAttendances&eventId=" + eventId);
 
         } else {
             response.sendRedirect("auths?action=logout");

@@ -36,6 +36,7 @@
                                                     <span class="text-muted fw-light">SERS /</span> Explore
                                                     Campus Events
                                                 </h4>
+                                                
 
                                                 <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
                                                     <% List<Event> eventCatalog = (List<Event>)
@@ -151,7 +152,7 @@
                                                                                                 e.getEventName().replace("'", "\\'"
                                                                                                 ) + "?" ; %>
                                                                                                 <form
-                                                                                                    action="EventController?action=browse"
+                                                                                                    action="events"
                                                                                                     method="POST"
                                                                                                     class="m-0"
                                                                                                     onsubmit="return confirm('<%= confirmMsg %>');">

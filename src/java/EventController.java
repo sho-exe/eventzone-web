@@ -1,3 +1,4 @@
+
 import com.lab.dao.EventDAO;
 import com.lab.dao.AttendanceDAO;
 import com.lab.dao.ClubDAO;
@@ -105,7 +106,7 @@ public class EventController extends HttpServlet {
             newEvent.setCategory(request.getParameter("kategori"));
             newEvent.setClubId(Integer.parseInt(request.getParameter("clubId")));
             eventDAO.insertEvent(newEvent);
-            response.sendRedirect("EventController?action=manage");
+            response.sendRedirect("events?action=manage");
 
         } else if (("approve".equals(action) || "reject".equals(action))
                 && ("ADVISOR".equals(accountType) || "HEPA".equals(accountType))) {
@@ -125,7 +126,7 @@ public class EventController extends HttpServlet {
             int eventId = Integer.parseInt(request.getParameter("eventId"));
             int studentId = (int) session.getAttribute("userId");
             regDAO.registerStudent(eventId, studentId);
-            response.sendRedirect("EventController?action=browse");
+            response.sendRedirect("events?action=browse");
 
         } else {
             response.sendRedirect("auths?action=logout");
