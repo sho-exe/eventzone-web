@@ -49,31 +49,36 @@ public class EventController extends HttpServlet {
                 request.setAttribute("club", myClub);
                 request.setAttribute("eventList", myEvents);
             }
-            request.getRequestDispatcher("ManageEvents.jsp").forward(request, response);
+            request.setAttribute("activeTab", "manage");
+            request.getRequestDispatcher("EventsHub.jsp").forward(request, response);
 
         } else if ("pending".equals(action) && "ADVISOR".equals(accountType)) {
             List<Event> pendingEvents = eventDAO.selectPendingEventsByAdvisor(userId);
-            request.setAttribute("pendingEvents", pendingEvents);
-            request.getRequestDispatcher("PendingApprovals.jsp").forward(request, response);
+            request.setAttribute("adminEventList", pendingEvents);
+            request.setAttribute("viewMode", "ADVISOR_PENDING");
+            request.getRequestDispatcher("AdminEventLedger.jsp").forward(request, response);
 
         } else if ("global".equals(action) && ("HEPA".equals(accountType) || "ADVISOR".equals(accountType))) {
             List<Event> globalEvents = eventDAO.selectAllEvents();
-            request.setAttribute("globalEvents", globalEvents);
-            request.getRequestDispatcher("GlobalEvents.jsp").forward(request, response);
+            request.setAttribute("adminEventList", globalEvents);
+            request.setAttribute("viewMode", "HEPA_GLOBAL");
+            request.getRequestDispatcher("AdminEventLedger.jsp").forward(request, response);
 
         } else if ("clubEvents".equals(action) && "ADVISOR".equals(accountType)) {
             List<Event> clubEvents = eventDAO.selectAllEventsByAdvisor(userId);
-            request.setAttribute("clubEvents", clubEvents);
-            request.getRequestDispatcher("ClubEvents.jsp").forward(request, response);
+            request.setAttribute("adminEventList", clubEvents);
+            request.setAttribute("viewMode", "ADVISOR_HISTORY");
+            request.getRequestDispatcher("AdminEventLedger.jsp").forward(request, response);
 
-        } else if ("browse".equals(action) && "STUDENT".equals(accountType)) {
+        } else if ("browse".equals(action) && ("STUDENT".equals(accountType) || "CHAIRPERSON".equals(accountType))) {
             List<Event> approvedEvents = eventDAO.selectApprovedEvents();
             for (Event e : approvedEvents) {
                 e.setAlreadyRegistered(regDAO.isStudentRegistered(e.getEventId(), userId));
                 e.setCurrentEnrollments(regDAO.getEnrollmentCount(e.getEventId()));
             }
             request.setAttribute("eventCatalog", approvedEvents);
-            request.getRequestDispatcher("BrowseEvents.jsp").forward(request, response);
+            request.setAttribute("activeTab", "explore");
+            request.getRequestDispatcher("EventsHub.jsp").forward(request, response);
 
         } else {
             response.sendRedirect("auths?action=logout");
@@ -117,18 +122,19 @@ public class EventController extends HttpServlet {
             // Redirect back to context
             String referer = request.getHeader("referer");
             if (referer != null && referer.contains("global")) {
-                response.sendRedirect("EventController?action=global");
+                response.sendRedirect("events?action=global");
             } else {
-                response.sendRedirect("EventController?action=pending");
+                response.sendRedirect("events?action=pending");
             }
 
-        } else if ("register".equals(action) && "STUDENT".equals(accountType)) {
+        } else if ("register".equals(action) && ("STUDENT".equals(accountType) || "CHAIRPERSON".equals(accountType))) {
             int eventId = Integer.parseInt(request.getParameter("eventId"));
             int studentId = (int) session.getAttribute("userId");
             regDAO.registerStudent(eventId, studentId);
             response.sendRedirect("events?action=browse");
 
         } else {
+
             response.sendRedirect("auths?action=logout");
         }
     }

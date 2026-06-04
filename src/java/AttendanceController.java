@@ -37,10 +37,11 @@ public class AttendanceController extends HttpServlet {
         String accountType = (String) session.getAttribute("accountType");
         int userId = (int) session.getAttribute("userId");
 
-        if ("myAttendance".equals(action) && "STUDENT".equals(accountType)) {
+        if ("myAttendance".equals(action) && ("STUDENT".equals(accountType) || "CHAIRPERSON".equals(accountType))) {
             List<Attendance> myRegistrations = attendanceDAO.getStudentRegistrations(userId);
             request.setAttribute("myRegistrations", myRegistrations);
-            request.getRequestDispatcher("MyRegistrations.jsp").forward(request, response);
+            request.setAttribute("activeTab", "registrations");
+            request.getRequestDispatcher("EventsHub.jsp").forward(request, response);
 
         } else if ("manageAttendances".equals(action)
                 && ("CHAIRPERSON".equals(accountType) || "HEPA".equals(accountType))) {
