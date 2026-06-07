@@ -96,7 +96,7 @@ public class ClubController extends HttpServlet {
                 int clubId = Integer.parseInt(request.getParameter("clubId"));
                 clubDAO.deleteClub(clubId);
             }
-            response.sendRedirect("ClubController?action=manage");
+            response.sendRedirect("clubs?action=manage");
         }
 
         // ADVISOR Actions
@@ -116,7 +116,7 @@ public class ClubController extends HttpServlet {
                             chairpersonId);
                 }
             }
-            response.sendRedirect("ClubController?action=advisor");
+            response.sendRedirect("clubs?action=advisor");
         } else {
             response.sendRedirect("auths?action=logout");
         }

@@ -1,3 +1,4 @@
+
 import com.lab.dao.EventDAO;
 import com.lab.dao.MeritDAO;
 import com.lab.model.Event;
@@ -60,6 +61,7 @@ public class MeritController extends HttpServlet {
 
         } else {
             response.sendRedirect("auths?action=logout");
+
         }
     }
 
@@ -75,15 +77,15 @@ public class MeritController extends HttpServlet {
 
         String action = request.getParameter("action");
         String accountType = (String) session.getAttribute("accountType");
+        int eventId = Integer.parseInt(request.getParameter("eventId"));
+        int points = Integer.parseInt(request.getParameter("points"));
 
-        if ("distribute".equals(action) && "HEPA".equals(accountType)) {
-            int eventId = Integer.parseInt(request.getParameter("eventId"));
-            int points = Integer.parseInt(request.getParameter("points"));
+        if ("distributeMerits".equals(action) && "HEPA".equals(accountType)) {
 
             meritDAO.distributeMerits(eventId, points);
-            response.sendRedirect("MeritController?action=distributeMerits&success=true");
 
         } else {
+
             response.sendRedirect("auths?action=logout");
         }
     }

@@ -58,7 +58,7 @@
                                                                                 class="card h-100 club-card bg-white  p-0 border position-relative">
                                                                                 <!-- Tiny Delete Button Form Floating Top Right -->
                                                                                 <form
-                                                                                    action="ClubController?action=manage"
+                                                                                    action="clubs"
                                                                                     method="POST"
                                                                                     class="position-absolute end-0 top-0 m-2"
                                                                                     style="z-index: 10;"
@@ -73,7 +73,7 @@
                                                                                 </form>
 
                                                                                 <form
-                                                                                    action="ClubController?action=manage"
+                                                                                    action="clubs"
                                                                                     method="POST"
                                                                                     class="h-100 d-flex flex-column">
                                                                                     <input type="hidden" name="action"
