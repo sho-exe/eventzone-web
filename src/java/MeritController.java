@@ -84,6 +84,8 @@ public class MeritController extends HttpServlet {
 
             meritDAO.distributeMerits(eventId, points);
 
+            response.sendRedirect("merits?action=distributeMerits&success=true");
+
         } else {
 
             response.sendRedirect("auths?action=logout");

@@ -1,5 +1,97 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<% String role = (String) session.getAttribute("accountType"); %>
+<%@page import="java.sql.*" %>
+<%@page import="com.lab.dao.DBConnection" %>
+<%
+    String role = (String) session.getAttribute("accountType");
+    Integer overviewUserId = (Integer) session.getAttribute("userId");
+    
+    int totalUserCount = 0;
+    int pendingMeritBatches = 0;
+    int activeClubCount = 0;
+    
+    int pendingApprovalCount = 0;
+    int clubParticipantCount = 0;
+    
+    int totalMerits = 0;
+    int upcomingEventCount = 0;
+    
+    if (role != null) {
+        try (Connection conn = DBConnection.getConnection()) {
+            if ("HEPA".equals(role)) {
+                // 1. Total User Count
+                try (PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM users")) {
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) totalUserCount = rs.getInt(1);
+                }
+                // 2. Active Club Count
+                try (PreparedStatement ps = conn.prepareStatement("SELECT COUNT(*) FROM clubs")) {
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) activeClubCount = rs.getInt(1);
+                }
+                // 3. Pending Merit Batches
+                String sqlPending = "SELECT COUNT(DISTINCT a.event_id) FROM attendances a " +
+                                    "JOIN events e ON a.event_id = e.event_id " +
+                                    "LEFT JOIN merits m ON a.event_id = m.event_id " +
+                                    "WHERE a.status = 'ATTENDED' AND m.event_id IS NULL";
+                try (PreparedStatement ps = conn.prepareStatement(sqlPending)) {
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) pendingMeritBatches = rs.getInt(1);
+                }
+            } else if ("ADVISOR".equals(role)) {
+                if (overviewUserId != null) {
+                    // 1. Pending Approval Count for Advisor
+                    String sqlPendingApp = "SELECT COUNT(*) FROM events e " +
+                                           "JOIN clubs c ON e.club_id = c.club_id " +
+                                           "WHERE e.status = 'PENDING' AND c.advisor_id = ?";
+                    try (PreparedStatement ps = conn.prepareStatement(sqlPendingApp)) {
+                        ps.setInt(1, overviewUserId);
+                        ResultSet rs = ps.executeQuery();
+                        if (rs.next()) pendingApprovalCount = rs.getInt(1);
+                    }
+                    // 2. Club Participant Count
+                    String sqlParticipants = "SELECT COUNT(DISTINCT a.user_id) FROM attendances a " +
+                                             "JOIN events e ON a.event_id = e.event_id " +
+                                             "JOIN clubs c ON e.club_id = c.club_id " +
+                                             "WHERE c.advisor_id = ? AND a.status = 'ATTENDED'";
+                    try (PreparedStatement ps = conn.prepareStatement(sqlParticipants)) {
+                        ps.setInt(1, overviewUserId);
+                        ResultSet rs = ps.executeQuery();
+                        if (rs.next()) clubParticipantCount = rs.getInt(1);
+                    }
+                }
+            } else if ("STUDENT".equals(role)) {
+                if (overviewUserId != null) {
+                    // 1. Total Merits
+                    try (PreparedStatement ps = conn.prepareStatement("SELECT COALESCE(SUM(points), 0) FROM merits WHERE user_id = ?")) {
+                        ps.setInt(1, overviewUserId);
+                        ResultSet rs = ps.executeQuery();
+                        if (rs.next()) totalMerits = rs.getInt(1);
+                    }
+                    // 2. Upcoming Events
+                    String sqlUpcoming = "SELECT COUNT(*) FROM attendances a " +
+                                         "JOIN events e ON a.event_id = e.event_id " +
+                                         "WHERE a.user_id = ? AND e.date >= CURRENT_DATE";
+                    try (PreparedStatement ps = conn.prepareStatement(sqlUpcoming)) {
+                        ps.setInt(1, overviewUserId);
+                        ResultSet rs = ps.executeQuery();
+                        if (rs.next()) upcomingEventCount = rs.getInt(1);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // Set request attributes so EL expressions can resolve them
+    request.setAttribute("totalUserCount", totalUserCount);
+    request.setAttribute("pendingMeritBatches", pendingMeritBatches);
+    request.setAttribute("activeClubCount", activeClubCount);
+    request.setAttribute("pendingApprovalCount", pendingApprovalCount);
+    request.setAttribute("clubParticipantCount", clubParticipantCount);
+    request.setAttribute("totalMerits", totalMerits);
+    request.setAttribute("upcomingEventCount", upcomingEventCount);
+%>
 
                                         <% if ("STUDENT".equals(role)) { %>
                                             <div class="row">

@@ -254,6 +254,13 @@ p {
     opacity: 0.8;
 }
 
+/* Ensure buttons inside tables are vertically centered and don't inherit top margins */
+table .btn,
+.table .btn {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
 /* Role Badges */
 .role-badge {
     padding: 4px 10px;
@@ -960,6 +967,17 @@ p {
 .btn-outline-primary:hover {
     color: #fff !important;
     background: var(--role-accent, #696cff) !important;
+}
+
+/* Fix outline danger buttons being white text on light background */
+.btn-outline-danger {
+    color: #ff3e1d !important;
+    border-color: #ff3e1d !important;
+    background: transparent !important;
+}
+.btn-outline-danger:hover {
+    color: #fff !important;
+    background: #ff3e1d !important;
 }
 
 /* Modal inputs matching role accent color on focus */

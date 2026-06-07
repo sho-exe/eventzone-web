@@ -39,17 +39,21 @@
                                                     </h4>
 
                                                     <% if(request.getParameter("success") !=null) { %>
-                                                        <div class="alert alert-success d-flex align-items-center "
-                                                            role="alert">
-                                                            <i class="fas fa-check-circle fa-2x me-3"></i>
-                                                            <div>
-                                                                <strong>Merits Distributed Successfully!</strong><br>
-                                                                Students have automatically received their event points
-                                                                on their immutable
-                                                                transcript.
-                                                            </div>
-                                                        </div>
-                                                        <% } %>
+                                                         <div class="alert alert-success border-0 shadow-sm mb-4 alert-dismissible fade show d-flex align-items-center"
+                                                             role="alert" id="successAlert">
+                                                             <i class="bx bx-check-circle me-3 fs-3"></i>
+                                                             <div>
+                                                                 <strong>Merits Distributed Successfully!</strong><br>
+                                                                 Students have automatically received their event points
+                                                                 on their immutable
+                                                                 transcript.
+                                                                 <span class="badge bg-white text-success ms-2 countdown-badge" style="font-size: 0.75rem; vertical-align: middle;">3s</span>
+                                                             </div>
+                                                             <button type="button" class="btn-close"
+                                                                 data-bs-dismiss="alert"
+                                                                 aria-label="Close"></button>
+                                                         </div>
+                                                         <% } %>
 
                                                             <div
                                                                 class="alert alert-info border-0  bg-primary-soft text-dark mb-4">
@@ -224,6 +228,26 @@
                                 <jsp:include page="footer.jsp" />
 
                                 <% } %>
+                                <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    const alertEl = document.getElementById("successAlert");
+                                    if (alertEl) {
+                                        const badge = alertEl.querySelector(".countdown-badge");
+                                        let timeLeft = 3;
+                                        const interval = setInterval(() => {
+                                            timeLeft--;
+                                            if (badge) {
+                                                badge.textContent = timeLeft + "s";
+                                            }
+                                            if (timeLeft <= 0) {
+                                                clearInterval(interval);
+                                                const bsAlert = new bootstrap.Alert(alertEl);
+                                                bsAlert.close();
+                                            }
+                                        }, 1000);
+                                    }
+                                });
+                                </script>
                     </body>
 
                     </html>
