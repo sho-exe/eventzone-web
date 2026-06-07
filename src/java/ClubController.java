@@ -74,10 +74,12 @@ public class ClubController extends HttpServlet {
 
         // HEPA Actions
         if ("HEPA".equals(accountType)) {
+            String message = "";
             if ("createClub".equals(action)) {
                 String name = request.getParameter("clubName");
                 String desc = request.getParameter("description");
                 clubDAO.insertClub(new Club(name, desc));
+                message = "Club created successfully!";
             } else if ("updateClub".equals(action) || "assignRoles".equals(action)) {
                 int clubId = Integer.parseInt(request.getParameter("clubId"));
                 String name = request.getParameter("clubName");
@@ -92,15 +94,22 @@ public class ClubController extends HttpServlet {
                 if (name == null || name.trim().isEmpty())
                     name = "Unnamed Club";
                 clubDAO.updateClub(clubId, name, desc, advisorId, chairpersonId);
+                message = "Club updated successfully!";
             } else if ("deleteClub".equals(action)) {
                 int clubId = Integer.parseInt(request.getParameter("clubId"));
                 clubDAO.deleteClub(clubId);
+                message = "Club deleted successfully!";
             }
-            response.sendRedirect("clubs?action=manage");
+            if (!message.isEmpty()) {
+                response.sendRedirect("clubs?action=manage&message=" + java.net.URLEncoder.encode(message, "UTF-8"));
+            } else {
+                response.sendRedirect("clubs?action=manage");
+            }
         }
 
         // ADVISOR Actions
         else if ("ADVISOR".equals(accountType)) {
+            String message = "";
             if ("assignChairperson".equals(action)) {
                 int clubId = Integer.parseInt(request.getParameter("clubId"));
                 String chairStr = request.getParameter("chairpersonId");
@@ -114,9 +123,14 @@ public class ClubController extends HttpServlet {
                 if (targetClub != null && targetClub.getAdvisorId() != null && targetClub.getAdvisorId() == advisorId) {
                     clubDAO.updateClub(clubId, targetClub.getClubName(), targetClub.getDescription(), advisorId,
                             chairpersonId);
+                    message = "Chairperson assigned successfully!";
                 }
             }
-            response.sendRedirect("clubs?action=advisor");
+            if (!message.isEmpty()) {
+                response.sendRedirect("clubs?action=advisor&message=" + java.net.URLEncoder.encode(message, "UTF-8"));
+            } else {
+                response.sendRedirect("clubs?action=advisor");
+            }
         } else {
             response.sendRedirect("auths?action=logout");
         }

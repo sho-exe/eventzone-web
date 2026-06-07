@@ -65,7 +65,7 @@ public class UserController extends HttpServlet {
             int userId = Integer.parseInt(request.getParameter("userId"));
             String newRole = request.getParameter("newRole");
             userDAO.updateUserRole(userId, newRole);
-            response.sendRedirect("users?action=manage");
+            response.sendRedirect("users?action=manage&message=" + java.net.URLEncoder.encode("User role updated successfully!", "UTF-8"));
 
         } else if ("updateProfile".equals(action)) {
             HttpSession session = request.getSession(false);

@@ -47,94 +47,54 @@
 
                         <div class="row justify-content-center">
                             <div class="col-lg-7 col-md-9">
-                                <div class="profile-card card">
-
-                                    <!-- Profile Header -->
-                                    <%
-                                        String headerClass = "student";
-                                        if ("HEPA".equals(role))        headerClass = "hepa";
-                                        else if ("ADVISOR".equals(role))     headerClass = "advisor";
-                                        else if ("CHAIRPERSON".equals(role)) headerClass = "chair";
-                                        String initials = "?";
-                                        if (profileUser != null && profileUser.getFullName() != null) {
-                                            String[] parts = profileUser.getFullName().trim().split("\\s+");
-                                            initials = parts.length >= 2
-                                                ? String.valueOf(parts[0].charAt(0)) + String.valueOf(parts[parts.length-1].charAt(0))
-                                                : String.valueOf(parts[0].charAt(0));
-                                        }
-                                    %>
-                                    <div class="profile-header <%= headerClass %>">
-                                        <div class="profile-avatar"><%= initials.toUpperCase() %></div>
-                                        <h5 class="mb-1 fw-bold"><%= profileUser != null ? profileUser.getFullName() : "—" %></h5>
-                                        <div class="text-white-50 small"><%= profileUser != null ? profileUser.getEmail() : "" %></div>
-                                        <span class="profile-role-pill"><%= role %></span>
-                                    </div>
-
-                                    <!-- Update Form -->
-                                    <div class="profile-body">
+                                <div class="card mt-4">
+                                    <h5 class="card-header fw-bold">Profile Details</h5>
+                                    <div class="card-body">
                                         <form action="users" method="POST">
                                             <input type="hidden" name="action" value="updateProfile">
 
-                                            <p class="form-section-title"><i class="fas fa-id-card me-2"></i>Account Information</p>
-
-                                            <!-- Read-only username -->
+                                            <!-- Username (Read-only) -->
                                             <div class="mb-3">
-                                                <label class="form-label small fw-semibold text-muted">Username</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text"><i class="fas fa-at"></i></span>
-                                                    <input type="text" class="form-control profile-input"
-                                                           value="<%= profileUser != null ? profileUser.getUsername() : "" %>"
-                                                           readonly>
-                                                </div>
-                                                <small class="text-muted">Username cannot be changed.</small>
+                                                <label class="form-label fw-semibold" for="username">Username</label>
+                                                <input type="text" id="username" class="form-control"
+                                                       value="<%= profileUser != null ? profileUser.getUsername() : "" %>"
+                                                       readonly>
                                             </div>
 
                                             <!-- Full Name -->
                                             <div class="mb-3">
-                                                <label class="form-label small fw-semibold text-muted" for="fullName">Full Name</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                                    <input type="text" id="fullName" name="fullName"
-                                                           class="form-control profile-input"
-                                                           value="<%= profileUser != null ? profileUser.getFullName() : "" %>"
-                                                           required>
-                                                </div>
+                                                <label class="form-label fw-semibold" for="fullName">Full Name</label>
+                                                <input type="text" id="fullName" name="fullName"
+                                                       class="form-control"
+                                                       value="<%= profileUser != null ? profileUser.getFullName() : "" %>"
+                                                       required>
                                             </div>
 
                                             <!-- Email -->
-                                            <div class="mb-4">
-                                                <label class="form-label small fw-semibold text-muted" for="email">Email Address</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                                    <input type="email" id="email" name="email"
-                                                           class="form-control profile-input"
-                                                           value="<%= profileUser != null ? profileUser.getEmail() : "" %>"
-                                                           required>
-                                                </div>
+                                            <div class="mb-3">
+                                                <label class="form-label fw-semibold" for="email">Email Address</label>
+                                                <input type="email" id="email" name="email"
+                                                       class="form-control"
+                                                       value="<%= profileUser != null ? profileUser.getEmail() : "" %>"
+                                                       required>
                                             </div>
-
-                                            <p class="form-section-title"><i class="fas fa-lock me-2"></i>Change Password</p>
 
                                             <!-- New Password -->
-                                            <div class="mb-3">
-                                                <label class="form-label small fw-semibold text-muted" for="newPassword">New Password</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                                    <input type="password" id="newPassword" name="newPassword"
-                                                           class="form-control profile-input"
-                                                           placeholder="Leave blank to keep current password">
-                                                </div>
+                                            <div class="mb-4">
+                                                <label class="form-label fw-semibold" for="newPassword">New Password</label>
+                                                <input type="password" id="newPassword" name="newPassword"
+                                                       class="form-control"
+                                                       placeholder="Leave blank to keep current password">
                                             </div>
 
-                                            <div class="d-flex justify-content-end mt-4">
-                                                <button type="submit" class="btn btn-update">
-                                                    <i class="fas fa-save me-2"></i> Save Changes
+                                            <div class="d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Save Changes
                                                 </button>
                                             </div>
 
                                         </form>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

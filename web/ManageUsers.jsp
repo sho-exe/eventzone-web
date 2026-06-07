@@ -33,6 +33,15 @@
                                                     Manage Users
                                                 </h4>
 
+                                                <% String message = request.getParameter("message"); %>
+                                                <% if (message != null && !message.trim().isEmpty()) { %>
+                                                    <div class="alert alert-success border-0 shadow-sm mb-4 alert-dismissible fade show" role="alert" id="successAlert">
+                                                        <i class="bx bx-check-circle me-2"></i> <%= message %>
+                                                        <span class="badge bg-white text-success ms-2 countdown-badge" style="font-size: 0.75rem; vertical-align: middle;">3s</span>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>
+                                                <% } %>
+
                                                 <div class="alert alert-info border-0 shadow-sm">
                                                     <i class="fas fa-info-circle me-2"></i> As a <strong>HEPA
                                                         Administrator</strong>, you can assign
@@ -46,10 +55,11 @@
                                                         <table class="table table-hover">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>ID</th>
-                                                                    <th>Full Name</th>
+                                                                    <th class="text-center" style="width: 70px;">#</th>
+                                                                    <th onclick="sortTable(1)" style="cursor: pointer; user-select: none;">ID <i class="bx bx-sort-alt-2 ms-1 small text-muted"></i></th>
+                                                                    <th onclick="sortTable(2)" style="cursor: pointer; user-select: none;">Full Name <i class="bx bx-sort-alt-2 ms-1 small text-muted"></i></th>
                                                                     <th>Email Address</th>
-                                                                    <th>Current Role</th>
+                                                                    <th onclick="sortTable(4)" style="cursor: pointer; user-select: none;">Current Role <i class="bx bx-sort-alt-2 ms-1 small text-muted"></i></th>
                                                                     <th class="text-center">Actions</th>
                                                                 </tr>
                                                             </thead>
@@ -57,7 +67,9 @@
                                                                 <% List<User> userList = (List<User>)
                                                                         request.getAttribute("userList");
                                                                         if(userList != null && !userList.isEmpty()) {
+                                                                        int userIndex = 0;
                                                                         for(User u : userList) {
+                                                                        userIndex++;
                                                                         String roleClass = "bg-label-primary";
                                                                         if(u.getRole().equals("HEPA")) roleClass =
                                                                         "bg-label-danger";
@@ -67,6 +79,9 @@
                                                                         = "bg-label-warning";
                                                                         %>
                                                                         <tr>
+                                                                            <td class="text-center fw-semibold text-muted">
+                                                                                <%= userIndex %>
+                                                                            </td>
                                                                             <td class="px-4 text-muted">#<%=
                                                                                     u.getUserId() %>
                                                                             </td>
@@ -94,26 +109,27 @@
                                                                                             value="<%= u.getUserId() %>">
                                                                                         <div
                                                                                             class="input-group input-group-sm d-flex justify-content-center">
-                                                                                            <select name="newRole"
-                                                                                                class="form-select form-select-sm"
-                                                                                                style="max-width: 150px;">
-                                                                                                <option value="STUDENT"
-                                                                                                    <%=u.getRole().equals("STUDENT")
-                                                                                                    ? "selected" : "" %>
-                                                                                                    >Student</option>
-                                                                                                <option value="ADVISOR"
-                                                                                                    <%=u.getRole().equals("ADVISOR")
-                                                                                                    ? "selected" : "" %>
-                                                                                                    >Advisor</option>
-                                                                                                <option
-                                                                                                    value="CHAIRPERSON"
-                                                                                                    <%=u.getRole().equals("CHAIRPERSON")
-                                                                                                    ? "selected" : "" %>
-                                                                                                    >Chairperson
-                                                                                                </option>
-                                                                                            </select>
-                                                                                            <button type="submit"
-                                                                                                class="btn btn-dark">Update</button>
+                                                                                             <select name="newRole"
+                                                                                                 class="form-select form-select-sm assign-select"
+                                                                                                 style="max-width: 150px; border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important; border-right: none !important;">
+                                                                                                 <option value="STUDENT"
+                                                                                                     <%=u.getRole().equals("STUDENT")
+                                                                                                     ? "selected" : "" %>
+                                                                                                     >Student</option>
+                                                                                                 <option value="ADVISOR"
+                                                                                                     <%=u.getRole().equals("ADVISOR")
+                                                                                                     ? "selected" : "" %>
+                                                                                                     >Advisor</option>
+                                                                                                 <option
+                                                                                                     value="CHAIRPERSON"
+                                                                                                     <%=u.getRole().equals("CHAIRPERSON")
+                                                                                                     ? "selected" : "" %>
+                                                                                                     >Chairperson
+                                                                                                 </option>
+                                                                                             </select>
+                                                                                             <button type="submit"
+                                                                                                 class="btn btn-save"
+                                                                                                 style="width: auto; padding: 0 16px; border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important; margin-top: 0 !important; display: flex; align-items: center; font-size: 0.82rem; height: 35px;">Update</button>
                                                                                         </div>
                                                                                     </form>
                                                                                     <% } else { %>
@@ -126,7 +142,7 @@
                                                                         </tr>
                                                                         <% } } else { %>
                                                                             <tr>
-                                                                                <td colspan="5"
+                                                                                <td colspan="6"
                                                                                     class="text-center py-5 text-muted">
                                                                                     <i
                                                                                         class="fas fa-folder-open fa-3x mb-3 text-light"></i><br>
@@ -158,6 +174,82 @@
                             <jsp:include page="footer.jsp" />
 
                             <% } %>
+
+                            <script>
+                            let sortDirections = {};
+
+                            function sortTable(colIndex) {
+                                const table = document.querySelector(".table");
+                                const tbody = table.querySelector("tbody");
+                                const rows = Array.from(tbody.querySelectorAll("tr"));
+                                
+                                if (rows.length === 1 && rows[0].querySelector("td[colspan]")) {
+                                    return;
+                                }
+
+                                const currentDir = sortDirections[colIndex] || 'desc';
+                                const nextDir = currentDir === 'desc' ? 'asc' : 'desc';
+                                sortDirections[colIndex] = nextDir;
+
+                                rows.sort((a, b) => {
+                                    let valA = a.cells[colIndex].textContent.trim();
+                                    let valB = b.cells[colIndex].textContent.trim();
+
+                                    if (colIndex === 1) {
+                                        valA = parseInt(valA.replace(/[^0-9]/g, '')) || 0;
+                                        valB = parseInt(valB.replace(/[^0-9]/g, '')) || 0;
+                                        return nextDir === 'asc' ? valA - valB : valB - valA;
+                                    }
+
+                                    return nextDir === 'asc' 
+                                        ? valA.localeCompare(valB) 
+                                        : valB.localeCompare(valA);
+                                });
+
+                                rows.forEach(row => tbody.appendChild(row));
+
+                                const updatedRows = tbody.querySelectorAll("tr");
+                                updatedRows.forEach((row, i) => {
+                                    const indexCell = row.cells[0];
+                                    if (indexCell && !indexCell.hasAttribute("colspan")) {
+                                        indexCell.textContent = i + 1;
+                                    }
+                                });
+                                
+                                table.querySelectorAll("thead th i").forEach(icon => {
+                                    if (icon.classList.contains("bx-chevron-up") || icon.classList.contains("bx-chevron-down") || icon.classList.contains("bx-sort-alt-2")) {
+                                        icon.className = "bx bx-sort-alt-2 ms-1 small text-muted";
+                                    }
+                                });
+                                
+                                const activeHeader = table.querySelectorAll("thead th")[colIndex];
+                                if (activeHeader) {
+                                    const icon = activeHeader.querySelector("i");
+                                    if (icon) {
+                                        icon.className = nextDir === 'asc' ? "bx bx-chevron-up ms-1 text-primary" : "bx bx-chevron-down ms-1 text-primary";
+                                    }
+                                }
+                            }
+
+                             document.addEventListener("DOMContentLoaded", function() {
+                                 const alertEl = document.getElementById("successAlert");
+                                 if (alertEl) {
+                                     const badge = alertEl.querySelector(".countdown-badge");
+                                     let timeLeft = 3;
+                                     const interval = setInterval(() => {
+                                         timeLeft--;
+                                         if (badge) {
+                                             badge.textContent = timeLeft + "s";
+                                         }
+                                         if (timeLeft <= 0) {
+                                             clearInterval(interval);
+                                             const bsAlert = new bootstrap.Alert(alertEl);
+                                             bsAlert.close();
+                                         }
+                                     }, 1000);
+                                 }
+                             });
+                            </script>
                 </body>
 
                 </html>

@@ -213,13 +213,6 @@
                                     </a>
                                 </li>
                                 <% } %>
-                                    <li class="menu-item">
-                                        <a href="Logout.jsp" class="menu-link text-danger"
-                                            onclick="return confirm('Are you sure you want to log out?');">
-                                            <i class="menu-icon tf-icons bx bx-power-off"></i>
-                                            <div data-i18n="Logout">Logout</div>
-                                        </a>
-                                    </li>
             </ul>
         </aside>
         <!-- / Menu -->

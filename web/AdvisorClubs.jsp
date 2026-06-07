@@ -34,6 +34,14 @@
                                                         My Managed Clubs
                                                     </h4>
 
+                                                    <% String message = request.getParameter("message"); %>
+                                                    <% if (message != null && !message.trim().isEmpty()) { %>
+                                                        <div class="alert alert-success border-0 shadow-sm mb-4 alert-dismissible" role="alert">
+                                                            <i class="bx bx-check-circle me-2"></i> <%= message %>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                        </div>
+                                                    <% } %>
+
                                                     <div class="alert alert-success border-0  bg-success-soft"
                                                         style="color:black">
                                                         <i class="fas fa-info-circle me-2 success"></i> As an
