@@ -40,7 +40,7 @@
                                             <div class=" flex-grow-1 container-p-y">
 
                                                 <h4 class="fw-bold py-3 mb-4">
-                                                    <span class="text-muted fw-light">SERS /</span>
+
                                                     <%= title%>
                                                 </h4>
 
@@ -88,7 +88,9 @@
                                                                                     boolean isApproved
                                                                                     = "APPROVED".equals(e.getStatus());
                                                                                     %>
-                                                                                    <tr class="<%= isPendingRow ? "bg-warning-soft border-start border-warning border-4" : "" %>
+                                                                                    <tr class="<%= isPendingRow ? "
+                                                                                        bg-warning-soft border-start
+                                                                                        border-warning border-4" : "" %>
                                                                                         ">
                                                                                         <td
                                                                                             class="ps-4 text-muted fw-bold">
@@ -149,7 +151,8 @@
                                                                                                         <%=isHepa
                                                                                                             ? "REVIEW"
                                                                                                             : "VERIFICATION"
-                                                                                                            %></span>
+                                                                                                            %>
+                                                                                                    </span>
                                                                                                     <% } else if
                                                                                                         (isApproved) {
                                                                                                         %>

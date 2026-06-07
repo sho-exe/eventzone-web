@@ -3,7 +3,7 @@
         <div class=" flex-grow-1 container-p-y">
 
             <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">SERS /</span> My Personal Sign-Ups
+                My Personal Sign-Ups
             </h4>
 
             <style>
@@ -88,10 +88,10 @@
                                     boolean isAttended = "ATTENDED".equals(a.getStatus());
                                     boolean isMissed = "MISSED".equals(a.getStatus());
 
-                                    String statusIndicatorClass = isPending ? "pending" : 
-                                                                  (isRegistered ? "registered" : 
-                                                                  (isDeclined ? "declined" : 
-                                                                  (isAttended ? "attended" : "missed")));
+                                    String statusIndicatorClass = isPending ? "pending" :
+                                    (isRegistered ? "registered" :
+                                    (isDeclined ? "declined" :
+                                    (isAttended ? "attended" : "missed")));
                                     %>
                                     <div class="timeline-item <%= statusIndicatorClass %>">
                                         <div class="card border-0 shadow-sm overflow-hidden bg-white">
@@ -108,23 +108,23 @@
                                                             <span class="badge bg-secondary text-white"><i
                                                                     class="fas fa-hourglass-half"></i>
                                                                 PENDING APPROVAL</span>
-                                                        <% } else if(isRegistered) { %>
-                                                            <span class="badge bg-warning text-dark"><i
-                                                                    class="fas fa-check"></i>
-                                                                APPROVED & AWAITING EVENT</span>
-                                                        <% } else if(isAttended) { %>
-                                                            <span class="badge bg-success"><i
-                                                                    class="fas fa-check-double"></i>
-                                                                ATTENDED</span>
-                                                        <% } else if(isMissed) { %>
-                                                            <span class="badge bg-danger"><i
-                                                                    class="fas fa-times"></i>
-                                                                MISSED EVENT</span>
-                                                        <% } else if(isDeclined) { %>
-                                                            <span class="badge bg-dark"><i
-                                                                    class="fas fa-ban"></i>
-                                                                DECLINED</span>
-                                                        <% } %>
+                                                            <% } else if(isRegistered) { %>
+                                                                <span class="badge bg-warning text-dark"><i
+                                                                        class="fas fa-check"></i>
+                                                                    APPROVED & AWAITING EVENT</span>
+                                                                <% } else if(isAttended) { %>
+                                                                    <span class="badge bg-success"><i
+                                                                            class="fas fa-check-double"></i>
+                                                                        ATTENDED</span>
+                                                                    <% } else if(isMissed) { %>
+                                                                        <span class="badge bg-danger"><i
+                                                                                class="fas fa-times"></i>
+                                                                            MISSED EVENT</span>
+                                                                        <% } else if(isDeclined) { %>
+                                                                            <span class="badge bg-dark"><i
+                                                                                    class="fas fa-ban"></i>
+                                                                                DECLINED</span>
+                                                                            <% } %>
                                                     </div>
                                                     <p class="small text-muted mb-3">
                                                         <i class="fas fa-flag text-primary me-1"></i>

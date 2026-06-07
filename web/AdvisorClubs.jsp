@@ -31,7 +31,7 @@
                                                 <div class=" flex-grow-1 container-p-y">
 
                                                     <h4 class="fw-bold py-3 mb-4">
-                                                        <span class="text-muted fw-light">SERS /</span> My Managed Clubs
+                                                        My Managed Clubs
                                                     </h4>
 
                                                     <div class="alert alert-success border-0  bg-success-soft"
