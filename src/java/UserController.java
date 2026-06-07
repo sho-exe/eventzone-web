@@ -23,17 +23,18 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Check if user is logged in as HEPA
-        String accountType = (String) request.getSession().getAttribute("accountType");
-        if (accountType == null || !"HEPA".equals(accountType)) {
-            response.sendRedirect("Logout.jsp");
+        // Must be logged in
+        HttpSession session = request.getSession(false);
+        String accountType = session != null ? (String) session.getAttribute("accountType") : null;
+        if (accountType == null) {
+            response.sendRedirect("Login.jsp");
             return;
         }
 
         String action = request.getParameter("action");
 
         if (action == null || "manage".equals(action)) {
-            // HEPA: Manage all users
+            // HEPA only
             if (!"HEPA".equals(accountType)) {
                 response.sendRedirect("Homepage.jsp");
                 return;
@@ -43,12 +44,7 @@ public class UserController extends HttpServlet {
             request.getRequestDispatcher("ManageUsers.jsp").forward(request, response);
 
         } else if ("profile".equals(action)) {
-            // Any role: View/edit own profile
-            HttpSession session = request.getSession(false);
-            if (session == null || session.getAttribute("userId") == null) {
-                response.sendRedirect("Login.jsp");
-                return;
-            }
+            // Any role: view/edit own profile
             int userId = (int) session.getAttribute("userId");
             User user = userDAO.getUserById(userId);
             request.setAttribute("profileUser", user);
