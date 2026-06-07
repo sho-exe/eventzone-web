@@ -97,4 +97,52 @@ public class UserDAO {
         }
         return rowUpdated;
     }
+
+    // 5. Get User By ID (For Profile Page)
+    public User getUserById(int userId) {
+        User user = null;
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setFullName(rs.getString("full_name"));
+                user.setRole(rs.getString("role"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    // 6. Update User Profile (Full name, email, password)
+    public boolean updateUserProfile(int userId, String fullName, String email, String newPassword) {
+        boolean rowUpdated = false;
+        String sql;
+        if (newPassword != null && !newPassword.trim().isEmpty()) {
+            sql = "UPDATE users SET full_name = ?, email = ?, password = ? WHERE user_id = ?";
+        } else {
+            sql = "UPDATE users SET full_name = ?, email = ? WHERE user_id = ?";
+        }
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, fullName);
+            ps.setString(2, email);
+            if (newPassword != null && !newPassword.trim().isEmpty()) {
+                ps.setString(3, newPassword);
+                ps.setInt(4, userId);
+            } else {
+                ps.setInt(3, userId);
+            }
+            rowUpdated = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
+    }
 }

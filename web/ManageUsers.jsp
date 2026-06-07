@@ -30,8 +30,7 @@
                                             <div class=" flex-grow-1 container-p-y">
 
                                                 <h4 class="fw-bold py-3 mb-4">
-                                                    <span class="text-muted fw-light">Admin /</span> User Directory
-                                                    Matrix
+                                                    Manage Users
                                                 </h4>
 
                                                 <div class="alert alert-info border-0 shadow-sm">
