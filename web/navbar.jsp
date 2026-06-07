@@ -1,44 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <% String role = (String) session.getAttribute("accountType"); %>
 
-<%
-    String badgeClass, accentColor, accentLight;
-    if ("HEPA".equals(role)) {
-        badgeClass  = "bg-label-danger";
-        accentColor = "#ea5455";
-        accentLight = "rgba(234,84,85,0.1)";
-    } else if ("ADVISOR".equals(role)) {
-        badgeClass  = "bg-label-success";
-        accentColor = "#28c76f";
-        accentLight = "rgba(40,199,111,0.1)";
-    } else if ("CHAIRPERSON".equals(role)) {
-        badgeClass  = "bg-label-warning";
-        accentColor = "#ff9f43";
-        accentLight = "rgba(255,159,67,0.1)";
-    } else {
-        badgeClass  = "bg-label-primary";
-        accentColor = "#696cff";
-        accentLight = "rgba(105,108,255,0.1)";
-    }
-%>
 
-<style>
-    /* Navbar role accent */
-    #layout-navbar {
-        border-bottom: 2px solid <%= accentColor %>22 !important;
-    }
-    .navbar-role-badge {
-        font-size: 0.7rem;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        padding: 3px 10px;
-        border-radius: 20px;
-        background: <%= accentLight %>;
-        color: <%= accentColor %>;
-        border: 1.5px solid <%= accentColor %>;
-        text-transform: uppercase;
-    }
-</style>
 
 <!-- Navbar -->
 <nav class="layout-navbar navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">

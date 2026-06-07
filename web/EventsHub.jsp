@@ -3,8 +3,30 @@
         <%@page import="com.lab.model.Attendance" %>
             <%@page import="com.lab.model.Club" %>
                 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-                    <% String role=(String) session.getAttribute("accountType"); String activeTab=(String)
-                        request.getAttribute("activeTab"); if (activeTab==null) activeTab="explore" ; %>
+                    <% 
+                        String role=(String) session.getAttribute("accountType"); 
+                        String activeTab=(String) request.getAttribute("activeTab"); 
+                        if (activeTab==null) activeTab="explore" ; 
+
+                        String accentColor, accentLight, accentHex;
+                        if ("HEPA".equals(role)) {
+                            accentColor="#ea5455";
+                            accentLight="rgba(234,84,85,0.12)";
+                            accentHex="#ea5455";
+                        } else if ("ADVISOR".equals(role)) {
+                            accentColor="#28c76f";
+                            accentLight="rgba(40,199,111,0.12)";
+                            accentHex="#28c76f";
+                        } else if ("CHAIRPERSON".equals(role)) {
+                            accentColor="#ff9f43";
+                            accentLight="rgba(255,159,67,0.12)";
+                            accentHex="#ff9f43";
+                        } else {
+                            accentColor="#696cff";
+                            accentLight="rgba(105,108,255,0.12)";
+                            accentHex="#696cff";
+                        }
+                    %>
 
                         <jsp:include page="header.jsp" />
 
@@ -39,11 +61,13 @@
                                                             </h4>
                                                         </div>
 
+
+
                                                         <div class="nav-align-top mb-4">
-                                                            <ul class="nav nav-tabs nav-fill">
+                                                            <ul class="nav nav-tabs nav-fill custom-tabs">
                                                                 <li class="nav-item">
                                                                     <a class="nav-link <%= "explore".equals(activeTab) ? "active" : "" %>" href="events?action=browse">
-                                                                        <i class="tf-icons bx bx-compass me-1"></i>
+                                                                        <i class="tf-icons bx bx-compass me-2 fs-5"></i>
                                                                         Explore Events
                                                                     </a>
                                                                 </li>
@@ -51,7 +75,7 @@
                                                                 <li class="nav-item">
                                                                     <a class="nav-link <%= "registrations".equals(activeTab) ? "active" : ""
                                                                         %>" href="attendances?action=myAttendance">
-                                                                        <i class="tf-icons bx bx-list-check me-1"></i>
+                                                                        <i class="tf-icons bx bx-list-check me-2 fs-5"></i>
                                                                         My Registrations
                                                                     </a>
                                                                 </li>
@@ -61,7 +85,7 @@
                                                                         <a class="nav-link <%= "manage".equals(activeTab) ? "active" : ""
                                                                             %>" href="events?action=manage">
                                                                             <i
-                                                                                class="tf-icons bx bx-briefcase-alt-2 me-1"></i>
+                                                                                class="tf-icons bx bx-briefcase-alt-2 me-2 fs-5"></i>
                                                                             Manage Club Events
                                                                         </a>
                                                                     </li>

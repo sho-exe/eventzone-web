@@ -88,10 +88,7 @@
                                                                                     boolean isApproved
                                                                                     = "APPROVED".equals(e.getStatus());
                                                                                     %>
-                                                                                    <tr class="<%= isPendingRow ? "
-                                                                                        bg-warning-soft border-start
-                                                                                        border-warning border-4" : "" %>
-                                                                                        ">
+                                                                                    <tr class="<%= isPendingRow ? "bg-warning-soft border-startborder-warning border-4" : "" %>">
                                                                                         <td
                                                                                             class="ps-4 text-muted fw-bold">
                                                                                             #<%= e.getEventId()%>

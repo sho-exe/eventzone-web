@@ -7,7 +7,7 @@
                                                     <h4 class="fw-bold py-3 mb-4">Your Overview</h4>
                                                 </div>
                                                 <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
-                                                    <div class="card border-start border-primary border-5">
+                                                    <div class="card">
                                                         <div class="card-body">
                                                             <div
                                                                 class="card-title d-flex align-items-start justify-content-between">
@@ -23,7 +23,7 @@
                                                 </div>
 
                                                 <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
-                                                    <div class="card border-start border-success border-5">
+                                                    <div class="card">
                                                         <div class="card-body">
                                                             <div
                                                                 class="card-title d-flex align-items-start justify-content-between">
@@ -45,7 +45,7 @@
                                                         <h4 class="fw-bold py-3 mb-4">Your Overview</h4>
                                                     </div>
                                                     <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
-                                                        <div class="card border-start border-warning border-5">
+                                                        <div class="card">
                                                             <div class="card-body">
                                                                 <div
                                                                     class="card-title d-flex align-items-start justify-content-between">
@@ -62,7 +62,7 @@
                                                     </div>
 
                                                     <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
-                                                        <div class="card border-start border-success border-5">
+                                                        <div class="card">
                                                             <div class="card-body">
                                                                 <div
                                                                     class="card-title d-flex align-items-start justify-content-between">
@@ -86,7 +86,7 @@
                                                                 <h4 class="fw-bold py-3 mb-4">Your Overview</h4>
                                                             </div>
                                                             <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
-                                                                <div class="card border-start border-primary border-5">
+                                                                <div class="card">
                                                                     <div class="card-body">
                                                                         <div
                                                                             class="card-title d-flex align-items-start justify-content-between">
@@ -105,7 +105,7 @@
                                                             </div>
 
                                                             <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
-                                                                <div class="card border-start border-danger border-5">
+                                                                <div class="card">
                                                                     <div class="card-body">
                                                                         <div
                                                                             class="card-title d-flex align-items-start justify-content-between">
@@ -124,7 +124,7 @@
                                                             </div>
 
                                                             <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
-                                                                <div class="card border-start border-warning border-5">
+                                                                <div class="card">
                                                                     <div class="card-body">
                                                                         <div
                                                                             class="card-title d-flex align-items-start justify-content-between">

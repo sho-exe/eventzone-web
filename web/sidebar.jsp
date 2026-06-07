@@ -9,74 +9,6 @@
         accentLight="rgba(105,108,255,0.12)" ; accentHex="#696cff" ; badgeClass="bg-label-primary" ; roleName="Student"
         ; } %>
 
-        <style>
-            /* ── Override theme CSS variables on the sidebar ── */
-            #layout-menu {
-                --bs-primary: <%=accentColor %>;
-                --bs-primary-rgb: <%=accentColor %>;
-            }
-
-            /* ── Brand text & logo ── */
-            #layout-menu .app-brand-text {
-                color: <%=accentColor %> !important;
-            }
-
-
-
-            /* ── Active menu item ── */
-            #layout-menu .menu-inner>.menu-item.active>.menu-link,
-            #layout-menu .menu-inner>.menu-item.active>.menu-link:hover {
-                background-color: <%=accentLight %> !important;
-                color: <%=accentColor %> !important;
-            }
-
-            #layout-menu .menu-inner>.menu-item.active>.menu-link .menu-icon,
-            #layout-menu .menu-inner>.menu-item.active>.menu-link i {
-                color: <%=accentColor %> !important;
-            }
-
-            /* ── Hover state ── */
-            #layout-menu .menu-inner>.menu-item>.menu-link:hover {
-                background-color: <%=accentLight %> !important;
-                color: <%=accentColor %> !important;
-            }
-
-            #layout-menu .menu-inner>.menu-item>.menu-link:hover .menu-icon,
-            #layout-menu .menu-inner>.menu-item>.menu-link:hover i {
-                color: <%=accentColor %> !important;
-            }
-
-            /* ── Left accent bar on active item ── */
-            #layout-menu .menu-inner>.menu-item.active>.menu-link::before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 0;
-                bottom: 0;
-                width: 3px;
-                background: <%=accentColor %>;
-                border-radius: 0 2px 2px 0;
-            }
-
-            #layout-menu .menu-inner>.menu-item.active>.menu-link {
-                position: relative;
-            }
-
-            /* ── Transition ── */
-            #layout-menu .menu-link {
-                transition: background-color 0.2s, color 0.2s;
-            }
-
-            #layout-menu .menu-icon {
-                transition: color 0.2s;
-            }
-
-            /* ── Remove theme's right-side active indicator (::before on the li) ── */
-            .layout-wrapper:not(.layout-horizontal) .bg-menu-theme .menu-inner>.menu-item.active:before {
-                display: none !important;
-                width: 0 !important;
-            }
-        </style>
 
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -214,9 +146,27 @@
                                 </a>
                             </li>
                             <li class="menu-item">
+                                <a href="events?action=browse" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-search"></i>
+                                    <div data-i18n="Explore Events">Explore Events</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="attendances?action=myAttendance" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-clipboard"></i>
+                                    <div data-i18n="My Registrations">My Registrations</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
                                 <a href="events?action=manage" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-calendar-plus"></i>
-                                    <div data-i18n="Manage Events">Manage Events</div>
+                                    <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i>
+                                    <div data-i18n="Manage Club Events">Manage Club Events</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="merits?action=meritHistory" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-medal"></i>
+                                    <div data-i18n="Merit Transcript">Merit Transcript</div>
                                 </a>
                             </li>
                             <li class="menu-item">

@@ -6,64 +6,7 @@
                 My Personal Sign-Ups
             </h4>
 
-            <style>
-                .timeline {
-                    position: relative;
-                    padding-left: 2rem;
-                    margin-top: 2rem;
-                }
 
-                .timeline::before {
-                    content: '';
-                    position: absolute;
-                    left: 0.5rem;
-                    top: 0;
-                    bottom: 0;
-                    width: 4px;
-                    background: #e9ecef;
-                    border-radius: 4px;
-                }
-
-                .timeline-item {
-                    position: relative;
-                    margin-bottom: 2rem;
-                    padding-left: 1.5rem;
-                }
-
-                .timeline-item::before {
-                    content: '';
-                    position: absolute;
-                    left: -1.75rem;
-                    top: 0.5rem;
-                    width: 1.5rem;
-                    height: 1.5rem;
-                    background: var(--bs-primary);
-                    border: 4px solid #fff;
-                    border-radius: 50%;
-                    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-                    z-index: 1;
-                }
-
-                .timeline-item.attended::before {
-                    background: var(--bs-success);
-                }
-
-                .timeline-item.missed::before {
-                    background: var(--bs-danger);
-                }
-
-                .timeline-item.pending::before {
-                    background: var(--bs-secondary);
-                }
-
-                .timeline-item.registered::before {
-                    background: var(--bs-warning);
-                }
-
-                .timeline-item.declined::before {
-                    background: var(--bs-dark);
-                }
-            </style>
 
             <div class="row">
                 <div class="col-md-10 col-lg-8">

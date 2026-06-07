@@ -1,4 +1,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+    <% 
+        String headerRole = (String) session.getAttribute("accountType");
+        String accentColor = "#696cff", accentLight = "rgba(105,108,255,0.12)", accentHex = "#696cff";
+        if ("HEPA".equals(headerRole)) {
+            accentColor = "#ea5455";
+            accentLight = "rgba(234,84,85,0.12)";
+            accentHex = "#ea5455";
+        } else if ("ADVISOR".equals(headerRole)) {
+            accentColor = "#28c76f";
+            accentLight = "rgba(40,199,111,0.12)";
+            accentHex = "#28c76f";
+        } else if ("CHAIRPERSON".equals(headerRole)) {
+            accentColor = "#ff9f43";
+            accentLight = "rgba(255,159,67,0.12)";
+            accentHex = "#ff9f43";
+        }
+    %>
     <!DOCTYPE html>
     <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
         data-assets-path="resources/assets/" data-template="vertical-menu-template-free">
@@ -9,6 +26,15 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
         <title>EventZone Dashboard</title>
         <meta name="description" content="SERS Dashboard" />
+
+        <!-- Role Theme CSS Variables -->
+        <style>
+            :root {
+                --role-accent: <%= accentColor %>;
+                --role-accent-light: <%= accentLight %>;
+                --role-accent-hex: <%= accentHex %>;
+            }
+        </style>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,5 +60,5 @@
         <!-- Helpers -->
         <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
         <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/custom-styles.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
     </head>
