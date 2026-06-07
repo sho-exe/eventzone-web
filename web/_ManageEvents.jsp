@@ -43,83 +43,122 @@
                             </button>
                         </div>
 
-                        <div class="row">
+                        <div class="row gy-4">
                             <% List<Event> eventList = (List<Event>)
                                     request.getAttribute("eventList");
                                     if(eventList != null && !eventList.isEmpty()) {
+                                    int eventIndex = 0;
                                     for(Event e : eventList) {
+                                    eventIndex++;
                                     String badgeColor = "bg-warning text-dark"; // PENDING
-                                    String icon = "fa-hourglass-half";
+                                    String icon = "bx-time-five";
                                     if("APPROVED".equals(e.getStatus())) {
-                                    badgeColor = "bg-success";
-                                    icon = "fa-check-circle"; }
+                                    badgeColor = "bg-success text-white";
+                                    icon = "bx-check-circle"; }
                                     if("REJECTED".equals(e.getStatus())) {
-                                    badgeColor = "bg-danger";
-                                    icon = "fa-times-circle"; }
+                                    badgeColor = "bg-danger text-white";
+                                    icon = "bx-x-circle"; }
                                     %>
-                                    <div class="col-lg-12 mb-3">
-                                        <div class="card border-0  ">
-                                            <div
-                                                class="card-body p-4 d-flex align-items-lg-center flex-column flex-lg-row">
-                                                <div class="flex-grow-1 pe-jg-4">
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        <h5 class="fw-bold mb-0 me-3">
-                                                            <%= e.getEventName() %>
-                                                        </h5>
-                                                        <span class="badge <%= badgeColor %>"><i
-                                                                class="fas <%= icon %> me-1"></i>
-                                                            <%= e.getStatus() %>
-                                                        </span>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card club-card position-relative">
+                                            <div class="card-inner">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <span class="club-id-badge badge-index mb-0">
+                                                        #<%= eventIndex %>
+                                                    </span>
+                                                    <span class="club-id-badge badge-id mb-0">
+                                                        ID: <%= e.getEventId() %>
+                                                    </span>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <h5 class="fw-bold text-dark mb-1"
+                                                        style="font-size: 1.1rem; line-height: 1.3;">
+                                                        <%= e.getEventName() %>
+                                                    </h5>
+                                                    <span class="badge <%= badgeColor %>"
+                                                        style="font-size: 0.72rem; padding: 4px 8px;"><i
+                                                            class="bx <%= icon %> me-1"></i>
+                                                        <%= e.getStatus() %>
+                                                    </span>
+                                                </div>
+
+                                                <p class="text-muted small mb-3"
+                                                    style="min-height: 55px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">
+                                                    <%= e.getDescription() %>
+                                                </p>
+
+                                                <hr class="divider-soft">
+
+                                                <div class="assign-section mt-3">
+                                                    <div class="mb-2 d-flex align-items-center gap-2">
+                                                        <i class="bx bx-calendar text-primary fs-5"></i>
+                                                        <div>
+                                                            <small class="text-muted d-block"
+                                                                style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Date</small>
+                                                            <span class="fs-6 text-dark fw-semibold">
+                                                                <%= e.getDate() %>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                    <p class="text-muted small mb-3">
-                                                        <%= e.getDescription() %>
-                                                    </p>
-                                                    <div class="d-flex text-muted small fw-bold">
-                                                        <div class="me-4"><i
-                                                                class="far fa-calendar-alt text-primary me-1"></i>
-                                                            <%= e.getDate() %>
+                                                    <div class="mb-2 d-flex align-items-center gap-2">
+                                                        <i class="bx bx-map-pin text-danger fs-5"></i>
+                                                        <div>
+                                                            <small class="text-muted d-block"
+                                                                style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Venue</small>
+                                                            <span class="fs-6 text-dark fw-semibold">
+                                                                <%= e.getVenue() %>
+                                                            </span>
                                                         </div>
-                                                        <div class="me-4"><i
-                                                                class="fas fa-map-marker-alt text-danger me-1"></i>
-                                                            <%= e.getVenue() %>
+                                                    </div>
+                                                    <div class="mb-2 d-flex align-items-center gap-2">
+                                                        <i class="bx bx-group text-info fs-5"></i>
+                                                        <div>
+                                                            <small class="text-muted d-block"
+                                                                style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Quota</small>
+                                                            <span class="fs-6 text-dark fw-semibold">
+                                                                <%= e.getQuota() %> Pax
+                                                            </span>
                                                         </div>
-                                                        <div class="me-4"><i class="fas fa-users text-info me-1"></i>
-                                                            <%= e.getQuota() %> Pax
-                                                        </div>
-                                                        <div><i class="fas fa-bullseye text-success me-1"></i>
-                                                            <%= e.getCriteria() %> |
+                                                    </div>
+                                                    <div class="mb-0 d-flex align-items-center gap-2">
+                                                        <i class="bx bx-purchase-tag-alt text-success fs-5"></i>
+                                                        <div>
+                                                            <small class="text-muted d-block"
+                                                                style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Category</small>
+                                                            <span class="fs-6 text-dark fw-semibold"
+                                                                style="text-transform: capitalize;">
                                                                 <%= e.getCategory() %>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="mt-3 mt-lg-0 pb-lg-0 text-center text-lg-end"
-                                                    style="min-width: 170px; border-left: 1px solid #eee; padding-left: 20px;">
-                                                    <span class="d-block small text-muted mb-1">System
-                                                        ID</span>
-                                                    <span class="fw-bold fs-5 mb-3 d-block">#
-                                                        <%= e.getEventId() %>
-                                                    </span>
-
-                                                    <% if("APPROVED".equals(e.getStatus())) { %>
+                                                <% if("APPROVED".equals(e.getStatus())) { %>
+                                                    <div class="mt-3">
                                                         <a href="attendances?action=manageAttendances&eventId=<%= e.getEventId() %>"
-                                                            class="btn btn-sm btn-outline-primary fw-bold w-100">
-                                                            <i class="fas fa-users me-1"></i>
+                                                            class="btn btn-save mt-0"
+                                                            style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px; margin-top: 0 !important;">
+                                                            <i class="bx bx-group me-1"></i>
                                                             Attendances
                                                         </a>
-                                                        <% } %>
-                                                </div>
+                                                    </div>
+                                                    <% } %>
                                             </div>
                                         </div>
                                     </div>
-                                    <% } } else { %>
-                                        <div class="col-12 text-center py-5 text-muted">
-                                            <i class="fas fa-folder-open fa-3x mb-3 text-light"></i><br>
-                                            You have not proposed any events yet.
-                                            Click the button above
-                                            to begin!
-                                        </div>
+                                    <% /* Insert a full-width spacer row after every 3rd card */ if (eventIndex % 3==0)
+                                        { %>
+                                        <div class="col-12" style="margin-bottom: 20px;"></div>
                                         <% } %>
+                                            <% } } else { %>
+                                                <div class="col-12 text-center py-5 text-muted">
+                                                    <i class="fas fa-folder-open fa-3x mb-3 text-light"></i><br>
+                                                    You have not proposed any events yet.
+                                                    Click the button above
+                                                    to begin!
+                                                </div>
+                                                <% } %>
                         </div>
 
                         <!-- Propose Event Modal -->

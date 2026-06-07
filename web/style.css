@@ -754,10 +754,21 @@ p {
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.05em;
-    color: #8592a3;
     text-transform: uppercase;
     margin-bottom: 6px;
-    display: block;
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+.club-id-badge.badge-index {
+    background: var(--role-accent-light);
+    color: var(--role-accent);
+}
+
+.club-id-badge.badge-id {
+    background: rgba(133, 146, 163, 0.08);
+    color: #8592a3;
 }
 
 .club-name-input {
@@ -940,8 +951,62 @@ p {
     background: #8592a3 !important;
 }
 
+/* Fix outline primary buttons being white text on light background */
+.btn-outline-primary {
+    color: var(--role-accent, #696cff) !important;
+    border-color: var(--role-accent, #696cff) !important;
+    background: transparent !important;
+}
+.btn-outline-primary:hover {
+    color: #fff !important;
+    background: var(--role-accent, #696cff) !important;
+}
+
 /* Modal inputs matching role accent color on focus */
 .modal-content .form-control:focus {
     border-color: var(--role-accent) !important;
     box-shadow: 0 0 0 0.2rem var(--role-accent-light) !important;
+}
+
+/* Approve and Reject admin buttons style matching */
+.btn-approve-action {
+    background: linear-gradient(135deg, #28c76f, #1a9c51) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    height: 36px;
+    width: 100%;
+    margin-top: 0 !important;
+    transition: opacity 0.2s, transform 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.btn-approve-action:hover {
+    opacity: 0.9 !important;
+    transform: scale(1.02);
+}
+
+.btn-reject-action {
+    background: linear-gradient(135deg, #ea5455, #cf3c3e) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    height: 36px;
+    width: 100%;
+    margin-top: 0 !important;
+    transition: opacity 0.2s, transform 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.btn-reject-action:hover {
+    opacity: 0.9 !important;
+    transform: scale(1.02);
 }
