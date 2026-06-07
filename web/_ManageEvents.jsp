@@ -128,7 +128,7 @@
                                                                 style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Category</small>
                                                             <span class="fs-6 text-dark fw-semibold"
                                                                 style="text-transform: capitalize;">
-                                                                <%= e.getCategory() %>
+                                                                 <%= e.getCategory() != null ? e.getCategory() : "N/A" %>
                                                             </span>
                                                         </div>
                                                     </div>

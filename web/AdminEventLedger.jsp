@@ -159,7 +159,7 @@
                                                                                     <span
                                                                                         class="fs-6 text-dark fw-semibold"
                                                                                         style="text-transform: capitalize;">
-                                                                                        <%= e.getCategory()%>
+                                                                                         <%= e.getCategory() != null ? e.getCategory() : "N/A" %>
                                                                                     </span>
                                                                                 </div>
                                                                             </div>

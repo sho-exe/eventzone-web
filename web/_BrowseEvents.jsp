@@ -61,8 +61,8 @@
                                         </div>
                                         <div class="d-flex small fw-bold text-secondary">
                                             <i class="fas fa-bullseye text-success me-2 mt-1"></i>
-                                            <span>Merit Tier: <%= e.getCriteria() %>
-                                                    | Category: <%= e.getCategory() %></span>
+                                             <span>Merit Tier: <%= e.getCriteria() %>
+                                                     | Category: <%= e.getCategory() != null ? e.getCategory() : "N/A" %></span>
                                         </div>
                                     </div>
 
