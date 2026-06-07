@@ -34,7 +34,7 @@
               <div class="app-brand justify-content-center">
                 <span class="app-brand-text demo text-body fw-bolder fs-3">EventZone</span>
               </div>
-              <h4 class="mb-2">Welcome to EventZone! 👋</h4>
+              <h4 class="mb-2">Welcome to EventZone!</h4>
               <p class="mb-4">Please sign-in to your account.</p>
 
               <% if(request.getAttribute("errorMessage") !=null) { %>
@@ -64,7 +64,6 @@
                   </form>
 
                   <div class="mt-4">
-                    <p class="text-center text-muted mb-2"><small>DEV ACCOUNTS</small></p>
                     <div class="table-responsive">
                       <table class="table table-sm table-bordered text-center">
                         <thead class="table-light">

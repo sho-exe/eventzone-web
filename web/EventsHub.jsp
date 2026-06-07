@@ -42,8 +42,7 @@
                                                         <div class="nav-align-top mb-4">
                                                             <ul class="nav nav-tabs nav-fill">
                                                                 <li class="nav-item">
-                                                                    <a class="nav-link <%= " explore".equals(activeTab)
-                                                                        ? "active" : "" %>" href="events?action=browse">
+                                                                    <a class="nav-link <%= "explore".equals(activeTab) ? "active" : "" %>" href="events?action=browse">
                                                                         <i class="tf-icons bx bx-compass me-1"></i>
                                                                         Explore Events
                                                                     </a>
