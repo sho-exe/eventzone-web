@@ -1032,3 +1032,107 @@ table .btn,
     opacity: 0.9 !important;
     transform: scale(1.02);
 }
+
+/* =========================================================
+   Premium Dashboard Stats Overviews
+   ========================================================= */
+.overview-card {
+    border: none !important;
+    border-radius: 16px !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border-left: 5px solid #d9dee3 !important;
+}
+
+.overview-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
+}
+
+.overview-card.card-primary {
+    border-left-color: var(--role-accent, #696cff) !important;
+}
+.overview-card.card-primary .card-icon-box {
+    background-color: var(--role-accent-light, rgba(105, 108, 255, 0.12)) !important;
+    color: var(--role-accent, #696cff) !important;
+}
+
+.overview-card.card-success {
+    border-left-color: #28c76f !important;
+}
+.overview-card.card-success .card-icon-box {
+    background-color: rgba(40, 199, 111, 0.12) !important;
+    color: #28c76f !important;
+}
+
+.overview-card.card-warning {
+    border-left-color: #ff9f43 !important;
+}
+.overview-card.card-warning .card-icon-box {
+    background-color: rgba(255, 159, 67, 0.12) !important;
+    color: #ff9f43 !important;
+}
+
+.overview-card.card-danger {
+    border-left-color: #ea5455 !important;
+}
+.overview-card.card-danger .card-icon-box {
+    background-color: rgba(234, 84, 85, 0.12) !important;
+    color: #ea5455 !important;
+}
+
+.card-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.overview-card:hover .card-icon-box {
+    transform: scale(1.1);
+}
+
+.overview-card .card-title {
+    font-weight: 700 !important;
+}
+
+/* Checkbox Cards in Modals */
+.modal-content .form-check {
+    border: 1.5px solid #d9dee3 !important;
+    border-radius: 8px !important;
+    padding: 0.6rem 0.8rem 0.6rem 2.2rem !important;
+    transition: all 0.2s ease-in-out !important;
+    cursor: pointer !important;
+    background-color: #ffffff !important;
+    position: relative !important;
+}
+.modal-content .form-check:hover {
+    border-color: var(--role-accent) !important;
+    background-color: var(--role-accent-light) !important;
+}
+.modal-content .form-check:has(.form-check-input:checked) {
+    border-color: var(--role-accent) !important;
+    background-color: var(--role-accent-light) !important;
+    box-shadow: 0 2px 6px var(--role-accent-light) !important;
+}
+.modal-content .form-check-input {
+    position: absolute !important;
+    left: 0.75rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-top: 0 !important;
+}
+.modal-content .form-check-label {
+    font-weight: 600 !important;
+    color: #495057 !important;
+    user-select: none !important;
+    display: block !important;
+    width: 100% !important;
+}

@@ -61,103 +61,98 @@
                                                          </div>
                                                      </div>
 
-                                                    <div class="row mt-4">
-                                                        <% List<Club> clubList = (List<Club>)
-                                                                request.getAttribute("clubList");
-                                                                List<User> userList = (List<User>)
-                                                                        request.getAttribute("userList");
-
-                                                                        if(clubList != null && !clubList.isEmpty()) {
-                                                                        for(Club c : clubList) {
-                                                                        %>
-                                                                        <div class="col-lg-6 col-md-12 mb-4">
-                                                                            <div
-                                                                                class="card h-100 club-card bg-white  ">
-                                                                                <div
-                                                                                    class="card-header bg-white border-bottom-0 pt-4 pb-0">
-                                                                                    <h5 class="fw-bold text-dark mb-1">
-                                                                                        <%= c.getClubName() %>
-                                                                                    </h5>
-                                                                                    <span
-                                                                                        class="badge bg-secondary">System
-                                                                                        ID: #<%= c.getClubId() %></span>
-                                                                                </div>
-                                                                                <div class="card-body">
-                                                                                    <p class="text-muted">
-                                                                                        <%= c.getDescription() %>
-                                                                                    </p>
-
-                                                                                    <hr class="bg-light">
-
-                                                                                    <div
-                                                                                        class="row align-items-center mb-3 p-3 bg-light rounded">
-                                                                                        <div
-                                                                                            class="col-2 text-center text-success">
-                                                                                            <i
-                                                                                                class="fas fa-user-tie fa-2x"></i>
-                                                                                        </div>
-                                                                                        <div class="col-10">
-                                                                                            <small
-                                                                                                class="text-muted d-block text-uppercase fw-bold">Official
-                                                                                                Advisor (You)</small>
-                                                                                            <span class="fs-5">
-                                                                                                <%= c.getAdvisorName()
-                                                                                                    %>
-                                                                                            </span>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <form
-                                                                                        action="ClubController?action=advisor"
-                                                                                        method="POST"
-                                                                                        class="p-3 bg-warning-soft rounded border border-warning">
-                                                                                        <input type="hidden"
-                                                                                            name="action"
-                                                                                            value="assignChairperson">
-                                                                                        <input type="hidden"
-                                                                                            name="clubId"
-                                                                                            value="<%= c.getClubId() %>">
-
-                                                                                        <label
-                                                                                            class="fw-bold text-warning mb-2"
-                                                                                            style="color: #d39e00 !important;"><i
-                                                                                                class="fas fa-user-graduate me-1"></i>
-                                                                                            Appointed
-                                                                                            Chairperson</label>
-                                                                                        <div class="input-group">
-                                                                                            <select name="chairpersonId"
-                                                                                                class="form-select border-warning bg-white">
-                                                                                                <option value="">--
-                                                                                                    Vacant Position --
-                                                                                                </option>
-                                                                                                <% for(User u :
-                                                                                                    userList) { if
-                                                                                                    (u.getRole().equals("CHAIRPERSON"))
-                                                                                                    { boolean
-                                                                                                    selected=(c.getChairpersonId()
-                                                                                                    !=null &&
-                                                                                                    c.getChairpersonId()==u.getUserId());
-                                                                                                    %>
-                                                                                                    <option
-                                                                                                        value="<%= u.getUserId() %>"
-                                                                                                        <%=selected
-                                                                                                        ? "selected"
-                                                                                                        : "" %>><%=
-                                                                                                            u.getFullName()
-                                                                                                            %>
-                                                                                                    </option>
-                                                                                                    <% } } %>
-                                                                                            </select>
-                                                                                            <button type="submit"
-                                                                                                class="btn btn-warning fw-bold text-dark border-warning">Save
-                                                                                                Assignment</button>
-                                                                                        </div>
-                                                                                    </form>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <% } } else { %>
+                                                    <div class="row mt-4 gy-4 clubs-grid">
+                                                         <% List<Club> clubList = (List<Club>)
+                                                                 request.getAttribute("clubList");
+                                                                 List<User> userList = (List<User>)
+                                                                         request.getAttribute("userList");
+ 
+                                                                         if(clubList != null && !clubList.isEmpty()) {
+                                                                         int clubIndex = 0;
+                                                                         for(Club c : clubList) {
+                                                                         clubIndex++;
+                                                                         %>
+                                                                         <div class="col-lg-4 col-md-6">
+                                                                             <div class="card club-card position-relative">
+                                                                                 <form action="ClubController?action=advisor" method="POST">
+                                                                                     <input type="hidden" name="action" value="assignChairperson">
+                                                                                     <input type="hidden" name="clubId" value="<%= c.getClubId() %>">
+ 
+                                                                                     <div class="card-inner">
+                                                                                         <div class="d-flex justify-content-between align-items-center mb-1">
+                                                                                             <span class="club-id-badge badge-index mb-0" style="font-size: 1.05rem !important; padding: 8px 14px !important;">
+                                                                                                 <%= clubIndex %>
+                                                                                             </span>
+                                                                                             <span class="club-id-badge badge-id mb-0" style="font-size: 0.9rem !important; padding: 6px 12px !important;">
+                                                                                                 ID: <%= c.getClubId() %>
+                                                                                             </span>
+                                                                                         </div>
+                                                                                         <div class="position-relative mb-2">
+                                                                                             <input type="text"
+                                                                                                 class="club-name-input"
+                                                                                                 value="<%= c.getClubName() %>"
+                                                                                                 readonly
+                                                                                                 style="padding-right: 24px !important;"
+                                                                                                 placeholder="Club Name">
+                                                                                         </div>
+ 
+                                                                                         <div class="position-relative">
+                                                                                             <textarea
+                                                                                                 class="form-control club-desc-textarea"
+                                                                                                 rows="3"
+                                                                                                 readonly
+                                                                                                 style="padding-right: 28px !important; text-decoration: none !important;"
+                                                                                                 placeholder="Club description..."><%= c.getDescription() %></textarea>
+                                                                                         </div>
+ 
+                                                                                         <hr class="divider-soft">
+ 
+                                                                                         <div class="assign-section">
+                                                                                             <!-- Advisor -->
+                                                                                             <div class="mb-3">
+                                                                                                 <div class="assign-label advisor">
+                                                                                                     <i class="bx bx-user-pin"></i>
+                                                                                                     Club Advisor (You)
+                                                                                                 </div>
+                                                                                                 <input type="text" class="form-control form-control-sm assign-select bg-light" value="<%= c.getAdvisorName() %>" readonly style="font-size: 0.82rem !important; border-radius: 8px !important;">
+                                                                                             </div>
+ 
+                                                                                             <!-- Chairperson -->
+                                                                                             <div class="mb-0">
+                                                                                                 <div class="assign-label chair">
+                                                                                                     <i class="bx bx-user"></i>
+                                                                                                     Chairperson
+                                                                                                 </div>
+                                                                                                 <select name="chairpersonId" class="form-select form-select-sm assign-select" required>
+                                                                                                     <option value="" disabled <%= c.getChairpersonId() == null ? "selected" : "" %>>
+                                                                                                         — Select Chairperson —
+                                                                                                     </option>
+                                                                                                     <% for(User u : userList) { 
+                                                                                                         if (u.getRole().equals("CHAIRPERSON")) { 
+                                                                                                             boolean selected=(c.getChairpersonId() != null && c.getChairpersonId() == u.getUserId());
+                                                                                                     %>
+                                                                                                             <option value="<%= u.getUserId() %>" <%=selected ? "selected" : "" %>>
+                                                                                                                 <%= u.getFullName() %>
+                                                                                                             </option>
+                                                                                                     <% } } %>
+                                                                                                 </select>
+                                                                                             </div>
+                                                                                         </div>
+ 
+                                                                                         <div class="mt-3">
+                                                                                             <button type="submit" class="btn btn-save" style="margin-top: 0 !important;">
+                                                                                                 <i class="bx bx-save me-1"></i>
+                                                                                                 Save Chairperson Assignment
+                                                                                             </button>
+                                                                                         </div>
+                                                                                     </div>
+                                                                                 </form>
+                                                                             </div>
+                                                                         </div>
+                                                                         <% /* Insert a full-width spacer row after every 3rd card */ 
+                                                                         if (clubIndex % 3 == 0) { %>
+                                                                             <div class="col-12" style="margin-bottom: 20px;"></div>
+                                                                         <% } } } else { %>
                                                                             <div
                                                                                 class="col-12 text-center py-5 text-muted">
                                                                                 <i
