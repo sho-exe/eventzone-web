@@ -36,9 +36,18 @@
                                                      </h4>
 
                                                      <% String message = request.getParameter("message"); %>
-                                                     <% if (message != null && !message.trim().isEmpty()) { %>
-                                                         <div class="alert alert-success border-0 shadow-sm mb-4 alert-dismissible" role="alert">
-                                                             <i class="bx bx-check-circle me-2"></i> <%= message %>
+                                                     <% if (message != null && !message.trim().isEmpty()) {
+                                                         boolean isError = message.startsWith("Error");
+                                                         String alertClass = isError ? "alert-danger" : "alert-success";
+                                                         String iconClass = isError ? "bx-error-circle" : "bx-check-circle";
+                                                         String badgeTextClass = isError ? "text-danger" : "text-success";
+                                                     %>
+                                                         <div class="alert <%= alertClass %> border-0 shadow-sm mb-4 alert-dismissible fade show" role="alert" id="successAlert">
+                                                             <i class="bx <%= iconClass %> me-2"></i>
+                                                             <%= message %>
+                                                             <% if (!isError) { %>
+                                                             <span class="badge bg-white <%= badgeTextClass %> ms-2 countdown-badge" style="font-size: 0.75rem; vertical-align: middle;">3s</span>
+                                                             <% } %>
                                                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                          </div>
                                                      <% } %>
@@ -62,10 +71,10 @@
                                                      </div>
 
                                                     <div class="row mt-4 gy-4 clubs-grid">
-                                                         <% List<Club> clubList = (List<Club>)
-                                                                 request.getAttribute("clubList");
-                                                                 List<User> userList = (List<User>)
-                                                                         request.getAttribute("userList");
+                                                          <% List<Club> clubList = (List<Club>)
+                                                                  request.getAttribute("clubList");
+                                                                  List<User> userList = (List<User>)
+                                                                          request.getAttribute("userList");
  
                                                                          if(clubList != null && !clubList.isEmpty()) {
                                                                          int clubIndex = 0;
@@ -123,19 +132,19 @@
                                                                                                      <i class="bx bx-user"></i>
                                                                                                      Chairperson
                                                                                                  </div>
-                                                                                                 <select name="chairpersonId" class="form-select form-select-sm assign-select" required>
-                                                                                                     <option value="" disabled <%= c.getChairpersonId() == null ? "selected" : "" %>>
-                                                                                                         — Select Chairperson —
-                                                                                                     </option>
-                                                                                                     <% for(User u : userList) { 
-                                                                                                         if (u.getRole().equals("CHAIRPERSON")) { 
-                                                                                                             boolean selected=(c.getChairpersonId() != null && c.getChairpersonId() == u.getUserId());
-                                                                                                     %>
-                                                                                                             <option value="<%= u.getUserId() %>" <%=selected ? "selected" : "" %>>
-                                                                                                                 <%= u.getFullName() %>
-                                                                                                             </option>
-                                                                                                     <% } } %>
-                                                                                                 </select>
+                                                                                                  <select name="chairpersonId" class="form-select form-select-sm assign-select" required>
+                                                                                                      <option value="" disabled <%= c.getChairpersonId() == null ? "selected" : "" %>>
+                                                                                                          — Select Chairperson —
+                                                                                                      </option>
+                                                                                                      <% for(User u : userList) { 
+                                                                                                          if (u.getRole().equals("CHAIRPERSON")) { 
+                                                                                                              boolean selected=(c.getChairpersonId() != null && c.getChairpersonId() == u.getUserId());
+                                                                                                      %>
+                                                                                                              <option value="<%= u.getUserId() %>" <%=selected ? "selected" : "" %>>
+                                                                                                                  <%= u.getFullName() %>
+                                                                                                              </option>
+                                                                                                      <% } } %>
+                                                                                                  </select>
                                                                                              </div>
                                                                                          </div>
  
@@ -181,6 +190,28 @@
                                 <jsp:include page="footer.jsp" />
 
                                 <% } %>
+                                 <script>
+                                     document.addEventListener("DOMContentLoaded", function () {
+                                         const alertEl = document.getElementById("successAlert");
+                                         if (alertEl) {
+                                             const badge = alertEl.querySelector(".countdown-badge");
+                                             if (badge) {
+                                                 let timeLeft = 3;
+                                                 const interval = setInterval(() => {
+                                                     timeLeft--;
+                                                     if (badge) {
+                                                         badge.textContent = timeLeft + "s";
+                                                     }
+                                                     if (timeLeft <= 0) {
+                                                         clearInterval(interval);
+                                                         const bsAlert = new bootstrap.Alert(alertEl);
+                                                         bsAlert.close();
+                                                     }
+                                                 }, 1000);
+                                             }
+                                         }
+                                     });
+                                 </script>
                     </body>
 
                     </html>

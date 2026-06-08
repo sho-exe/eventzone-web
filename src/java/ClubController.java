@@ -43,15 +43,18 @@ public class ClubController extends HttpServlet {
 
             request.setAttribute("clubList", clubList);
             request.setAttribute("userList", userList);
+            request.setAttribute("allClubsList", clubList);
             request.getRequestDispatcher("ManageClubs.jsp").forward(request, response);
 
         } else if ("advisor".equals(action) && "ADVISOR".equals(accountType)) {
             int advisorId = (int) session.getAttribute("userId");
             List<Club> myClubs = clubDAO.selectClubsByAdvisor(advisorId);
             List<User> userList = userDAO.selectAllUsers();
+            List<Club> allClubs = clubDAO.selectAllClubs();
 
             request.setAttribute("clubList", myClubs);
             request.setAttribute("userList", userList);
+            request.setAttribute("allClubsList", allClubs);
             request.getRequestDispatcher("AdvisorClubs.jsp").forward(request, response);
 
         } else {
@@ -91,6 +94,17 @@ public class ClubController extends HttpServlet {
                 Integer chairpersonId = (chairStr != null && !chairStr.trim().isEmpty()) ? Integer.parseInt(chairStr)
                         : null;
 
+                if (chairpersonId != null) {
+                    Club existingClub = clubDAO.selectAllClubs().stream()
+                            .filter(c -> c.getChairpersonId() != null && c.getChairpersonId().equals(chairpersonId) && c.getClubId() != clubId)
+                            .findFirst().orElse(null);
+                    if (existingClub != null) {
+                        message = "Error: Only allow one chairman for one club!";
+                        response.sendRedirect("clubs?action=manage&message=" + java.net.URLEncoder.encode(message, "UTF-8"));
+                        return;
+                    }
+                }
+
                 if (name == null || name.trim().isEmpty())
                     name = "Unnamed Club";
                 clubDAO.updateClub(clubId, name, desc, advisorId, chairpersonId);
@@ -115,6 +129,17 @@ public class ClubController extends HttpServlet {
                 String chairStr = request.getParameter("chairpersonId");
                 Integer chairpersonId = (chairStr != null && !chairStr.trim().isEmpty()) ? Integer.parseInt(chairStr)
                         : null;
+
+                if (chairpersonId != null) {
+                    Club existingClub = clubDAO.selectAllClubs().stream()
+                            .filter(c -> c.getChairpersonId() != null && c.getChairpersonId().equals(chairpersonId) && c.getClubId() != clubId)
+                            .findFirst().orElse(null);
+                    if (existingClub != null) {
+                        message = "Error: Only allow one chairman for one club!";
+                        response.sendRedirect("clubs?action=advisor&message=" + java.net.URLEncoder.encode(message, "UTF-8"));
+                        return;
+                    }
+                }
 
                 int advisorId = (int) session.getAttribute("userId");
                 Club targetClub = clubDAO.selectAllClubs().stream().filter(c -> c.getClubId() == clubId).findFirst()
