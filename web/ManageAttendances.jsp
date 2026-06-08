@@ -17,36 +17,42 @@
                                     <div class="flex-grow-1 container-p-y">
                                         <% Event targetEvent=(Event) request.getAttribute("targetEvent"); %>
 
-                                            <!-- Page Header -->
-                                            <div
-                                                class="d-flex justify-content-between align-items-center py-3 mb-4 border-bottom">
-                                                <h4 class="mb-0 text-dark fw-bold"><i
-                                                        class="fas fa-clipboard-check text-success me-2"></i> Roster:
-                                                    <%= targetEvent.getEventName() %>
-                                                </h4>
-                                                <div class="d-flex align-items-center">
-                                                    <span class="badge bg-danger ms-3"><i
-                                                            class="fas fa-map-marker-alt me-1"></i>
-                                                        <%= targetEvent.getVenue() %>
-                                                    </span>
-                                                    <span class="badge bg-primary ms-2"><i
-                                                            class="far fa-calendar-alt me-1"></i>
-                                                        <%= targetEvent.getDate() %>
-                                                    </span>
-                                                </div>
-                                            </div>
+                                             <!-- Page Header -->
+                                             <div
+                                                 class="d-flex justify-content-between align-items-center py-3 mb-4 border-bottom">
+                                                 <h4 class="mb-0 text-dark fw-bold d-flex align-items-center"><i
+                                                         class="fas fa-clipboard-check text-success me-2"></i> Roster: <%= targetEvent.getEventName() %>
+                                                     <i class="bx bx-info-circle text-info ms-2" style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;" data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse" title="Toggle Page Guide"></i>
+                                                 </h4>
+                                                 <div class="d-flex align-items-center">
+                                                     <span class="badge bg-danger ms-3"><i
+                                                             class="fas fa-map-marker-alt me-1"></i>
+                                                         <%= targetEvent.getVenue() %>
+                                                     </span>
+                                                     <span class="badge bg-primary ms-2"><i
+                                                             class="far fa-calendar-alt me-1"></i>
+                                                         <%= targetEvent.getDate() %>
+                                                     </span>
+                                                 </div>
+                                             </div>
 
-                                            <div
-                                                class="alert alert-info border-0 shadow-sm bg-info-soft text-dark mb-4">
-                                                <i class="fas fa-info-circle me-2 text-info"></i> You are actively
-                                                managing the
-                                                registration list for <strong>
-                                                    <%= targetEvent.getEventName() %>
-                                                </strong>. Students who signed up are listed below. Click
-                                                <strong>Verify</strong> when the student physically attends the event.
-                                                This
-                                                allows HEPA to distribute merit points.
-                                            </div>
+                                             <div class="collapse mb-4" id="pageTipsCollapse">
+                                                 <div class="card border-0 bg-label-info shadow-none" style="border-radius: 12px;">
+                                                     <div class="card-body p-3">
+                                                         <div class="d-flex align-items-center gap-3">
+                                                             <div class="bg-info text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: 8px; font-size: 1.2rem; flex-shrink: 0;">
+                                                                 <i class="bx bx-info-circle"></i>
+                                                             </div>
+                                                             <div class="flex-grow-1">
+                                                                 <h6 class="mb-1 text-info fw-bold" style="font-size: 0.95rem;">Page Guide & Tips</h6>
+                                                                 <div class="text-dark" style="font-size: 0.85rem; line-height: 1.45; font-weight: 500;">
+                                                                     You are actively managing the registration list for <strong><%= targetEvent.getEventName() %></strong>. Students who signed up are listed below. Click <strong>Verify</strong> when the student physically attends the event. This allows HEPA to distribute merit points.
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
 
                                             <div class="card shadow-sm border-0">
                                                 <div class="card-body p-0">
@@ -57,6 +63,7 @@
                                                                     <th class="ps-4">Student</th>
                                                                     <th>Registration Date</th>
                                                                     <th>Status</th>
+                                                                    <th>Position</th>
                                                                     <th>Verified By</th>
                                                                     <th class="text-end pe-4">Verification Actions</th>
                                                                 </tr>
@@ -133,6 +140,26 @@
                                                                                                             class="fas fa-ban me-1"></i>
                                                                                                         DECLINED</span>
                                                                                                     <% } %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <% if ("CHAIRPERSON".equals(session.getAttribute("accountType")) && (isPending || isRegistered)) { %>
+                                                                                    <form action="attendances" method="POST" class="d-inline-block m-0">
+                                                                                        <input type="hidden" name="action" value="assignPosition">
+                                                                                        <input type="hidden" name="eventId" value="<%= targetEvent.getEventId() %>">
+                                                                                        <input type="hidden" name="attendanceId" value="<%= a.getAttendanceId() %>">
+                                                                                        <select name="position" class="form-select form-select-sm fw-bold border-primary text-dark" style="min-width: 160px;" onchange="this.form.submit()">
+                                                                                            <option value="Ahli Kelab" <%= "Ahli Kelab".equals(a.getPosition()) || a.getPosition() == null ? "selected" : "" %>>Ahli Kelab (20)</option>
+                                                                                            <option value="AJK Kelab" <%= "AJK Kelab".equals(a.getPosition()) ? "selected" : "" %>>AJK Kelab (40)</option>
+                                                                                            <option value="MT Kelab" <%= "MT Kelab".equals(a.getPosition()) ? "selected" : "" %>>MT Kelab (50)</option>
+                                                                                            <option value="Setiausaha Kelab" <%= "Setiausaha Kelab".equals(a.getPosition()) ? "selected" : "" %>>Setiausaha Kelab (60)</option>
+                                                                                            <option value="Presiden Kelab" <%= "Presiden Kelab".equals(a.getPosition()) ? "selected" : "" %>>Presiden Kelab (80)</option>
+                                                                                        </select>
+                                                                                    </form>
+                                                                                <% } else { %>
+                                                                                    <span class="badge bg-secondary fw-semibold">
+                                                                                        <%= a.getPosition() != null && !a.getPosition().isEmpty() ? a.getPosition() : "Ahli Kelab" %>
+                                                                                    </span>
+                                                                                <% } %>
                                                                             </td>
                                                                             <td>
                                                                                 <% if(a.getVerifierName() !=null) { %>

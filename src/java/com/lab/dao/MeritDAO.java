@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class MeritDAO {
 
-    private static final String GET_ELIGIBLE_ATTENDEES = "SELECT user_id FROM attendances WHERE event_id = ? AND status = 'ATTENDED'";
+    private static final String GET_ELIGIBLE_ATTENDEES = "SELECT user_id, position FROM attendances WHERE event_id = ? AND status = 'ATTENDED'";
     private static final String INSERT_MERIT = "INSERT INTO merits (user_id, event_id, points, awarded_date) VALUES (?, ?, ?, NOW())";
     private static final String CHECK_IF_DISTRIBUTED = "SELECT COUNT(*) FROM merits WHERE event_id = ?";
     private static final String SUM_TOTAL_MERITS = "SELECT SUM(points) FROM merits WHERE user_id = ?";
@@ -76,19 +76,22 @@ public class MeritDAO {
         return total;
     }
 
-    public int distributeMerits(int eventId, int points) {
+    public int distributeMerits(int eventId, int defaultPoints) {
         int eligibleCount = 0;
         int successCount = 0;
 
         try (Connection connection = getConnection()) {
 
             // 1. Gather all verified attendees
-            List<Integer> attendees = new ArrayList<>();
+            List<Map<String, Object>> attendees = new ArrayList<>();
             try (PreparedStatement ps1 = connection.prepareStatement(GET_ELIGIBLE_ATTENDEES)) {
                 ps1.setInt(1, eventId);
                 ResultSet rs = ps1.executeQuery();
                 while (rs.next()) {
-                    attendees.add(rs.getInt("user_id"));
+                    Map<String, Object> attendee = new HashMap<>();
+                    attendee.put("userId", rs.getInt("user_id"));
+                    attendee.put("position", rs.getString("position"));
+                    attendees.add(attendee);
                 }
             }
 
@@ -97,7 +100,23 @@ public class MeritDAO {
             // 2. Distribute points ignoring constraints silently if already awarded
             if (eligibleCount > 0) {
                 try (PreparedStatement ps2 = connection.prepareStatement(INSERT_MERIT)) {
-                    for (int userId : attendees) {
+                    for (Map<String, Object> attendee : attendees) {
+                        int userId = (int) attendee.get("userId");
+                        String pos = (String) attendee.get("position");
+
+                        int points = 20; // Default: Ahli Kelab / fallback
+                        if ("Presiden Kelab".equals(pos)) {
+                            points = 80;
+                        } else if ("Setiausaha Kelab".equals(pos)) {
+                            points = 60;
+                        } else if ("MT Kelab".equals(pos)) {
+                            points = 50;
+                        } else if ("AJK Kelab".equals(pos)) {
+                            points = 40;
+                        } else {
+                            points = 20; // Ahli Kelab (20)
+                        }
+
                         ps2.setInt(1, userId);
                         ps2.setInt(2, eventId);
                         ps2.setInt(3, points);

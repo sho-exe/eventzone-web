@@ -30,25 +30,36 @@
                                                 <!-- Content -->
                                                 <div class=" flex-grow-1 container-p-y">
 
-                                                    <h4 class="fw-bold py-3 mb-4">
-                                                        My Managed Clubs
-                                                    </h4>
+                                                     <h4 class="fw-bold py-3 mb-4 d-flex align-items-center">
+                                                         My Managed Clubs
+                                                         <i class="bx bx-info-circle text-info ms-2" style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;" data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse" title="Toggle Page Guide"></i>
+                                                     </h4>
 
-                                                    <% String message = request.getParameter("message"); %>
-                                                    <% if (message != null && !message.trim().isEmpty()) { %>
-                                                        <div class="alert alert-success border-0 shadow-sm mb-4 alert-dismissible" role="alert">
-                                                            <i class="bx bx-check-circle me-2"></i> <%= message %>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                        </div>
-                                                    <% } %>
+                                                     <% String message = request.getParameter("message"); %>
+                                                     <% if (message != null && !message.trim().isEmpty()) { %>
+                                                         <div class="alert alert-success border-0 shadow-sm mb-4 alert-dismissible" role="alert">
+                                                             <i class="bx bx-check-circle me-2"></i> <%= message %>
+                                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                         </div>
+                                                     <% } %>
 
-                                                    <div class="alert alert-success border-0  bg-success-soft"
-                                                        style="color:black">
-                                                        <i class="fas fa-info-circle me-2 success"></i> As an
-                                                        assigned Advisor, you have the authority to assign or change the
-                                                        <strong>Chairperson</strong> who will handle event creation for
-                                                        your clubs.
-                                                    </div>
+                                                     <div class="collapse mb-4" id="pageTipsCollapse">
+                                                         <div class="card border-0 bg-label-info shadow-none" style="border-radius: 12px;">
+                                                             <div class="card-body p-3">
+                                                                 <div class="d-flex align-items-center gap-3">
+                                                                     <div class="bg-info text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: 8px; font-size: 1.2rem; flex-shrink: 0;">
+                                                                         <i class="bx bx-info-circle"></i>
+                                                                     </div>
+                                                                     <div class="flex-grow-1">
+                                                                         <h6 class="mb-1 text-info fw-bold" style="font-size: 0.95rem;">Page Guide & Tips</h6>
+                                                                         <div class="text-dark" style="font-size: 0.85rem; line-height: 1.45; font-weight: 500;">
+                                                                             As an assigned Advisor, you have the authority to assign or change the <strong>Chairperson</strong> who will handle event creation for your clubs.
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     </div>
 
                                                     <div class="row mt-4">
                                                         <% List<Club> clubList = (List<Club>)

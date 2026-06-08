@@ -9,6 +9,7 @@ public class Attendance {
     private Timestamp registrationDate;
     private String status;
     private Integer verifiedBy;
+    private String position;
 
     // View Mapping Properties - For Chairpersons
     private String studentName;
@@ -40,6 +41,9 @@ public class Attendance {
 
     public Integer getVerifiedBy() { return verifiedBy; }
     public void setVerifiedBy(Integer verifiedBy) { this.verifiedBy = verifiedBy; }
+
+    public String getPosition() { return position; }
+    public void setPosition(String position) { this.position = position; }
 
     public String getStudentName() { return studentName; }
     public void setStudentName(String studentName) { this.studentName = studentName; }

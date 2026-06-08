@@ -13,6 +13,7 @@ public class Event {
     private int clubId;
     private String status;
     private String category;
+    private String sdgGoals;
 
     // Helper specific to UI mapping
     private String clubName;
@@ -50,6 +51,9 @@ public class Event {
 
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
+
+    public String getSdgGoals() { return sdgGoals; }
+    public void setSdgGoals(String sdgGoals) { this.sdgGoals = sdgGoals; }
 
     public String getClubName() { return clubName; }
     public void setClubName(String clubName) { this.clubName = clubName; }

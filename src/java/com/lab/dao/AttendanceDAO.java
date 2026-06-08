@@ -104,6 +104,7 @@ public class AttendanceDAO {
                 a.setStudentName(rs.getString("full_name"));
                 a.setStudentEmail(rs.getString("email"));
                 a.setVerifierName(rs.getString("verifier_name"));
+                a.setPosition(rs.getString("position"));
                 list.add(a);
             }
         } catch(SQLException e) {
@@ -122,6 +123,21 @@ public class AttendanceDAO {
             preparedStatement.setInt(3, attendanceId);
             rowUpdated = preparedStatement.executeUpdate() > 0;
             
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
+    }
+
+    private static final String UPDATE_ATTENDANCE_POSITION = "UPDATE attendances SET position = ? WHERE attendance_id = ?";
+    
+    public boolean updateAttendancePosition(int attendanceId, String position) {
+        boolean rowUpdated = false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ATTENDANCE_POSITION)) {
+            preparedStatement.setString(1, position);
+            preparedStatement.setInt(2, attendanceId);
+            rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -148,6 +164,7 @@ public class AttendanceDAO {
                 a.setEventDate(rs.getDate("event_date"));
                 a.setEventVenue(rs.getString("event_venue"));
                 a.setClubName(rs.getString("club_name"));
+                a.setPosition(rs.getString("position"));
                 list.add(a);
             }
         } catch(SQLException e) {

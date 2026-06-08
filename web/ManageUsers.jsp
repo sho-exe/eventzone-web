@@ -29,26 +29,37 @@
                                             <!-- Content -->
                                             <div class=" flex-grow-1 container-p-y">
 
-                                                <h4 class="fw-bold py-3 mb-4">
-                                                    Manage Users
-                                                </h4>
+                                                 <h4 class="fw-bold py-3 mb-4 d-flex align-items-center">
+                                                     Manage Users
+                                                     <i class="bx bx-info-circle text-info ms-2" style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;" data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse" title="Toggle Page Guide"></i>
+                                                 </h4>
 
-                                                <% String message = request.getParameter("message"); %>
-                                                <% if (message != null && !message.trim().isEmpty()) { %>
-                                                    <div class="alert alert-success border-0 shadow-sm mb-4 alert-dismissible fade show" role="alert" id="successAlert">
-                                                        <i class="bx bx-check-circle me-2"></i> <%= message %>
-                                                        <span class="badge bg-white text-success ms-2 countdown-badge" style="font-size: 0.75rem; vertical-align: middle;">3s</span>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                                    </div>
-                                                <% } %>
+                                                 <% String message = request.getParameter("message"); %>
+                                                 <% if (message != null && !message.trim().isEmpty()) { %>
+                                                     <div class="alert alert-success border-0 shadow-sm mb-4 alert-dismissible fade show" role="alert" id="successAlert">
+                                                         <i class="bx bx-check-circle me-2"></i> <%= message %>
+                                                         <span class="badge bg-white text-success ms-2 countdown-badge" style="font-size: 0.75rem; vertical-align: middle;">3s</span>
+                                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                     </div>
+                                                 <% } %>
 
-                                                <div class="alert alert-info border-0 shadow-sm">
-                                                    <i class="fas fa-info-circle me-2"></i> As a <strong>HEPA
-                                                        Administrator</strong>, you can assign
-                                                    users to the <strong>ADVISOR</strong> role, or revoke roles back to
-                                                    <strong>STUDENT</strong>.
-                                                    Chairpersons are assigned automatically via Club creation.
-                                                </div>
+                                                 <div class="collapse mb-4" id="pageTipsCollapse">
+                                                     <div class="card border-0 bg-label-info shadow-none" style="border-radius: 12px;">
+                                                         <div class="card-body p-3">
+                                                             <div class="d-flex align-items-center gap-3">
+                                                                 <div class="bg-info text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: 8px; font-size: 1.2rem; flex-shrink: 0;">
+                                                                     <i class="bx bx-info-circle"></i>
+                                                                 </div>
+                                                                 <div class="flex-grow-1">
+                                                                     <h6 class="mb-1 text-info fw-bold" style="font-size: 0.95rem;">Page Guide & Tips</h6>
+                                                                     <div class="text-dark" style="font-size: 0.85rem; line-height: 1.45; font-weight: 500;">
+                                                                         As a <strong>HEPA Administrator</strong>, you can assign users to the <strong>ADVISOR</strong> role, or revoke roles back to <strong>STUDENT</strong>. Chairpersons are assigned automatically via Club creation.
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
 
                                                 <div class="card mt-4">
                                                     <div class="table-responsive text-nowrap">

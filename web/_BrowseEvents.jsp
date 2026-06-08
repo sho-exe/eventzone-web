@@ -64,6 +64,10 @@
                                              <span>Merit Tier: <%= e.getCriteria() %>
                                                      | Category: <%= e.getCategory() != null ? e.getCategory() : "N/A" %></span>
                                         </div>
+                                        <div class="d-flex small fw-bold text-secondary mt-2">
+                                            <i class="fas fa-globe text-primary me-2 mt-1"></i>
+                                            <span>SDG Goals: <%= e.getSdgGoals() != null && !e.getSdgGoals().isEmpty() ? e.getSdgGoals() : "N/A" %></span>
+                                        </div>
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center mt-auto">

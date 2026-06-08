@@ -34,8 +34,9 @@
                                                 <div class="flex-grow-1 container-p-y">
 
                                                     <div class="d-flex justify-content-between align-items-center mb-4">
-                                                        <h4 class="fw-bold m-0 py-3">
+                                                        <h4 class="fw-bold m-0 py-3 d-flex align-items-center">
                                                             Manage Clubs
+                                                            <i class="bx bx-info-circle text-info ms-2" style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;" data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse" title="Toggle Page Guide"></i>
                                                         </h4>
                                                         <button type="button" class="btn btn-primary"
                                                             data-bs-toggle="modal" data-bs-target="#createClubModal">
@@ -56,13 +57,22 @@
                                                             </div>
                                                             <% } %>
 
-                                                                <div class="alert alert-secondary border-0">
-                                                                    <i class="bx bx-info-circle me-2"></i> Select
-                                                                    established
-                                                                    <strong>Advisors</strong> and
-                                                                    <strong>Chairpersons</strong> to
-                                                                    assign them to clubs. Unassigned clubs cannot
-                                                                    propose events!
+                                                                <div class="collapse mb-4" id="pageTipsCollapse">
+                                                                    <div class="card border-0 bg-label-info shadow-none" style="border-radius: 12px;">
+                                                                        <div class="card-body p-3">
+                                                                            <div class="d-flex align-items-center gap-3">
+                                                                                <div class="bg-info text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: 8px; font-size: 1.2rem; flex-shrink: 0;">
+                                                                                    <i class="bx bx-info-circle"></i>
+                                                                                </div>
+                                                                                <div class="flex-grow-1">
+                                                                                    <h6 class="mb-1 text-info fw-bold" style="font-size: 0.95rem;">Page Guide & Tips</h6>
+                                                                                    <div class="text-dark" style="font-size: 0.85rem; line-height: 1.45; font-weight: 500;">
+                                                                                        Select established <strong>Advisors</strong> and <strong>Chairpersons</strong> to assign them to clubs. Unassigned clubs cannot propose events!
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
 
                                                                 <div class="row mt-4 gy-4 clubs-grid">

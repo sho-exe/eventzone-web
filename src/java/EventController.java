@@ -109,8 +109,36 @@ public class EventController extends HttpServlet {
                     : 0);
             newEvent.setCriteria(request.getParameter("criteria"));
             newEvent.setCategory(request.getParameter("kategori"));
+            String[] sdgArr = request.getParameterValues("sdgGoals");
+            newEvent.setSdgGoals(sdgArr != null ? String.join(", ", sdgArr) : "");
             newEvent.setClubId(Integer.parseInt(request.getParameter("clubId")));
             eventDAO.insertEvent(newEvent);
+            response.sendRedirect("events?action=manage");
+
+        } else if ("editEvent".equals(action) && "CHAIRPERSON".equals(accountType)) {
+            int eventId = Integer.parseInt(request.getParameter("eventId"));
+            Event event = eventDAO.selectEventById(eventId);
+            if (event != null && "PENDING".equals(event.getStatus())) {
+                event.setEventName(request.getParameter("eventName"));
+                event.setDescription(request.getParameter("description"));
+                event.setDate(Date.valueOf(request.getParameter("date")));
+                event.setVenue(request.getParameter("venue"));
+                event.setQuota(request.getParameter("quota") != null && !request.getParameter("quota").isEmpty()
+                        ? Integer.parseInt(request.getParameter("quota"))
+                        : 0);
+                event.setCategory(request.getParameter("kategori"));
+                String[] sdgArr = request.getParameterValues("sdgGoals");
+                event.setSdgGoals(sdgArr != null ? String.join(", ", sdgArr) : "");
+                eventDAO.updateEvent(event);
+            }
+            response.sendRedirect("events?action=manage");
+
+        } else if ("deleteEvent".equals(action) && "CHAIRPERSON".equals(accountType)) {
+            int eventId = Integer.parseInt(request.getParameter("eventId"));
+            Event event = eventDAO.selectEventById(eventId);
+            if (event != null && "PENDING".equals(event.getStatus())) {
+                eventDAO.deleteEvent(eventId);
+            }
             response.sendRedirect("events?action=manage");
 
         } else if (("approve".equals(action) || "reject".equals(action))

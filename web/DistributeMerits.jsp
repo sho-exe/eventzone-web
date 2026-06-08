@@ -33,12 +33,12 @@
                                                 <!-- Content -->
                                                 <div class=" flex-grow-1 container-p-y">
 
-                                                    <h4 class="fw-bold py-3 mb-4">
-                                                        System Merit
-                                                        Distribution
-                                                    </h4>
+                                                     <h4 class="fw-bold py-3 mb-4 d-flex align-items-center">
+                                                         System Merit Distribution
+                                                         <i class="bx bx-info-circle text-info ms-2" style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;" data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse" title="Toggle Page Guide"></i>
+                                                     </h4>
 
-                                                    <% if(request.getParameter("success") !=null) { %>
+                                                     <% if(request.getParameter("success") !=null) { %>
                                                          <div class="alert alert-success border-0 shadow-sm mb-4 alert-dismissible fade show d-flex align-items-center"
                                                              role="alert" id="successAlert">
                                                              <i class="bx bx-check-circle me-3 fs-3"></i>
@@ -47,23 +47,32 @@
                                                                  Students have automatically received their event points
                                                                  on their immutable
                                                                  transcript.
-                                                                 <span class="badge bg-white text-success ms-2 countdown-badge" style="font-size: 0.75rem; vertical-align: middle;">3s</span>
+                                                                 <span
+                                                                     class="badge bg-white text-success ms-2 countdown-badge"
+                                                                     style="font-size: 0.75rem; vertical-align: middle;">3s</span>
                                                              </div>
                                                              <button type="button" class="btn-close"
-                                                                 data-bs-dismiss="alert"
-                                                                 aria-label="Close"></button>
+                                                                 data-bs-dismiss="alert" aria-label="Close"></button>
                                                          </div>
                                                          <% } %>
 
-                                                            <div
-                                                                class="alert alert-info border-0  bg-primary-soft text-dark mb-4">
-                                                                <i class="fas fa-info-circle me-2 text-primary"></i>
-                                                                Select a finalized
-                                                                event below to systematically drop merit points to its
-                                                                verified attendees.
-                                                                Doing this locks the specific event transcript
-                                                                permanently.
-                                                            </div>
+                                                             <div class="collapse mb-4" id="pageTipsCollapse">
+                                                                 <div class="card border-0 bg-label-info shadow-none" style="border-radius: 12px;">
+                                                                     <div class="card-body p-3">
+                                                                         <div class="d-flex align-items-center gap-3">
+                                                                             <div class="bg-info text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: 8px; font-size: 1.2rem; flex-shrink: 0;">
+                                                                                 <i class="bx bx-info-circle"></i>
+                                                                             </div>
+                                                                             <div class="flex-grow-1">
+                                                                                 <h6 class="mb-1 text-info fw-bold" style="font-size: 0.95rem;">Page Guide & Tips</h6>
+                                                                                 <div class="text-dark" style="font-size: 0.85rem; line-height: 1.45; font-weight: 500;">
+                                                                                     Select a finalized event below to systematically drop merit points to its verified attendees. Doing this locks the specific event transcript permanently.
+                                                                                 </div>
+                                                                             </div>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
 
                                                             <div class="card  border-0">
                                                                 <div class="card-body p-0">
@@ -167,21 +176,7 @@
                                                                                                                     type="hidden"
                                                                                                                     name="eventId"
                                                                                                                     value="<%= e.getEventId() %>">
-                                                                                                                <div
-                                                                                                                    class="input-group input-group-sm w-auto ">
-                                                                                                                    <span
-                                                                                                                        class="input-group-text bg-light text-muted"><i
-                                                                                                                            class="fas fa-star"></i></span>
-                                                                                                                    <input
-                                                                                                                        type="number"
-                                                                                                                        name="points"
-                                                                                                                        class="form-control"
-                                                                                                                        style="width: 80px;"
-                                                                                                                        min="1"
-                                                                                                                        max="100"
-                                                                                                                        value="10"
-                                                                                                                        required>
-                                                                                                                </div>
+
                                                                                                                 <button
                                                                                                                     type="submit"
                                                                                                                     class="btn btn-sm btn-success fw-bold  px-3"><i
@@ -228,26 +223,26 @@
                                 <jsp:include page="footer.jsp" />
 
                                 <% } %>
-                                <script>
-                                document.addEventListener("DOMContentLoaded", function() {
-                                    const alertEl = document.getElementById("successAlert");
-                                    if (alertEl) {
-                                        const badge = alertEl.querySelector(".countdown-badge");
-                                        let timeLeft = 3;
-                                        const interval = setInterval(() => {
-                                            timeLeft--;
-                                            if (badge) {
-                                                badge.textContent = timeLeft + "s";
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            const alertEl = document.getElementById("successAlert");
+                                            if (alertEl) {
+                                                const badge = alertEl.querySelector(".countdown-badge");
+                                                let timeLeft = 3;
+                                                const interval = setInterval(() => {
+                                                    timeLeft--;
+                                                    if (badge) {
+                                                        badge.textContent = timeLeft + "s";
+                                                    }
+                                                    if (timeLeft <= 0) {
+                                                        clearInterval(interval);
+                                                        const bsAlert = new bootstrap.Alert(alertEl);
+                                                        bsAlert.close();
+                                                    }
+                                                }, 1000);
                                             }
-                                            if (timeLeft <= 0) {
-                                                clearInterval(interval);
-                                                const bsAlert = new bootstrap.Alert(alertEl);
-                                                bsAlert.close();
-                                            }
-                                        }, 1000);
-                                    }
-                                });
-                                </script>
+                                        });
+                                    </script>
                     </body>
 
                     </html>

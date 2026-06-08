@@ -33,11 +33,22 @@ public class EventDAO {
             + "WHERE c.advisor_id = ? ORDER BY e.date DESC";
 
     private static final String INSERT_EVENT
-            = "INSERT INTO events (event_name, description, date, venue, quota, criteria, club_id, status, category) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, 'PENDING', ?)";
+            = "INSERT INTO events (event_name, description, date, venue, quota, criteria, club_id, status, category, sdg_goals) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, 'PENDING', ?, ?)";
 
     private static final String UPDATE_EVENT_STATUS
             = "UPDATE events SET status = ? WHERE event_id = ?";
+
+    private static final String SELECT_EVENT_BY_ID
+            = "SELECT e.*, c.club_name FROM events e "
+            + "JOIN clubs c ON e.club_id = c.club_id "
+            + "WHERE e.event_id = ?";
+
+    private static final String UPDATE_EVENT
+            = "UPDATE events SET event_name = ?, description = ?, date = ?, venue = ?, quota = ?, criteria = ?, category = ?, sdg_goals = ? WHERE event_id = ?";
+
+    private static final String DELETE_EVENT
+            = "DELETE FROM events WHERE event_id = ?";
 
     protected Connection getConnection() {
         return DBConnection.getConnection();
@@ -62,6 +73,7 @@ public class EventDAO {
                 e.setClubId(rs.getInt("club_id"));
                 e.setStatus(rs.getString("status"));
                 e.setCategory(rs.getString("category"));
+                e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -87,6 +99,7 @@ public class EventDAO {
                 e.setQuota(rs.getInt("quota"));
                 e.setCriteria(rs.getString("criteria"));
                 e.setCategory(rs.getString("category"));
+                e.setSdgGoals(rs.getString("sdg_goals"));
 
                 e.setClubId(rs.getInt("club_id"));
                 e.setStatus(rs.getString("status"));
@@ -116,6 +129,7 @@ public class EventDAO {
                 e.setCriteria(rs.getString("criteria"));
                 e.setClubId(rs.getInt("club_id"));
                 e.setStatus(rs.getString("status"));
+                e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -144,6 +158,7 @@ public class EventDAO {
                 e.setClubId(rs.getInt("club_id"));
                 e.setStatus(rs.getString("status"));
                 e.setCategory(rs.getString("category"));
+                e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -172,6 +187,7 @@ public class EventDAO {
                 e.setClubId(rs.getInt("club_id"));
                 e.setStatus(rs.getString("status"));
                 e.setCategory(rs.getString("category"));
+                e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -193,6 +209,7 @@ public class EventDAO {
             preparedStatement.setString(6, e.getCriteria());
             preparedStatement.setInt(7, e.getClubId());
             preparedStatement.setString(8, e.getCategory());
+            preparedStatement.setString(9, e.getSdgGoals());
 
             rowInserted = preparedStatement.executeUpdate() > 0;
 
@@ -214,5 +231,61 @@ public class EventDAO {
             e.printStackTrace();
         }
         return rowUpdated;
+    }
+
+    public Event selectEventById(int eventId) {
+        Event e = null;
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_EVENT_BY_ID)) {
+            preparedStatement.setInt(1, eventId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                e = new Event();
+                e.setEventId(rs.getInt("event_id"));
+                e.setEventName(rs.getString("event_name"));
+                e.setDescription(rs.getString("description"));
+                e.setDate(rs.getDate("date"));
+                e.setVenue(rs.getString("venue"));
+                e.setQuota(rs.getInt("quota"));
+                e.setCriteria(rs.getString("criteria"));
+                e.setClubId(rs.getInt("club_id"));
+                e.setStatus(rs.getString("status"));
+                e.setCategory(rs.getString("category"));
+                e.setSdgGoals(rs.getString("sdg_goals"));
+                e.setClubName(rs.getString("club_name"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return e;
+    }
+
+    public boolean updateEvent(Event e) {
+        boolean rowUpdated = false;
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_EVENT)) {
+            preparedStatement.setString(1, e.getEventName());
+            preparedStatement.setString(2, e.getDescription());
+            preparedStatement.setDate(3, e.getDate());
+            preparedStatement.setString(4, e.getVenue());
+            preparedStatement.setInt(5, e.getQuota());
+            preparedStatement.setString(6, e.getCriteria());
+            preparedStatement.setString(7, e.getCategory());
+            preparedStatement.setString(8, e.getSdgGoals());
+            preparedStatement.setInt(9, e.getEventId());
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return rowUpdated;
+    }
+
+    public boolean deleteEvent(int eventId) {
+        boolean rowDeleted = false;
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(DELETE_EVENT)) {
+            preparedStatement.setInt(1, eventId);
+            rowDeleted = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowDeleted;
     }
 }

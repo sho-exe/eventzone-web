@@ -18,6 +18,23 @@
 
                 <jsp:include page="header.jsp" />
 
+                <style>
+                    @media (min-width: 992px) {
+                        .border-lg-end {
+                            border-right: 1px solid #eef0f4;
+                        }
+                    }
+                    .detail-icon {
+                        width: 32px;
+                        height: 32px;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 8px;
+                        font-size: 1.1rem;
+                    }
+                </style>
+
                 <body>
                     <% if (role==null) { %>
                         <div class="container-xxl container-p-y">
@@ -39,15 +56,27 @@
                                             <!-- Content -->
                                             <div class=" flex-grow-1 container-p-y">
 
-                                                <h4 class="fw-bold py-3 mb-4">
-
+                                                <h4 class="fw-bold py-3 mb-4 d-flex align-items-center">
                                                     <%= title%>
+                                                    <i class="bx bx-info-circle text-info ms-2" style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;" data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse" title="Toggle Page Guide"></i>
                                                 </h4>
 
-                                                <div class="alert <%= alertClass%> border-0">
-                                                    <i class="bx <%= alertIcon%> me-2 fs-5"
-                                                        style="vertical-align: middle;"></i>
-                                                    <%= alertText%>
+                                                <div class="collapse mb-4" id="pageTipsCollapse">
+                                                    <div class="card border-0 bg-label-info shadow-none" style="border-radius: 12px;">
+                                                        <div class="card-body p-3">
+                                                            <div class="d-flex align-items-center gap-3">
+                                                                <div class="bg-info text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: 8px; font-size: 1.2rem; flex-shrink: 0;">
+                                                                    <i class="bx bx-info-circle"></i>
+                                                                </div>
+                                                                <div class="flex-grow-1">
+                                                                    <h6 class="mb-1 text-info fw-bold" style="font-size: 0.95rem;">Page Guide & Tips</h6>
+                                                                    <div class="text-dark" style="font-size: 0.85rem; line-height: 1.45; font-weight: 500;">
+                                                                        <%= alertText%>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="row mt-4 gy-4">
@@ -60,158 +89,140 @@
                                                             eventIndex++;
                                                             boolean isPendingRow
                                                             = "PENDING".equals(e.getStatus());
-                                                            boolean isApproved
-                                                            = "APPROVED".equals(e.getStatus());
-                                                            String badgeColor = "bg-warning text-dark"; // PENDING
-                                                            String icon = "bx-time-five";
-                                                            if("APPROVED".equals(e.getStatus())) {
-                                                            badgeColor = "bg-success text-white";
-                                                            icon = "bx-check-circle"; }
-                                                            if("REJECTED".equals(e.getStatus())) {
-                                                            badgeColor = "bg-danger text-white";
-                                                            icon = "bx-x-circle"; }
-                                                            %>
-                                                            <div class="col-lg-4 col-md-6">
-                                                                <div class="card club-card position-relative">
-                                                                    <div class="card-inner">
-                                                                        <div
-                                                                            class="d-flex justify-content-between align-items-center mb-1">
-                                                                            <span
-                                                                                class="club-id-badge badge-index mb-0">
-                                                                                #<%= eventIndex %>
-                                                                            </span>
-                                                                            <span class="club-id-badge badge-id mb-0">
-                                                                                ID: <%= e.getEventId()%>
-                                                                            </span>
-                                                                        </div>
+                                                             boolean isApproved
+                                                             = "APPROVED".equals(e.getStatus());
+                                                             String badgeColor = "bg-label-warning"; // PENDING
+                                                             String icon = "bx-time-five";
+                                                             if("APPROVED".equals(e.getStatus())) {
+                                                             badgeColor = "bg-label-success";
+                                                             icon = "bx-check-circle"; }
+                                                             if("REJECTED".equals(e.getStatus())) {
+                                                             badgeColor = "bg-label-danger";
+                                                             icon = "bx-x-circle"; }
+                                                             %>
+                                                             <div class="col-12">
+                                                                 <div class="card club-card position-relative shadow-sm border-0 mb-4">
+                                                                     <div class="card-inner p-4">
+                                                                         <div class="row align-items-center">
+                                                                             <!-- Col 1: Index and Basic Meta Information (Club Badge, Status Badge, ID) -->
+                                                                             <div class="col-lg-3 mb-3 mb-lg-0 border-lg-end">
+                                                                                 <div class="d-flex flex-column gap-2 pe-lg-3">
+                                                                                     <div class="d-flex align-items-center gap-2">
+                                                                                         <span class="badge bg-label-primary px-3 py-2 fw-bold" style="font-size: 0.95rem;">
+                                                                                             #<%= eventIndex %>
+                                                                                         </span>
+                                                                                         <span class="text-muted fw-semibold" style="font-size: 0.8rem;">
+                                                                                             ID: <%= e.getEventId()%>
+                                                                                         </span>
+                                                                                     </div>
+                                                                                     
+                                                                                     <div>
+                                                                                         <span class="badge bg-secondary text-white d-inline-block" style="font-size: 0.75rem; padding: 5px 10px;">
+                                                                                             <i class="bx bx-flag me-1"></i><%= e.getClubName()%>
+                                                                                         </span>
+                                                                                     </div>
+                                                                                     
+                                                                                     <div>
+                                                                                         <span class="badge <%= badgeColor %>" style="font-size: 0.75rem; padding: 5px 10px;">
+                                                                                             <i class="bx <%= icon %> me-1"></i><%= e.getStatus()%>
+                                                                                         </span>
+                                                                                     </div>
+                                                                                 </div>
+                                                                             </div>
 
-                                                                        <div class="mb-3">
-                                                                            <span class="badge bg-secondary mb-2"
-                                                                                style="font-size: 0.72rem; padding: 4px 8px;"><i
-                                                                                    class="bx bx-flag me-1"></i>
-                                                                                <%= e.getClubName()%>
-                                                                            </span>
-                                                                            <h5 class="fw-bold text-dark mb-1"
-                                                                                style="font-size: 1.1rem; line-height: 1.3;">
-                                                                                <%= e.getEventName()%>
-                                                                            </h5>
-                                                                            <span class="badge <%= badgeColor %>"
-                                                                                style="font-size: 0.72rem; padding: 4px 8px;"><i
-                                                                                    class="bx <%= icon %> me-1"></i>
-                                                                                <%= e.getStatus()%>
-                                                                            </span>
-                                                                        </div>
+                                                                             <!-- Col 2: Event Name & Description -->
+                                                                             <div class="col-lg-5 mb-3 mb-lg-0 px-lg-4 border-lg-end">
+                                                                                 <h5 class="fw-bold text-dark mb-2" style="font-size: 1.25rem; line-height: 1.3;">
+                                                                                     <%= e.getEventName()%>
+                                                                                 </h5>
+                                                                                 <p class="text-muted small mb-0" style="line-height: 1.5; font-size: 0.85rem;">
+                                                                                     <%= e.getDescription()%>
+                                                                                 </p>
+                                                                             </div>
 
-                                                                        <p class="text-muted small mb-3"
-                                                                            style="min-height: 55px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">
-                                                                            <%= e.getDescription()%>
-                                                                        </p>
+                                                                             <!-- Col 3: Details & Actions -->
+                                                                             <div class="col-lg-4 ps-lg-4 d-flex flex-column justify-content-between">
+                                                                                 <div class="row g-2 mb-3">
+                                                                                     <div class="col-6 d-flex align-items-center gap-2">
+                                                                                         <span class="detail-icon bg-label-primary">
+                                                                                             <i class="bx bx-calendar"></i>
+                                                                                         </span>
+                                                                                         <div>
+                                                                                             <small class="text-muted d-block" style="font-size: 0.65rem; text-transform: uppercase;">Date</small>
+                                                                                             <span class="fw-semibold text-dark text-nowrap" style="font-size: 0.82rem;"><%= e.getDate()%></span>
+                                                                                         </div>
+                                                                                     </div>
+                                                                                     <div class="col-6 d-flex align-items-center gap-2">
+                                                                                         <span class="detail-icon bg-label-danger">
+                                                                                             <i class="bx bx-map-pin"></i>
+                                                                                         </span>
+                                                                                         <div>
+                                                                                             <small class="text-muted d-block" style="font-size: 0.65rem; text-transform: uppercase;">Venue</small>
+                                                                                             <span class="fw-semibold text-dark text-nowrap" style="font-size: 0.82rem;"><%= e.getVenue()%></span>
+                                                                                         </div>
+                                                                                     </div>
+                                                                                     <div class="col-6 d-flex align-items-center gap-2">
+                                                                                         <span class="detail-icon bg-label-info">
+                                                                                             <i class="bx bx-group"></i>
+                                                                                         </span>
+                                                                                         <div>
+                                                                                             <small class="text-muted d-block" style="font-size: 0.65rem; text-transform: uppercase;">Quota</small>
+                                                                                             <span class="fw-semibold text-dark text-nowrap" style="font-size: 0.82rem;"><%= e.getQuota()%> Pax</span>
+                                                                                         </div>
+                                                                                     </div>
+                                                                                     <div class="col-6 d-flex align-items-center gap-2">
+                                                                                         <span class="detail-icon bg-label-success">
+                                                                                             <i class="bx bx-purchase-tag-alt"></i>
+                                                                                         </span>
+                                                                                         <div>
+                                                                                             <small class="text-muted d-block" style="font-size: 0.65rem; text-transform: uppercase;">Category</small>
+                                                                                             <span class="fw-semibold text-dark text-nowrap text-capitalize" style="font-size: 0.82rem;"><%= e.getCategory() != null ? e.getCategory() : "N/A" %></span>
+                                                                                         </div>
+                                                                                     </div>
+                                                                                 </div>
+                                                                                 
+                                                                                 <div class="d-flex align-items-center gap-2 mb-3">
+                                                                                     <span class="detail-icon bg-label-warning">
+                                                                                         <i class="bx bx-globe"></i>
+                                                                                     </span>
+                                                                                     <div>
+                                                                                         <small class="text-muted d-block" style="font-size: 0.65rem; text-transform: uppercase;">SDG Goals</small>
+                                                                                         <span class="fw-semibold text-dark" style="font-size: 0.82rem;"><%= e.getSdgGoals() != null && !e.getSdgGoals().isEmpty() ? e.getSdgGoals() : "N/A" %></span>
+                                                                                     </div>
+                                                                                 </div>
 
-                                                                        <hr class="divider-soft">
-
-                                                                        <div class="assign-section mt-3">
-                                                                            <div
-                                                                                class="mb-2 d-flex align-items-center gap-2">
-                                                                                <i
-                                                                                    class="bx bx-calendar text-primary fs-5"></i>
-                                                                                <div>
-                                                                                    <small class="text-muted d-block"
-                                                                                        style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Date</small>
-                                                                                    <span
-                                                                                        class="fs-6 text-dark fw-semibold">
-                                                                                        <%= e.getDate()%>
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div
-                                                                                class="mb-2 d-flex align-items-center gap-2">
-                                                                                <i
-                                                                                    class="bx bx-map-pin text-danger fs-5"></i>
-                                                                                <div>
-                                                                                    <small class="text-muted d-block"
-                                                                                        style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Venue</small>
-                                                                                    <span
-                                                                                        class="fs-6 text-dark fw-semibold">
-                                                                                        <%= e.getVenue()%>
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div
-                                                                                class="mb-2 d-flex align-items-center gap-2">
-                                                                                <i
-                                                                                    class="bx bx-group text-info fs-5"></i>
-                                                                                <div>
-                                                                                    <small class="text-muted d-block"
-                                                                                        style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Quota</small>
-                                                                                    <span
-                                                                                        class="fs-6 text-dark fw-semibold">
-                                                                                        <%= e.getQuota()%> Pax
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div
-                                                                                class="mb-0 d-flex align-items-center gap-2">
-                                                                                <i
-                                                                                    class="bx bx-purchase-tag-alt text-success fs-5"></i>
-                                                                                <div>
-                                                                                    <small class="text-muted d-block"
-                                                                                        style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Category</small>
-                                                                                    <span
-                                                                                        class="fs-6 text-dark fw-semibold"
-                                                                                        style="text-transform: capitalize;">
-                                                                                         <%= e.getCategory() != null ? e.getCategory() : "N/A" %>
-                                                                                    </span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <% if (isPendingRow && !isHistory) { %>
-                                                                            <div
-                                                                                class="d-flex align-items-center gap-2 mt-3 w-100">
-                                                                                <form action="events" method="POST"
-                                                                                    class="w-50 mb-0"
-                                                                                    onsubmit="return confirm('APPROVE: Are you sure you want to authorize this event?');">
-                                                                                    <input type="hidden" name="eventId"
-                                                                                        value="<%= e.getEventId()%>">
-                                                                                    <input type="hidden" name="action"
-                                                                                        value="approve">
-                                                                                    <button type="submit"
-                                                                                        class="btn-approve-action">
-                                                                                        <i class="bx bx-check me-1"></i>
-                                                                                        Approve
-                                                                                    </button>
-                                                                                </form>
-                                                                                <form action="events" method="POST"
-                                                                                    class="w-50 mb-0"
-                                                                                    onsubmit="return confirm('REJECT: Are you sure you want to reject this event?');">
-                                                                                    <input type="hidden" name="eventId"
-                                                                                        value="<%= e.getEventId()%>">
-                                                                                    <input type="hidden" name="action"
-                                                                                        value="reject">
-                                                                                    <button type="submit"
-                                                                                        class="btn-reject-action"
-                                                                                        title="Reject Event">
-                                                                                        <i class="bx bx-x me-1"></i>
-                                                                                        Reject
-                                                                                    </button>
-                                                                                </form>
-                                                                            </div>
-                                                                            <% } else { %>
-                                                                                <div class="mt-3 text-center">
-                                                                                    <span
-                                                                                        class="text-muted small border px-2 py-1 rounded bg-light d-block"><i
-                                                                                            class="bx bx-lock me-1"></i>
-                                                                                        Locked Status</span>
-                                                                                </div>
-                                                                                <% } %>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <% /* Insert a full-width spacer row after every 3rd card */
-                                                                if (eventIndex % 3==0) { %>
-                                                                <div class="col-12" style="margin-bottom: 280px;"></div>
-                                                                <% } %>
-                                                                    <% } } else {%>
+                                                                                 <div class="d-flex align-items-center gap-2">
+                                                                                     <% if (isPendingRow && !isHistory) { %>
+                                                                                         <div class="d-flex gap-2 w-100">
+                                                                                             <form action="events" method="POST" class="mb-0 flex-grow-1" onsubmit="return confirm('APPROVE: Are you sure you want to authorize this event?');">
+                                                                                                 <input type="hidden" name="eventId" value="<%= e.getEventId()%>">
+                                                                                                 <input type="hidden" name="action" value="approve">
+                                                                                                 <button type="submit" class="btn-approve-action">
+                                                                                                     <i class="bx bx-check me-1"></i> Approve
+                                                                                                 </button>
+                                                                                             </form>
+                                                                                             <form action="events" method="POST" class="mb-0 flex-grow-1" onsubmit="return confirm('REJECT: Are you sure you want to reject this event?');">
+                                                                                                 <input type="hidden" name="eventId" value="<%= e.getEventId()%>">
+                                                                                                 <input type="hidden" name="action" value="reject">
+                                                                                                 <button type="submit" class="btn-reject-action" title="Reject Event">
+                                                                                                     <i class="bx bx-x me-1"></i> Reject
+                                                                                                 </button>
+                                                                                             </form>
+                                                                                         </div>
+                                                                                     <% } else { %>
+                                                                                         <div class="w-100 text-center">
+                                                                                             <span class="badge bg-label-secondary d-block py-2 w-100 border text-muted" style="font-size: 0.8rem; border-style: dashed !important;">
+                                                                                                 <i class="bx bx-lock-alt me-1"></i> Locked Status
+                                                                                             </span>
+                                                                                         </div>
+                                                                                     <% } %>
+                                                                                 </div>
+                                                                             </div>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                             <% } } else {%>
                                                                         <div class="col-12 text-center py-5 text-muted">
                                                                             <i
                                                                                 class="bx bx-check-circle fa-3x mb-3 text-success"></i><br>
