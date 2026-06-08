@@ -209,7 +209,7 @@
                                                             </div>
                                                             <% /* Insert a full-width spacer row after every 3rd card */
                                                                 if (eventIndex % 3==0) { %>
-                                                                <div class="col-12" style="margin-bottom: 20px;"></div>
+                                                                <div class="col-12" style="margin-bottom: 280px;"></div>
                                                                 <% } %>
                                                                     <% } } else {%>
                                                                         <div class="col-12 text-center py-5 text-muted">
