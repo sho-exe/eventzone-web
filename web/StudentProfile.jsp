@@ -30,25 +30,25 @@
                                                 Update Profile
                                             </h4>
 
-                                            <% String success=(String) request.getAttribute("successMessage"); %>
+                                                                                      <% String success=(String) request.getAttribute("successMessage"); %>
                                                 <% String error=(String) request.getAttribute("errorMessage"); %>
-                                                    <% if (success !=null) { %>
-                                                        <div class="alert alert-success border-0 shadow-sm mb-4">
-                                                            <i class="fas fa-check-circle me-2"></i>
-                                                            <%= success %>
-                                                        </div>
-                                                        <% } %>
-                                                            <% if (error !=null) { %>
-                                                                <div class="alert alert-danger border-0 shadow-sm mb-4">
-                                                                    <i class="fas fa-exclamation-triangle me-2"></i>
-                                                                    <%= error %>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-md-8 col-12">
+                                                            <% if (success !=null) { %>
+                                                                <div class="alert alert-success border-0 shadow-sm mb-3">
+                                                                    <i class="fas fa-check-circle me-2"></i>
+                                                                    <%= success %>
                                                                 </div>
                                                                 <% } %>
-
-                                                                    <div class="row">
-                                                                        <div class="col-lg-7 col-md-9">
-                                                                            <div class="card club-card mt-4">
-                                                                                <div class="card-inner">
+                                                                    <% if (error !=null) { %>
+                                                                        <div class="alert alert-danger border-0 shadow-sm mb-3">
+                                                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                                                            <%= error %>
+                                                                        </div>
+                                                                        <% } %>
+                                                            <div class="card club-card mt-3">
+                                                                <div class="card-inner">
                                                                                     <h5 class="fw-bold mb-4">Profile
                                                                                         Details</h5>
                                                                                     <form action="users" method="POST">

@@ -73,7 +73,7 @@
                                             <div class="card-inner">
                                                 <div class="d-flex justify-content-between align-items-center mb-1">
                                                     <span class="club-id-badge badge-index mb-0">
-                                                        #<%= eventIndex %>
+                                                        <%= eventIndex %>
                                                     </span>
                                                     <span class="club-id-badge badge-id mb-0">
                                                         ID: <%= e.getEventId() %>

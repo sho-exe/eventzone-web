@@ -1,11 +1,50 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-  <% // Invalidate session before generating any HTML output if (session !=null) { session.invalidate(); } %>
+<% 
+    String userRole = null;
+    if (session != null) {
+        try {
+            userRole = (String) session.getAttribute("accountType");
+            session.invalidate();
+        } catch (IllegalStateException e) {
+            // Session already invalidated
+        }
+    }
+
+    String accentColor = "#696cff", accentLight = "rgba(105,108,255,0.12)", accentHex = "#696cff";
+    if ("HEPA".equals(userRole)) {
+        accentColor = "#ea5455";
+        accentLight = "rgba(234,84,85,0.12)";
+        accentHex = "#ea5455";
+    } else if ("ADVISOR".equals(userRole)) {
+        accentColor = "#28c76f";
+        accentLight = "rgba(40,199,111,0.12)";
+        accentHex = "#28c76f";
+    } else if ("CHAIRPERSON".equals(userRole)) {
+        accentColor = "#ff9f43";
+        accentLight = "rgba(255,159,67,0.12)";
+        accentHex = "#ff9f43";
+    }
+%>
     <!DOCTYPE html>
     <html>
     <jsp:include page="header.jsp" />
 
     <head>
       <meta http-equiv="refresh" content="3;url=Login.jsp">
+      <style>
+        :root {
+          --role-accent: <%= accentColor %> !important;
+          --role-accent-light: <%= accentLight %> !important;
+          --role-accent-hex: <%= accentHex %> !important;
+        }
+        .text-primary {
+          color: <%= accentColor %> !important;
+        }
+        .spinner-border.text-primary {
+          border-color: <%= accentColor %> !important;
+          border-right-color: transparent !important;
+        }
+      </style>
     </head>
 
     <body>

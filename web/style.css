@@ -769,13 +769,17 @@ table .btn,
 }
 
 .club-id-badge.badge-index {
-    background: var(--role-accent-light);
-    color: var(--role-accent);
+    background: rgba(133, 146, 163, 0.08);
+    color: #8592a3;
+    font-size: 1.05rem;
+    padding: 8px 14px;
 }
 
 .club-id-badge.badge-id {
-    background: rgba(133, 146, 163, 0.08);
-    color: #8592a3;
+    background: var(--role-accent-light);
+    color: var(--role-accent);
+    font-size: 0.9rem;
+    padding: 6px 12px;
 }
 
 .club-name-input {

@@ -103,45 +103,36 @@
                                                              <div class="col-12">
                                                                  <div class="card club-card position-relative shadow-sm border-0 mb-4">
                                                                      <div class="card-inner p-4">
-                                                                         <div class="row">
-                                                                             <!-- Col 1: Index and Basic Meta Information (Club Badge, Status Badge, ID) -->
-                                                                             <div class="col-lg-3 mb-3 mb-lg-0 border-lg-end">
-                                                                                 <div class="d-flex flex-column gap-2 pe-lg-3">
-                                                                                     <div class="d-flex align-items-center gap-2">
-                                                                                         <span class="badge bg-label-primary px-3 py-2 fw-bold" style="font-size: 0.95rem;">
-                                                                                             #<%= eventIndex %>
+                                                                          <div class="row">
+                                                                               <!-- Col 1: Index and Basic Meta Information (Club Badge, Status Badge, ID) -->
+                                                                               <div class="col-lg-1 col-md-2 col-12 mb-3 mb-md-0 border-lg-end">
+                                                                                   <div class="d-flex flex-column align-items-start gap-2 pe-lg-3">
+                                                                                         <span class="badge bg-label-secondary text-secondary fw-bold" style="font-size: 1.05rem; padding: 8px 14px;">
+                                                                                             <%= eventIndex %>
                                                                                          </span>
-                                                                                         <span class="text-muted fw-semibold" style="font-size: 0.8rem;">
-                                                                                             ID: <%= e.getEventId()%>
-                                                                                         </span>
-                                                                                     </div>
-                                                                                     
-                                                                                     <div>
-                                                                                         <span class="badge bg-secondary text-white d-inline-block" style="font-size: 0.75rem; padding: 5px 10px;">
-                                                                                             <i class="bx bx-flag me-1"></i><%= e.getClubName()%>
-                                                                                         </span>
-                                                                                     </div>
-                                                                                     
-                                                                                     <div>
-                                                                                         <span class="badge <%= badgeColor %>" style="font-size: 0.75rem; padding: 5px 10px;">
-                                                                                             <i class="bx <%= icon %> me-1"></i><%= e.getStatus()%>
-                                                                                         </span>
-                                                                                     </div>
-                                                                                 </div>
-                                                                             </div>
-
-                                                                             <!-- Col 2: Event Name & Description -->
-                                                                             <div class="col-lg-5 mb-3 mb-lg-0 px-lg-4 border-lg-end">
-                                                                                 <h5 class="fw-bold text-dark mb-2" style="font-size: 1.25rem; line-height: 1.3;">
-                                                                                     <%= e.getEventName()%>
-                                                                                 </h5>
-                                                                                 <p class="text-muted small mb-0" style="line-height: 1.5; font-size: 0.85rem;">
-                                                                                     <%= e.getDescription()%>
-                                                                                 </p>
-                                                                             </div>
-
-                                                                             <!-- Col 3: Details & Actions -->
-                                                                             <div class="col-lg-4 ps-lg-4 d-flex flex-column justify-content-between">
+                                                                                          <span class="badge fw-bold" style="font-size: 0.9rem; background-color: var(--role-accent-light); color: var(--role-accent); padding: 6px 12px;">
+                                                                                              ID: <%= e.getEventId()%>
+                                                                                          </span>
+                                                                                   </div>
+                                                                               </div>
+ 
+                                                                               <!-- Col 2: Event Name & Description -->
+                                                                               <div class="col-lg-7 col-md-10 col-12 mb-3 mb-md-0 px-lg-4 border-lg-end">
+                                                                                  <div class="mb-2">
+                                                                                      <span class="badge bg-label-secondary text-secondary d-inline-block px-3 py-2 fw-semibold" style="font-size: 0.75rem; border-radius: 6px;">
+                                                                                          <i class="bx bx-flag me-1"></i><%= e.getClubName()%>
+                                                                                      </span>
+                                                                                  </div>
+                                                                                  <h5 class="fw-bold text-dark mb-2" style="font-size: 1.4rem; line-height: 1.3;">
+                                                                                      <%= e.getEventName()%>
+                                                                                  </h5>
+                                                                                  <p class="text-muted mb-0" style="line-height: 1.5; font-size: 0.95rem;">
+                                                                                      <%= e.getDescription()%>
+                                                                                  </p>
+                                                                              </div>
+ 
+                                                                              <!-- Col 3: Details & Actions -->
+                                                                              <div class="col-lg-4 col-md-12 col-12 mt-4 mt-lg-0 ps-lg-4 d-flex flex-column justify-content-between">
                                                                                  <div class="row g-2 mb-3">
                                                                                      <div class="col-6 d-flex align-items-center gap-2">
                                                                                          <span class="detail-icon bg-label-primary">
@@ -190,7 +181,12 @@
                                                                                          <span class="fw-semibold text-dark" style="font-size: 0.82rem;"><%= e.getSdgGoals() != null && !e.getSdgGoals().isEmpty() ? e.getSdgGoals() : "N/A" %></span>
                                                                                      </div>
                                                                                  </div>
-
+ 
+                                                                                 <div class="mb-2">
+                                                                                     <span class="badge <%= badgeColor %> px-3 py-2 fw-semibold w-100 d-flex align-items-center justify-content-center" style="font-size: 0.75rem; border-radius: 6px;">
+                                                                                         <i class="bx <%= icon %> me-1"></i><%= e.getStatus()%>
+                                                                                     </span>
+                                                                                 </div>
                                                                                  <div class="d-flex align-items-center gap-2">
                                                                                      <% if (isPendingRow && !isHistory) { %>
                                                                                          <div class="d-flex gap-2 w-100">

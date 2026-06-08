@@ -111,10 +111,10 @@
 
                                                                                                 <div class="card-inner">
                                                                                                     <div class="d-flex justify-content-between align-items-center mb-1">
-                                                                                                        <span class="club-id-badge badge-index mb-0">
-                                                                                                            #<%= clubIndex %>
+                                                                                                        <span class="club-id-badge badge-index mb-0" style="font-size: 1.05rem !important; padding: 8px 14px !important;">
+                                                                                                            <%= clubIndex %>
                                                                                                         </span>
-                                                                                                        <span class="club-id-badge badge-id mb-0">
+                                                                                                        <span class="club-id-badge badge-id mb-0" style="font-size: 0.9rem !important; padding: 6px 12px !important;">
                                                                                                             ID: <%= c.getClubId() %>
                                                                                                         </span>
                                                                                                     </div>
