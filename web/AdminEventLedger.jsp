@@ -103,7 +103,7 @@
                                                              <div class="col-12">
                                                                  <div class="card club-card position-relative shadow-sm border-0 mb-4">
                                                                      <div class="card-inner p-4">
-                                                                         <div class="row align-items-center">
+                                                                         <div class="row">
                                                                              <!-- Col 1: Index and Basic Meta Information (Club Badge, Status Badge, ID) -->
                                                                              <div class="col-lg-3 mb-3 mb-lg-0 border-lg-end">
                                                                                  <div class="d-flex flex-column gap-2 pe-lg-3">
