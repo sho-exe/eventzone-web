@@ -29,10 +29,15 @@
                                             <!-- Content -->
                                             <div class=" flex-grow-1 container-p-y">
 
-                                                 <h4 class="fw-bold py-3 mb-4 d-flex align-items-center">
-                                                     Manage Users
-                                                     <i class="bx bx-info-circle text-info ms-2" style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;" data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse" title="Toggle Page Guide"></i>
-                                                 </h4>
+                                                 <div class="d-flex justify-content-between align-items-center py-3 mb-4">
+                                                     <h4 class="fw-bold mb-0 d-flex align-items-center">
+                                                         Manage Users
+                                                         <i class="bx bx-info-circle text-info ms-2" style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;" data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse" title="Toggle Page Guide"></i>
+                                                     </h4>
+                                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">
+                                                         <i class="bx bx-plus me-1"></i> Add User
+                                                     </button>
+                                                 </div>
 
                                                  <% String message = request.getParameter("message"); %>
                                                  <% if (message != null && !message.trim().isEmpty()) { %>
@@ -110,39 +115,27 @@
                                                                             </td>
                                                                             <td class="text-center">
                                                                                 <% if(!u.getRole().equals("HEPA")) { %>
-                                                                                    <form action="users" method="POST"
-                                                                                        class="d-inline">
-                                                                                        <input type="hidden"
-                                                                                            name="action"
-                                                                                            value="updateRole">
-                                                                                        <input type="hidden"
-                                                                                            name="userId"
-                                                                                            value="<%= u.getUserId() %>">
-                                                                                        <div
-                                                                                            class="input-group input-group-sm d-flex justify-content-center">
-                                                                                             <select name="newRole"
-                                                                                                 class="form-select form-select-sm assign-select"
-                                                                                                 style="max-width: 150px; border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important; border-right: none !important;">
-                                                                                                 <option value="STUDENT"
-                                                                                                     <%=u.getRole().equals("STUDENT")
-                                                                                                     ? "selected" : "" %>
-                                                                                                     >Student</option>
-                                                                                                 <option value="ADVISOR"
-                                                                                                     <%=u.getRole().equals("ADVISOR")
-                                                                                                     ? "selected" : "" %>
-                                                                                                     >Advisor</option>
-                                                                                                 <option
-                                                                                                     value="CHAIRPERSON"
-                                                                                                     <%=u.getRole().equals("CHAIRPERSON")
-                                                                                                     ? "selected" : "" %>
-                                                                                                     >Chairperson
-                                                                                                 </option>
-                                                                                             </select>
-                                                                                             <button type="submit"
-                                                                                                 class="btn btn-save"
-                                                                                                 style="width: auto; padding: 0 16px; border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important; margin-top: 0 !important; display: flex; align-items: center; font-size: 0.82rem; height: 35px;">Update</button>
-                                                                                        </div>
-                                                                                    </form>
+                                                                                    <div class="d-flex justify-content-center align-items-center">
+                                                                                        <form action="users" method="POST" class="m-0">
+                                                                                            <input type="hidden" name="action" value="updateRole">
+                                                                                            <input type="hidden" name="userId" value="<%= u.getUserId() %>">
+                                                                                            <div class="input-group input-group-sm">
+                                                                                                 <select name="newRole" class="form-select form-select-sm assign-select" style="max-width: 150px; border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important; border-right: none !important;">
+                                                                                                     <option value="STUDENT" <%=u.getRole().equals("STUDENT") ? "selected" : "" %>>Student</option>
+                                                                                                     <option value="ADVISOR" <%=u.getRole().equals("ADVISOR") ? "selected" : "" %>>Advisor</option>
+                                                                                                     <option value="CHAIRPERSON" <%=u.getRole().equals("CHAIRPERSON") ? "selected" : "" %>>Chairperson</option>
+                                                                                                 </select>
+                                                                                                 <button type="submit" class="btn btn-save" style="width: auto; padding: 0 16px; border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important; margin-top: 0 !important; display: flex; align-items: center; font-size: 0.82rem; height: 35px;">Update</button>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                        <form action="users" method="POST" class="m-0 ms-2" onsubmit="return confirm('Are you sure you want to delete this user? This action cannot be undone.');">
+                                                                                            <input type="hidden" name="action" value="deleteUser">
+                                                                                            <input type="hidden" name="userId" value="<%= u.getUserId() %>">
+                                                                                            <button type="submit" class="btn btn-danger btn-sm" style="height: 35px; display: flex; align-items: center;" title="Delete User">
+                                                                                                <i class="bx bx-trash"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </div>
                                                                                     <% } else { %>
                                                                                         <span
                                                                                             class="text-muted small fst-italic">System
@@ -164,6 +157,54 @@
                                                                             <% } %>
                                                             </tbody>
                                                         </table>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Create User Modal -->
+                                                <div class="modal fade" id="createUserModal" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <form action="users" method="POST">
+                                                                <input type="hidden" name="action" value="createUser">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title fw-bold">Create New User</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row g-3">
+                                                                        <div class="col-12 mb-3">
+                                                                            <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="fullName" class="form-control" required placeholder="John Doe">
+                                                                        </div>
+                                                                        <div class="col-6 mb-3">
+                                                                            <label class="form-label">Username <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="username" class="form-control" required placeholder="johndoe">
+                                                                        </div>
+                                                                        <div class="col-6 mb-3">
+                                                                            <label class="form-label">Password <span class="text-danger">*</span></label>
+                                                                            <input type="password" name="password" class="form-control" required placeholder="••••••••">
+                                                                        </div>
+                                                                        <div class="col-12 mb-3">
+                                                                            <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                                                                            <input type="email" name="email" class="form-control" required placeholder="john@example.com">
+                                                                        </div>
+                                                                        <div class="col-12 mb-3">
+                                                                            <label class="form-label">System Role <span class="text-danger">*</span></label>
+                                                                            <select name="role" class="form-select" required>
+                                                                                <option value="STUDENT">Student</option>
+                                                                                <option value="CHAIRPERSON">Chairperson</option>
+                                                                                <option value="ADVISOR">Advisor</option>
+                                                                                <option value="HEPA">HEPA Admin</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-primary">Create User</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
 

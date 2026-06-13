@@ -91,6 +91,37 @@ public class UserController extends HttpServlet {
             User user = userDAO.getUserById(userId);
             request.setAttribute("profileUser", user);
             request.getRequestDispatcher("StudentProfile.jsp").forward(request, response);
+
+        } else if ("createUser".equals(action)) {
+            // HEPA only
+            HttpSession session = request.getSession(false);
+            if (session != null && "HEPA".equals(session.getAttribute("accountType"))) {
+                User newUser = new User();
+                newUser.setUsername(request.getParameter("username"));
+                newUser.setPassword(request.getParameter("password"));
+                newUser.setEmail(request.getParameter("email"));
+                newUser.setFullName(request.getParameter("fullName"));
+                newUser.setRole(request.getParameter("role"));
+                
+                boolean created = userDAO.registerUser(newUser);
+                String msg = created ? "User created successfully!" : "Error: Username might already exist.";
+                response.sendRedirect("users?action=manage&message=" + java.net.URLEncoder.encode(msg, "UTF-8"));
+            } else {
+                response.sendRedirect("Homepage.jsp");
+            }
+
+        } else if ("deleteUser".equals(action)) {
+            // HEPA only
+            HttpSession session = request.getSession(false);
+            if (session != null && "HEPA".equals(session.getAttribute("accountType"))) {
+                int userId = Integer.parseInt(request.getParameter("userId"));
+                
+                boolean deleted = userDAO.deleteUser(userId);
+                String msg = deleted ? "User deleted successfully!" : "Error: Cannot delete user. They might be tied to existing records.";
+                response.sendRedirect("users?action=manage&message=" + java.net.URLEncoder.encode(msg, "UTF-8"));
+            } else {
+                response.sendRedirect("Homepage.jsp");
+            }
         }
     }
 }

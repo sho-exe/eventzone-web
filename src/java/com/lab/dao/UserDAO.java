@@ -145,4 +145,19 @@ public class UserDAO {
         }
         return rowUpdated;
     }
+
+    // 7. Delete User (For HEPA)
+    public boolean deleteUser(int userId) {
+        boolean rowDeleted = false;
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            
+            preparedStatement.setInt(1, userId);
+            rowDeleted = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowDeleted;
+    }
 }
