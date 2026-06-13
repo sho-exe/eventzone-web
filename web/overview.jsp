@@ -15,6 +15,9 @@
     int totalMerits = 0;
     int upcomingEventCount = 0;
     
+    int chairpersonClubEvents = 0;
+    int chairpersonTotalRegistrations = 0;
+    
     if (role != null) {
         try (Connection conn = DBConnection.getConnection()) {
             if ("HEPA".equals(role)) {
@@ -77,6 +80,34 @@
                         if (rs.next()) upcomingEventCount = rs.getInt(1);
                     }
                 }
+            } else if ("CHAIRPERSON".equals(role)) {
+                if (overviewUserId != null) {
+                    // 1. Club Events Proposed
+                    String sqlEvents = "SELECT COUNT(*) FROM events e " +
+                                       "JOIN clubs c ON e.club_id = c.club_id " +
+                                       "WHERE c.chairperson_id = ?";
+                    try (PreparedStatement ps = conn.prepareStatement(sqlEvents)) {
+                        ps.setInt(1, overviewUserId);
+                        ResultSet rs = ps.executeQuery();
+                        if (rs.next()) chairpersonClubEvents = rs.getInt(1);
+                    }
+                    // 2. Total Registrations for Club Events
+                    String sqlReg = "SELECT COUNT(*) FROM attendances a " +
+                                    "JOIN events e ON a.event_id = e.event_id " +
+                                    "JOIN clubs c ON e.club_id = c.club_id " +
+                                    "WHERE c.chairperson_id = ?";
+                    try (PreparedStatement ps = conn.prepareStatement(sqlReg)) {
+                        ps.setInt(1, overviewUserId);
+                        ResultSet rs = ps.executeQuery();
+                        if (rs.next()) chairpersonTotalRegistrations = rs.getInt(1);
+                    }
+                    // 3. Total Merits (as a student)
+                    try (PreparedStatement ps = conn.prepareStatement("SELECT COALESCE(SUM(points), 0) FROM merits WHERE user_id = ?")) {
+                        ps.setInt(1, overviewUserId);
+                        ResultSet rs = ps.executeQuery();
+                        if (rs.next()) totalMerits = rs.getInt(1);
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,6 +122,8 @@
     request.setAttribute("clubParticipantCount", clubParticipantCount);
     request.setAttribute("totalMerits", totalMerits);
     request.setAttribute("upcomingEventCount", upcomingEventCount);
+    request.setAttribute("chairpersonClubEvents", chairpersonClubEvents);
+    request.setAttribute("chairpersonTotalRegistrations", chairpersonTotalRegistrations);
 %>
 
                                         <% if ("STUDENT".equals(role)) { %>
@@ -171,7 +204,46 @@
                                                     </div>
                                                 </div>
                                                 <% } else if ("CHAIRPERSON".equals(role)) { %>
-                                                    <!-- No overview for chairperson yet -->
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h4 class="fw-bold py-3 mb-4">Your Overview</h4>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                                                        <h6 class="text-muted text-uppercase small fw-bold">Club Events Proposed</h6>
+                                                                    </div>
+                                                                    <h3 class="card-title text-nowrap mb-1 text-primary">${chairpersonClubEvents != null ? chairpersonClubEvents : '0'}</h3>
+                                                                    <small class="text-muted">Total events created by your club</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                                                        <h6 class="text-muted text-uppercase small fw-bold">Total Registrations</h6>
+                                                                    </div>
+                                                                    <h3 class="card-title text-nowrap mb-1 text-success">${chairpersonTotalRegistrations != null ? chairpersonTotalRegistrations : '0'}</h3>
+                                                                    <small class="text-muted">Total attendees across all your club's events</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                                                        <h6 class="text-muted text-uppercase small fw-bold">Accumulated Merits</h6>
+                                                                    </div>
+                                                                    <h3 class="card-title text-nowrap mb-1 text-info">${totalMerits != null ? totalMerits : '0'}</h3>
+                                                                    <small class="text-muted">Verified through events attended</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <% } else if ("HEPA".equals(role)) { %>
                                                         <div class="row">
                                                             <div class="col-12">
