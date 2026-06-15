@@ -42,9 +42,10 @@
                                                                 data-bs-target="#pageTipsCollapse"
                                                                 title="Toggle Page Guide"></i>
                                                         </h4>
-                                                        <button type="button" class="btn btn-primary"
+                                                        <button class="btn btn-primary" style="font-weight: 600;"
                                                             data-bs-toggle="modal" data-bs-target="#createClubModal">
-                                                            <i class="bx bx-plus me-1"></i> New Club
+                                                            <i class="bx bx-plus me-1" style="font-weight: 800;"></i>
+                                                            New Club
                                                         </button>
                                                     </div>
 

@@ -117,14 +117,16 @@
                                                                                     <thead
                                                                                         class="bg-light text-muted small text-uppercase">
                                                                                         <tr>
-                                                                                            <th class="ps-4">Identifier
+                                                                                            <th class="text-center"
+                                                                                                style="width: 70px;">#
                                                                                             </th>
+                                                                                            <th class="ps-4">ID</th>
                                                                                             <th>Event Details</th>
                                                                                             <th>Criteria Info</th>
                                                                                             <th>Status</th>
                                                                                             <th class="text-end pe-4">
-                                                                                                Execute
-                                                                                                Distribution</th>
+                                                                                                Actions
+                                                                                            </th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
@@ -136,6 +138,7 @@
                                                                                                 (MeritDAO)
                                                                                                 request.getAttribute("meritDAO");
 
+                                                                                                int rowIndex = 1;
                                                                                                 if(approvedEvents !=
                                                                                                 null &&
                                                                                                 !approvedEvents.isEmpty())
@@ -153,6 +156,11 @@
                                                                                                     : "" ; %>
                                                                                                     <tr
                                                                                                         class="<%= temporary %>">
+                                                                                                        <td
+                                                                                                            class="ps-4 fw-bold">
+                                                                                                            <%= rowIndex++
+                                                                                                                %>
+                                                                                                        </td>
                                                                                                         <td
                                                                                                             class="ps-4">
                                                                                                             <span

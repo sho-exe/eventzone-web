@@ -37,9 +37,10 @@
                                                             data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse"
                                                             title="Toggle Page Guide"></i>
                                                     </h4>
-                                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#createUserModal">
-                                                        <i class="bx bx-plus me-1"></i> Add User
+                                                    <button class="btn btn-primary" style="font-weight: 600;"
+                                                        data-bs-toggle="modal" data-bs-target="#createUserModal">
+                                                        <i class="bx bx-plus me-1" style="font-weight: 800;"></i>
+                                                        Add User
                                                     </button>
                                                 </div>
 
