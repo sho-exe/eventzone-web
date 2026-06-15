@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="sers_app" default="default" basedir=".">
-    <description>Builds, tests, and runs the project sers_app.</description>
+<project name="eventzone" default="default" basedir=".">
+    <description>Builds, tests, and runs the project eventzone.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/sers?useSSL=false&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/eventzone?useSSL=false&serverTimezone=UTC";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
 
@@ -22,7 +22,7 @@ public class DBConnection {
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            System.err.println("Fatal Error: Could not establish a connection to the SERS Database.");
+            System.err.println("Fatal Error: Could not establish a connection to the Eventzone Database.");
         }
         return connection;
     }

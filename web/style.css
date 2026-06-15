@@ -1,5 +1,5 @@
 /*
- * SERS Unified Stylesheet
+ * EventZone Unified Stylesheet
  */
 
 :root {
@@ -957,6 +957,7 @@ table .btn,
     border-color: #8592a3 !important;
     background: transparent !important;
 }
+
 .btn-outline-secondary:hover {
     color: #fff !important;
     background: #8592a3 !important;
@@ -968,6 +969,7 @@ table .btn,
     border-color: var(--role-accent, #696cff) !important;
     background: transparent !important;
 }
+
 .btn-outline-primary:hover {
     color: #fff !important;
     background: var(--role-accent, #696cff) !important;
@@ -979,6 +981,7 @@ table .btn,
     border-color: #ff3e1d !important;
     background: transparent !important;
 }
+
 .btn-outline-danger:hover {
     color: #fff !important;
     background: #ff3e1d !important;
@@ -1007,6 +1010,7 @@ table .btn,
     justify-content: center;
     cursor: pointer;
 }
+
 .btn-approve-action:hover {
     opacity: 0.9 !important;
     transform: scale(1.02);
@@ -1028,6 +1032,7 @@ table .btn,
     justify-content: center;
     cursor: pointer;
 }
+
 .btn-reject-action:hover {
     opacity: 0.9 !important;
     transform: scale(1.02);
@@ -1055,6 +1060,7 @@ table .btn,
 .overview-card.card-primary {
     border-left-color: var(--role-accent, #696cff) !important;
 }
+
 .overview-card.card-primary .card-icon-box {
     background-color: var(--role-accent-light, rgba(105, 108, 255, 0.12)) !important;
     color: var(--role-accent, #696cff) !important;
@@ -1063,6 +1069,7 @@ table .btn,
 .overview-card.card-success {
     border-left-color: #28c76f !important;
 }
+
 .overview-card.card-success .card-icon-box {
     background-color: rgba(40, 199, 111, 0.12) !important;
     color: #28c76f !important;
@@ -1071,6 +1078,7 @@ table .btn,
 .overview-card.card-warning {
     border-left-color: #ff9f43 !important;
 }
+
 .overview-card.card-warning .card-icon-box {
     background-color: rgba(255, 159, 67, 0.12) !important;
     color: #ff9f43 !important;
@@ -1079,6 +1087,7 @@ table .btn,
 .overview-card.card-danger {
     border-left-color: #ea5455 !important;
 }
+
 .overview-card.card-danger .card-icon-box {
     background-color: rgba(234, 84, 85, 0.12) !important;
     color: #ea5455 !important;
@@ -1113,15 +1122,18 @@ table .btn,
     background-color: #ffffff !important;
     position: relative !important;
 }
+
 .modal-content .form-check:hover {
     border-color: var(--role-accent) !important;
     background-color: var(--role-accent-light) !important;
 }
+
 .modal-content .form-check:has(.form-check-input:checked) {
     border-color: var(--role-accent) !important;
     background-color: var(--role-accent-light) !important;
     box-shadow: 0 2px 6px var(--role-accent-light) !important;
 }
+
 .modal-content .form-check-input {
     position: absolute !important;
     left: 0.75rem !important;
@@ -1129,6 +1141,7 @@ table .btn,
     transform: translateY(-50%) !important;
     margin-top: 0 !important;
 }
+
 .modal-content .form-check-label {
     font-weight: 600 !important;
     color: #495057 !important;
