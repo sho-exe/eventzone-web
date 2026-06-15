@@ -89,7 +89,14 @@
                                                                                         Select established
                                                                                         <strong>Advisors</strong> and
                                                                                         <strong>Chairpersons</strong> to
-                                                                                        assign them to clubs. Unassigned
+                                                                                        assign them to clubs.
+                                                                                        <strong>Note:</strong> You can
+                                                                                        assign only <strong>one
+                                                                                            chairperson per
+                                                                                            club</strong>, but you can
+                                                                                        assign <strong>one advisor to
+                                                                                            many clubs</strong>.
+                                                                                        Unassigned
                                                                                         clubs cannot propose events!
                                                                                     </div>
                                                                                 </div>
