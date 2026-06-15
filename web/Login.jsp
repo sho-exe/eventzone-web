@@ -107,7 +107,7 @@
         <div class="card">
           <div class="card-body p-4 p-md-5">
             <div class="app-brand justify-content-center mb-4">
-              <span class="app-brand-text demo text-body fw-bolder fs-3">EventZone</span>
+              <span class="app-brand-text demo text-body fw-bolder fs-3">EventZone - FSKM</span>
             </div>
             <h4 class="mb-2 fw-bold text-dark text-center">Welcome to EventZone!</h4>
             <p class="mb-4 text-muted text-center">Please sign-in to your account.</p>

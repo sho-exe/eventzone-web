@@ -36,7 +36,7 @@
                                                  </div>
                                              </div>
 
-                                             <div class="collapse mb-4" id="pageTipsCollapse">
+                                             <div class="collapse show mb-4" id="pageTipsCollapse">
                                                  <div class="card border-0 bg-label-info shadow-none" style="border-radius: 12px;">
                                                      <div class="card-body p-3">
                                                          <div class="d-flex align-items-center gap-3">

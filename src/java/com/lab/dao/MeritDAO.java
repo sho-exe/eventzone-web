@@ -15,6 +15,7 @@ public class MeritDAO {
     private static final String INSERT_MERIT = "INSERT INTO merits (user_id, event_id, points, awarded_date) VALUES (?, ?, ?, NOW())";
     private static final String CHECK_IF_DISTRIBUTED = "SELECT COUNT(*) FROM merits WHERE event_id = ?";
     private static final String SUM_TOTAL_MERITS = "SELECT SUM(points) FROM merits WHERE user_id = ?";
+    private static final String DELETE_MERITS_BY_EVENT = "DELETE FROM merits WHERE event_id = ?";
 
     private static final String ADVISOR_METRICS = "SELECT COUNT(DISTINCT m.event_id) as total_events, " +
             "COUNT(DISTINCT m.user_id) as total_students, " +
@@ -75,6 +76,17 @@ public class MeritDAO {
         }
         return total;
     }
+
+    public void deleteMeritsByEvent(int eventId) {
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(DELETE_MERITS_BY_EVENT)) {
+            preparedStatement.setInt(1, eventId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public int distributeMerits(int eventId, int defaultPoints) {
         int eligibleCount = 0;

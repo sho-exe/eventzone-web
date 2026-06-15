@@ -133,13 +133,19 @@ public class EventController extends HttpServlet {
             }
             response.sendRedirect("events?action=manage");
 
-        } else if ("deleteEvent".equals(action) && "CHAIRPERSON".equals(accountType)) {
+        } else if ("deleteEvent".equals(action) && ("CHAIRPERSON".equals(accountType) || "HEPA".equals(accountType))) {
             int eventId = Integer.parseInt(request.getParameter("eventId"));
             Event event = eventDAO.selectEventById(eventId);
-            if (event != null && "PENDING".equals(event.getStatus())) {
-                eventDAO.deleteEvent(eventId);
+            if (event != null) {
+                if ("HEPA".equals(accountType) || "PENDING".equals(event.getStatus())) {
+                    eventDAO.deleteEvent(eventId);
+                }
             }
-            response.sendRedirect("events?action=manage");
+            if ("HEPA".equals(accountType)) {
+                response.sendRedirect("events?action=global");
+            } else {
+                response.sendRedirect("events?action=manage");
+            }
 
         } else if (("approve".equals(action) || "reject".equals(action))
                 && ("ADVISOR".equals(accountType) || "HEPA".equals(accountType))) {

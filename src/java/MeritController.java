@@ -78,13 +78,22 @@ public class MeritController extends HttpServlet {
         String action = request.getParameter("action");
         String accountType = (String) session.getAttribute("accountType");
         int eventId = Integer.parseInt(request.getParameter("eventId"));
-        int points = Integer.parseInt(request.getParameter("points"));
+        int points = 0;
+        if (request.getParameter("points") != null) {
+            points = Integer.parseInt(request.getParameter("points"));
+        }
 
         if ("distributeMerits".equals(action) && "HEPA".equals(accountType)) {
 
             meritDAO.distributeMerits(eventId, points);
 
             response.sendRedirect("merits?action=distributeMerits&success=true");
+
+        } else if ("deleteMerits".equals(action) && "HEPA".equals(accountType)) {
+
+            meritDAO.deleteMeritsByEvent(eventId);
+
+            response.sendRedirect("merits?action=distributeMerits&deleted=true");
 
         } else {
 

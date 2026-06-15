@@ -5,7 +5,9 @@
 
                 <h4 class="fw-bold py-3 mb-4 d-flex align-items-center">
                     <span class="text-muted fw-light">Chairperson /&nbsp;</span>Manage Events
-                    <i class="bx bx-info-circle text-info ms-2" style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;" data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse" title="Toggle Page Guide"></i>
+                    <i class="bx bx-info-circle text-info ms-2"
+                        style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;" data-bs-toggle="collapse"
+                        data-bs-target="#pageTipsCollapse" title="Toggle Page Guide"></i>
                 </h4>
 
                 <% Club myClub=(Club) request.getAttribute("club"); if (myClub==null) { %>
@@ -24,17 +26,23 @@
                     </div>
                     <% } else { %>
 
-                        <div class="collapse mb-4" id="pageTipsCollapse">
+                        <div class="collapse show mb-4" id="pageTipsCollapse">
                             <div class="card border-0 bg-label-info shadow-none" style="border-radius: 12px;">
                                 <div class="card-body p-3">
                                     <div class="d-flex align-items-center gap-3">
-                                        <div class="bg-info text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: 8px; font-size: 1.2rem; flex-shrink: 0;">
+                                        <div class="bg-info text-white d-flex align-items-center justify-content-center"
+                                            style="width: 36px; height: 36px; border-radius: 8px; font-size: 1.2rem; flex-shrink: 0;">
                                             <i class="bx bx-info-circle"></i>
                                         </div>
                                         <div class="flex-grow-1">
-                                            <h6 class="mb-1 text-info fw-bold" style="font-size: 0.95rem;">Page Guide & Tips</h6>
-                                            <div class="text-dark" style="font-size: 0.85rem; line-height: 1.45; font-weight: 500;">
-                                                You are actively managing <strong><%= myClub.getClubName() %></strong>. Submit event proposals here. The Advisor or HEPA must manually approve them before students can register!
+                                            <h6 class="mb-1 text-info fw-bold" style="font-size: 0.95rem;">Page Guide &
+                                                Tips</h6>
+                                            <div class="text-dark"
+                                                style="font-size: 0.85rem; line-height: 1.45; font-weight: 500;">
+                                                You are actively managing <strong>
+                                                    <%= myClub.getClubName() %>
+                                                </strong>. Submit event proposals here. The Advisor or HEPA must
+                                                manually approve them before students can register!
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +60,7 @@
                             </button>
                         </div>
 
-                        <div class="row gy-4">
+                        <div>
                             <% List<Event> eventList = (List<Event>)
                                     request.getAttribute("eventList");
                                     if(eventList != null && !eventList.isEmpty()) {
@@ -137,7 +145,7 @@
                                                                 style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Category</small>
                                                             <span class="fs-6 text-dark fw-semibold"
                                                                 style="text-transform: capitalize;">
-                                                                 <%= e.getCategory() != null ? e.getCategory() : "N/A" %>
+                                                                <%= e.getCategory() !=null ? e.getCategory() : "N/A" %>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -145,9 +153,11 @@
                                                         <i class="bx bx-globe text-primary fs-5"></i>
                                                         <div>
                                                             <small class="text-muted d-block"
-                                                                style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">SDG Goals</small>
+                                                                style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">SDG
+                                                                Goals</small>
                                                             <span class="fs-6 text-dark fw-semibold">
-                                                                 <%= e.getSdgGoals() != null && !e.getSdgGoals().isEmpty() ? e.getSdgGoals() : "N/A" %>
+                                                                <%= e.getSdgGoals() !=null && !e.getSdgGoals().isEmpty()
+                                                                    ? e.getSdgGoals() : "N/A" %>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -162,33 +172,51 @@
                                                             Attendances
                                                         </a>
                                                     </div>
-                                                <% } %>
-                                                <% if("PENDING".equals(e.getStatus())) { %>
-                                                    <div class="mt-3 d-flex gap-2">
-                                                        <button type="button" class="btn btn-outline-primary w-50 edit-event-btn"
-                                                            data-bs-toggle="modal" data-bs-target="#editEventModal"
-                                                            data-id="<%= e.getEventId() %>"
-                                                            data-name="<%= e.getEventName().replace("\"", "&quot;") %>"
-                                                            data-desc="<%= e.getDescription().replace("\"", "&quot;") %>"
-                                                            data-date="<%= e.getDate() %>"
-                                                            data-venue="<%= e.getVenue().replace("\"", "&quot;") %>"
-                                                            data-quota="<%= e.getQuota() %>"
-                                                            data-cat="<%= e.getCategory() %>"
-                                                            data-sdg="<%= e.getSdgGoals() != null ? e.getSdgGoals() : "" %>"
-                                                            style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px; margin-top: 0 !important;">
-                                                            <i class="bx bx-edit-alt me-1"></i> Edit
-                                                        </button>
-                                                        <form action="events" method="POST" class="w-50 mb-0"
-                                                            onsubmit="return confirm('Are you sure you want to delete this pending event?');">
-                                                            <input type="hidden" name="action" value="deleteEvent">
-                                                            <input type="hidden" name="eventId" value="<%= e.getEventId() %>">
-                                                            <button type="submit" class="btn btn-outline-danger w-100" 
-                                                                style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px; margin-top: 0 !important;">
-                                                                <i class="bx bx-trash me-1"></i> Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                <% } %>
+                                                    <% } %>
+                                                        <% if("PENDING".equals(e.getStatus())) { %>
+                                                            <div class="mt-3 d-flex gap-2">
+                                                                <button type="button"
+                                                                    class="btn btn-outline-primary w-50 edit-event-btn"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#editEventModal"
+                                                                    data-id="<%= e.getEventId() %>"
+                                                                    data-name="<%= e.getEventName().replace("
+                                                                    \"", "&quot;" ) %>"
+                                                                    data-desc="<%=
+                                                                        e.getDescription().replace("\"", "&quot;" ) %>"
+                                                                        data-date="<%= e.getDate() %>"
+                                                                            data-venue="<%=
+                                                                                e.getVenue().replace("\"", "&quot;" ) %>
+                                                                                "
+                                                                                data-quota="<%= e.getQuota() %>"
+                                                                                    data-cat="<%= e.getCategory() %>"
+                                                                                        data-sdg="<%= e.getSdgGoals()
+                                                                                            !=null ? e.getSdgGoals()
+                                                                                            : "" %>"
+                                                                                            style="display: flex;
+                                                                                            align-items: center;
+                                                                                            justify-content: center;
+                                                                                            font-size: 0.82rem; height:
+                                                                                            36px; margin-top: 0
+                                                                                            !important;">
+                                                                                            <i
+                                                                                                class="bx bx-edit-alt me-1"></i>
+                                                                                            Edit
+                                                                </button>
+                                                                <form action="events" method="POST" class="w-50 mb-0"
+                                                                    onsubmit="return confirm('Are you sure you want to delete this pending event?');">
+                                                                    <input type="hidden" name="action"
+                                                                        value="deleteEvent">
+                                                                    <input type="hidden" name="eventId"
+                                                                        value="<%= e.getEventId() %>">
+                                                                    <button type="submit"
+                                                                        class="btn btn-outline-danger w-100"
+                                                                        style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px; margin-top: 0 !important;">
+                                                                        <i class="bx bx-trash me-1"></i> Delete
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                            <% } %>
                                             </div>
                                         </div>
                                     </div>
@@ -306,104 +334,142 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 1" id="sdg1">
-                                                                <label class="form-check-label text-dark" for="sdg1">SDG 1: No Poverty</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 1" id="sdg1">
+                                                                <label class="form-check-label text-dark" for="sdg1">SDG
+                                                                    1: No Poverty</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 2" id="sdg2">
-                                                                <label class="form-check-label text-dark" for="sdg2">SDG 2: Zero Hunger</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 2" id="sdg2">
+                                                                <label class="form-check-label text-dark" for="sdg2">SDG
+                                                                    2: Zero Hunger</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 3" id="sdg3">
-                                                                <label class="form-check-label text-dark" for="sdg3">SDG 3: Good Health and Well-being</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 3" id="sdg3">
+                                                                <label class="form-check-label text-dark" for="sdg3">SDG
+                                                                    3: Good Health and Well-being</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 4" id="sdg4">
-                                                                <label class="form-check-label text-dark" for="sdg4">SDG 4: Quality Education</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 4" id="sdg4">
+                                                                <label class="form-check-label text-dark" for="sdg4">SDG
+                                                                    4: Quality Education</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 5" id="sdg5">
-                                                                <label class="form-check-label text-dark" for="sdg5">SDG 5: Gender Equality</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 5" id="sdg5">
+                                                                <label class="form-check-label text-dark" for="sdg5">SDG
+                                                                    5: Gender Equality</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 6" id="sdg6">
-                                                                <label class="form-check-label text-dark" for="sdg6">SDG 6: Clean Water and Sanitation</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 6" id="sdg6">
+                                                                <label class="form-check-label text-dark" for="sdg6">SDG
+                                                                    6: Clean Water and Sanitation</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 7" id="sdg7">
-                                                                <label class="form-check-label text-dark" for="sdg7">SDG 7: Affordable and Clean Energy</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 7" id="sdg7">
+                                                                <label class="form-check-label text-dark" for="sdg7">SDG
+                                                                    7: Affordable and Clean Energy</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 8" id="sdg8">
-                                                                <label class="form-check-label text-dark" for="sdg8">SDG 8: Decent Work and Economic Growth</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 8" id="sdg8">
+                                                                <label class="form-check-label text-dark" for="sdg8">SDG
+                                                                    8: Decent Work and Economic Growth</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 9" id="sdg9">
-                                                                <label class="form-check-label text-dark" for="sdg9">SDG 9: Industry, Innovation and Infrastructure</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 9" id="sdg9">
+                                                                <label class="form-check-label text-dark" for="sdg9">SDG
+                                                                    9: Industry, Innovation and Infrastructure</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 10" id="sdg10">
-                                                                <label class="form-check-label text-dark" for="sdg10">SDG 10: Reduced Inequalities</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 10" id="sdg10">
+                                                                <label class="form-check-label text-dark"
+                                                                    for="sdg10">SDG 10: Reduced Inequalities</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 11" id="sdg11">
-                                                                <label class="form-check-label text-dark" for="sdg11">SDG 11: Sustainable Cities and Communities</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 11" id="sdg11">
+                                                                <label class="form-check-label text-dark"
+                                                                    for="sdg11">SDG 11: Sustainable Cities and
+                                                                    Communities</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 12" id="sdg12">
-                                                                <label class="form-check-label text-dark" for="sdg12">SDG 12: Responsible Consumption and Production</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 12" id="sdg12">
+                                                                <label class="form-check-label text-dark"
+                                                                    for="sdg12">SDG 12: Responsible Consumption and
+                                                                    Production</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 13" id="sdg13">
-                                                                <label class="form-check-label text-dark" for="sdg13">SDG 13: Climate Action</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 13" id="sdg13">
+                                                                <label class="form-check-label text-dark"
+                                                                    for="sdg13">SDG 13: Climate Action</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 14" id="sdg14">
-                                                                <label class="form-check-label text-dark" for="sdg14">SDG 14: Life Below Water</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 14" id="sdg14">
+                                                                <label class="form-check-label text-dark"
+                                                                    for="sdg14">SDG 14: Life Below Water</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 15" id="sdg15">
-                                                                <label class="form-check-label text-dark" for="sdg15">SDG 15: Life on Land</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 15" id="sdg15">
+                                                                <label class="form-check-label text-dark"
+                                                                    for="sdg15">SDG 15: Life on Land</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 16" id="sdg16">
-                                                                <label class="form-check-label text-dark" for="sdg16">SDG 16: Peace, Justice and Strong Institutions</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 16" id="sdg16">
+                                                                <label class="form-check-label text-dark"
+                                                                    for="sdg16">SDG 16: Peace, Justice and Strong
+                                                                    Institutions</label>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-2">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 17" id="sdg17">
-                                                                <label class="form-check-label text-dark" for="sdg17">SDG 17: Partnerships for the Goals</label>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sdgGoals" value="SDG 17" id="sdg17">
+                                                                <label class="form-check-label text-dark"
+                                                                    for="sdg17">SDG 17: Partnerships for the
+                                                                    Goals</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -435,264 +501,298 @@
                             </div>
                         </div>
 
-                        </div>
-
-                        <!-- Edit Event Modal -->
-                        <div class="modal fade" id="editEventModal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content border-0 shadow-lg">
-                                    <div class="modal-header bg-primary text-white">
-                                        <h5 class="modal-title fw-bold"><i class="fas fa-edit me-2"></i>
-                                            Modify Event
-                                            Proposal</h5>
-                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <form action="events" method="POST">
-                                        <div class="modal-body p-4 bg-light">
-                                            <input type="hidden" name="action" value="editEvent">
-                                            <input type="hidden" name="eventId" id="editEventId">
-
-                                            <div class="row">
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="form-label fw-bold">Event
-                                                        Title</label>
-                                                    <input type="text" name="eventName" id="editEventName"
-                                                        class="form-control border-primary"
-                                                        placeholder="e.g., Annual Coding Hackathon" required>
-                                                </div>
-
-                                                <div class="col-md-12 mb-2">
-                                                    <label class="form-label fw-bold">Description</label>
-                                                    <textarea name="description" id="editDescription" class="form-control border-primary"
-                                                        rows="4"
-                                                        placeholder="Briefly inform students what this event entails. They will read this during registration..."
-                                                        required></textarea>
-                                                </div>
-
-                                                <div class="col-md-5 mb-3">
-                                                    <label class="form-label fw-bold">Target
-                                                        Date</label>
-                                                    <input type="date" name="date" id="editDate" class="form-control border-primary"
-                                                        required>
-                                                </div>
-
-                                                <div class="col-md-5 mb-3">
-                                                    <label class="form-label fw-bold">Location
-                                                        /
-                                                        Venue</label>
-                                                    <input type="text" name="venue" id="editVenue" class="form-control border-primary"
-                                                        placeholder="e.g., Main Hall B" required>
-                                                </div>
-
-                                                <div class="col-md-2 mb-3">
-                                                    <label class="form-label fw-bold">Quota
-                                                        Limit</label>
-                                                    <input type="number" name="quota" id="editQuota"
-                                                        class="form-control border-primary" placeholder="0" required
-                                                        min="1">
-                                                </div>
-
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="form-label fw-bold">Select
-                                                        Category:</label>
-                                                    <select class="fw-bold form-select" id="editKategori" name="kategori">
-                                                        <option value="leadership">
-                                                            Leadership</option>
-                                                        <option value="culture">
-                                                            Culture</option>
-                                                        <option value="spirituality">
-                                                            Spirituality
-                                                        </option>
-                                                        <option value="entrepreneurship">
-                                                            Entrepreneurship
-                                                        </option>
-                                                        <option value="volunteerism">
-                                                            Volunteerism
-                                                        </option>
-                                                        <option value="career">
-                                                            Career</option>
-                                                        <option value="sports">
-                                                            Sports</option>
-                                                        <option value="counseling_wellbeing">
-                                                            Student
-                                                            Counseling and Wellbeing
-                                                        </option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="form-label fw-bold d-block">Select SDG Goals:</label>
-                                                    <div class="row">
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 1" id="editSdg1">
-                                                                <label class="form-check-label text-dark" for="editSdg1">SDG 1: No Poverty</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 2" id="editSdg2">
-                                                                <label class="form-check-label text-dark" for="editSdg2">SDG 2: Zero Hunger</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 3" id="editSdg3">
-                                                                <label class="form-check-label text-dark" for="editSdg3">SDG 3: Good Health and Well-being</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 4" id="editSdg4">
-                                                                <label class="form-check-label text-dark" for="editSdg4">SDG 4: Quality Education</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 5" id="editSdg5">
-                                                                <label class="form-check-label text-dark" for="editSdg5">SDG 5: Gender Equality</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 6" id="editSdg6">
-                                                                <label class="form-check-label text-dark" for="editSdg6">SDG 6: Clean Water and Sanitation</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 7" id="editSdg7">
-                                                                <label class="form-check-label text-dark" for="editSdg7">SDG 7: Affordable and Clean Energy</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 8" id="editSdg8">
-                                                                <label class="form-check-label text-dark" for="editSdg8">SDG 8: Decent Work and Economic Growth</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 9" id="editSdg9">
-                                                                <label class="form-check-label text-dark" for="editSdg9">SDG 9: Industry, Innovation and Infrastructure</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 10" id="editSdg10">
-                                                                <label class="form-check-label text-dark" for="editSdg10">SDG 10: Reduced Inequalities</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 11" id="editSdg11">
-                                                                <label class="form-check-label text-dark" for="editSdg11">SDG 11: Sustainable Cities and Communities</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 12" id="editSdg12">
-                                                                <label class="form-check-label text-dark" for="editSdg12">SDG 12: Responsible Consumption and Production</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 13" id="editSdg13">
-                                                                <label class="form-check-label text-dark" for="editSdg13">SDG 13: Climate Action</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 14" id="editSdg14">
-                                                                <label class="form-check-label text-dark" for="editSdg14">SDG 14: Life Below Water</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 15" id="editSdg15">
-                                                                <label class="form-check-label text-dark" for="editSdg15">SDG 15: Life on Land</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 16" id="editSdg16">
-                                                                <label class="form-check-label text-dark" for="editSdg16">SDG 16: Peace, Justice and Strong Institutions</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="sdgGoals" value="SDG 17" id="editSdg17">
-                                                                <label class="form-check-label text-dark" for="editSdg17">SDG 17: Partnerships for the Goals</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="alert alert-warning small border-0 mt-3 mb-0">
-                                                <i class="fas fa-lock me-1"></i>
-                                                <strong>Note:</strong>
-                                                Once edited, the proposal remains
-                                                frozen as "PENDING" until approved.
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer bg-white">
-                                            <button type="button" class="btn btn-outline-secondary fw-bold"
-                                                data-bs-dismiss="modal">Discard
-                                                Changes</button>
-                                            <button type="submit" class="btn btn-primary fw-bold px-4">Save Changes</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <% } %> <!-- End Else Branch -->
-
             </div>
 
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    // Append modals to body so they render properly
-                    var proposeModal = document.getElementById('proposeEventModal');
-                    if (proposeModal) {
-                        document.body.appendChild(proposeModal);
-                    }
-                    var editModal = document.getElementById('editEventModal');
-                    if (editModal) {
-                        document.body.appendChild(editModal);
-                    }
+            <!-- Edit Event Modal -->
+            <div class="modal fade" id="editEventModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content border-0 shadow-lg">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title fw-bold"><i class="fas fa-edit me-2"></i>
+                                Modify Event
+                                Proposal</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <form action="events" method="POST">
+                            <div class="modal-body p-4 bg-light">
+                                <input type="hidden" name="action" value="editEvent">
+                                <input type="hidden" name="eventId" id="editEventId">
 
-                    // Handle population of edit modal fields
-                    var editButtons = document.querySelectorAll('.edit-event-btn');
-                    editButtons.forEach(function(btn) {
-                        btn.addEventListener('click', function() {
-                            document.getElementById('editEventId').value = btn.getAttribute('data-id');
-                            document.getElementById('editEventName').value = btn.getAttribute('data-name');
-                            document.getElementById('editDescription').value = btn.getAttribute('data-desc');
-                            document.getElementById('editDate').value = btn.getAttribute('data-date');
-                            document.getElementById('editVenue').value = btn.getAttribute('data-venue');
-                            document.getElementById('editQuota').value = btn.getAttribute('data-quota');
-                            document.getElementById('editKategori').value = btn.getAttribute('data-cat');
-                            
-                            // Reset checkboxes first
-                            var checkboxes = document.querySelectorAll('#editEventModal input[name="sdgGoals"]');
-                            checkboxes.forEach(function(cb) {
-                                cb.checked = false;
-                            });
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label fw-bold">Event
+                                            Title</label>
+                                        <input type="text" name="eventName" id="editEventName"
+                                            class="form-control border-primary"
+                                            placeholder="e.g., Annual Coding Hackathon" required>
+                                    </div>
 
-                            // Parse and check selected SDGs
-                            var sdgString = btn.getAttribute('data-sdg');
-                            if (sdgString) {
-                                var sdgs = sdgString.split(', ');
-                                checkboxes.forEach(function(cb) {
-                                    if (sdgs.indexOf(cb.value) !== -1) {
-                                        cb.checked = true;
-                                    }
+                                    <div class="col-md-12 mb-2">
+                                        <label class="form-label fw-bold">Description</label>
+                                        <textarea name="description" id="editDescription"
+                                            class="form-control border-primary" rows="4"
+                                            placeholder="Briefly inform students what this event entails. They will read this during registration..."
+                                            required></textarea>
+                                    </div>
+
+                                    <div class="col-md-5 mb-3">
+                                        <label class="form-label fw-bold">Target
+                                            Date</label>
+                                        <input type="date" name="date" id="editDate" class="form-control border-primary"
+                                            required>
+                                    </div>
+
+                                    <div class="col-md-5 mb-3">
+                                        <label class="form-label fw-bold">Location
+                                            /
+                                            Venue</label>
+                                        <input type="text" name="venue" id="editVenue"
+                                            class="form-control border-primary" placeholder="e.g., Main Hall B"
+                                            required>
+                                    </div>
+
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label fw-bold">Quota
+                                            Limit</label>
+                                        <input type="number" name="quota" id="editQuota"
+                                            class="form-control border-primary" placeholder="0" required min="1">
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label fw-bold">Select
+                                            Category:</label>
+                                        <select class="fw-bold form-select" id="editKategori" name="kategori">
+                                            <option value="leadership">
+                                                Leadership</option>
+                                            <option value="culture">
+                                                Culture</option>
+                                            <option value="spirituality">
+                                                Spirituality
+                                            </option>
+                                            <option value="entrepreneurship">
+                                                Entrepreneurship
+                                            </option>
+                                            <option value="volunteerism">
+                                                Volunteerism
+                                            </option>
+                                            <option value="career">
+                                                Career</option>
+                                            <option value="sports">
+                                                Sports</option>
+                                            <option value="counseling_wellbeing">
+                                                Student
+                                                Counseling and Wellbeing
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label fw-bold d-block">Select SDG Goals:</label>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 1" id="editSdg1">
+                                                    <label class="form-check-label text-dark" for="editSdg1">SDG 1: No
+                                                        Poverty</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 2" id="editSdg2">
+                                                    <label class="form-check-label text-dark" for="editSdg2">SDG 2: Zero
+                                                        Hunger</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 3" id="editSdg3">
+                                                    <label class="form-check-label text-dark" for="editSdg3">SDG 3: Good
+                                                        Health and Well-being</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 4" id="editSdg4">
+                                                    <label class="form-check-label text-dark" for="editSdg4">SDG 4:
+                                                        Quality Education</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 5" id="editSdg5">
+                                                    <label class="form-check-label text-dark" for="editSdg5">SDG 5:
+                                                        Gender Equality</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 6" id="editSdg6">
+                                                    <label class="form-check-label text-dark" for="editSdg6">SDG 6:
+                                                        Clean Water and Sanitation</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 7" id="editSdg7">
+                                                    <label class="form-check-label text-dark" for="editSdg7">SDG 7:
+                                                        Affordable and Clean Energy</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 8" id="editSdg8">
+                                                    <label class="form-check-label text-dark" for="editSdg8">SDG 8:
+                                                        Decent Work and Economic Growth</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 9" id="editSdg9">
+                                                    <label class="form-check-label text-dark" for="editSdg9">SDG 9:
+                                                        Industry, Innovation and Infrastructure</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 10" id="editSdg10">
+                                                    <label class="form-check-label text-dark" for="editSdg10">SDG 10:
+                                                        Reduced Inequalities</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 11" id="editSdg11">
+                                                    <label class="form-check-label text-dark" for="editSdg11">SDG 11:
+                                                        Sustainable Cities and Communities</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 12" id="editSdg12">
+                                                    <label class="form-check-label text-dark" for="editSdg12">SDG 12:
+                                                        Responsible Consumption and Production</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 13" id="editSdg13">
+                                                    <label class="form-check-label text-dark" for="editSdg13">SDG 13:
+                                                        Climate Action</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 14" id="editSdg14">
+                                                    <label class="form-check-label text-dark" for="editSdg14">SDG 14:
+                                                        Life Below Water</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 15" id="editSdg15">
+                                                    <label class="form-check-label text-dark" for="editSdg15">SDG 15:
+                                                        Life on Land</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 16" id="editSdg16">
+                                                    <label class="form-check-label text-dark" for="editSdg16">SDG 16:
+                                                        Peace, Justice and Strong Institutions</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="sdgGoals"
+                                                        value="SDG 17" id="editSdg17">
+                                                    <label class="form-check-label text-dark" for="editSdg17">SDG 17:
+                                                        Partnerships for the Goals</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="alert alert-warning small border-0 mt-3 mb-0">
+                                    <i class="fas fa-lock me-1"></i>
+                                    <strong>Note:</strong>
+                                    Once edited, the proposal remains
+                                    frozen as "PENDING" until approved.
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-white">
+                                <button type="button" class="btn btn-outline-secondary fw-bold"
+                                    data-bs-dismiss="modal">Discard
+                                    Changes</button>
+                                <button type="submit" class="btn btn-primary fw-bold px-4">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <% } %> <!-- End Else Branch -->
+
+                </div>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Append modals to body so they render properly
+                        var proposeModal = document.getElementById('proposeEventModal');
+                        if (proposeModal) {
+                            document.body.appendChild(proposeModal);
+                        }
+                        var editModal = document.getElementById('editEventModal');
+                        if (editModal) {
+                            document.body.appendChild(editModal);
+                        }
+
+                        // Handle population of edit modal fields
+                        var editButtons = document.querySelectorAll('.edit-event-btn');
+                        editButtons.forEach(function (btn) {
+                            btn.addEventListener('click', function () {
+                                document.getElementById('editEventId').value = btn.getAttribute('data-id');
+                                document.getElementById('editEventName').value = btn.getAttribute('data-name');
+                                document.getElementById('editDescription').value = btn.getAttribute('data-desc');
+                                document.getElementById('editDate').value = btn.getAttribute('data-date');
+                                document.getElementById('editVenue').value = btn.getAttribute('data-venue');
+                                document.getElementById('editQuota').value = btn.getAttribute('data-quota');
+                                document.getElementById('editKategori').value = btn.getAttribute('data-cat');
+
+                                // Reset checkboxes first
+                                var checkboxes = document.querySelectorAll('#editEventModal input[name="sdgGoals"]');
+                                checkboxes.forEach(function (cb) {
+                                    cb.checked = false;
                                 });
-                            }
+
+                                // Parse and check selected SDGs
+                                var sdgString = btn.getAttribute('data-sdg');
+                                if (sdgString) {
+                                    var sdgs = sdgString.split(', ');
+                                    checkboxes.forEach(function (cb) {
+                                        if (sdgs.indexOf(cb.value) !== -1) {
+                                            cb.checked = true;
+                                        }
+                                    });
+                                }
+                            });
                         });
                     });
-                });
-            </script>
+                </script>
