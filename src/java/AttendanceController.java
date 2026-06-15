@@ -69,6 +69,39 @@ public class AttendanceController extends HttpServlet {
             request.setAttribute("roster", roster);
             request.getRequestDispatcher("ManageAttendances.jsp").forward(request, response);
 
+        } else if ("scanQR".equals(action)) {
+            // QR Self-Attendance: student scans QR code to mark themselves ATTENDED
+            String eventIdParam = request.getParameter("eventId");
+            String token = request.getParameter("token");
+            if (eventIdParam == null || token == null) {
+                response.sendRedirect("Homepage.jsp");
+                return;
+            }
+            int eventId = Integer.parseInt(eventIdParam);
+            String expectedToken = java.util.UUID.nameUUIDFromBytes(
+                (eventId + "SECRET_SERS").getBytes()).toString();
+
+            if (!expectedToken.equals(token)) {
+                request.setAttribute("qrError", "Invalid QR code.");
+                request.getRequestDispatcher("Homepage.jsp").forward(request, response);
+                return;
+            }
+            // Mark the student's registration as ATTENDED
+            List<Attendance> roster = attendanceDAO.getAttendancesForEvent(eventId);
+            int attendanceId = -1;
+            for (Attendance a : roster) {
+                if (a.getUserId() == userId && "REGISTERED".equals(a.getStatus())) {
+                    attendanceId = a.getAttendanceId();
+                    break;
+                }
+            }
+            if (attendanceId > 0) {
+                attendanceDAO.updateAttendanceStatus(attendanceId, "ATTENDED", userId);
+                response.sendRedirect("attendances?action=myAttendance&qrSuccess=1");
+            } else {
+                response.sendRedirect("attendances?action=myAttendance&qrError=1");
+            }
+
         } else {
             response.sendRedirect("auths?action=logout");
         }

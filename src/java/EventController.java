@@ -153,6 +153,17 @@ public class EventController extends HttpServlet {
             String status = "approve".equals(action) ? "APPROVED" : "REJECTED";
             eventDAO.updateEventStatus(eventId, status);
 
+            // Auto-register the club's chairperson as a participant when approved
+            if ("APPROVED".equals(status)) {
+                Event event = eventDAO.selectEventById(eventId);
+                if (event != null) {
+                    Club club = clubDAO.selectClubById(event.getClubId());
+                    if (club != null && club.getChairpersonId() != null && club.getChairpersonId() > 0) {
+                        regDAO.registerChairpersonAsParticipant(eventId, club.getChairpersonId());
+                    }
+                }
+            }
+
             // Redirect back to context
             String referer = request.getHeader("referer");
             if (referer != null && referer.contains("global")) {

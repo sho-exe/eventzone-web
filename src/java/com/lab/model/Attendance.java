@@ -15,6 +15,7 @@ public class Attendance {
     private String studentName;
     private String studentEmail;
     private String verifierName;
+    private String verifierRole;
     
     // View Mapping Properties - For Students
     private String eventName;
@@ -53,6 +54,9 @@ public class Attendance {
 
     public String getVerifierName() { return verifierName; }
     public void setVerifierName(String verifierName) { this.verifierName = verifierName; }
+
+    public String getVerifierRole() { return verifierRole; }
+    public void setVerifierRole(String verifierRole) { this.verifierRole = verifierRole; }
 
     public String getEventName() { return eventName; }
     public void setEventName(String eventName) { this.eventName = eventName; }

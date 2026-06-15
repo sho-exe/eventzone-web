@@ -33,6 +33,12 @@ public class ClubDAO {
     private static final String INSERT_CLUB = "INSERT INTO clubs (club_name, description) VALUES (?, ?)";
     private static final String UPDATE_CLUB = "UPDATE clubs SET club_name = ?, description = ?, advisor_id = ?, chairperson_id = ? WHERE club_id = ?";
     private static final String DELETE_CLUB = "DELETE FROM clubs WHERE club_id = ?";
+    private static final String SELECT_CLUB_BY_ID =
+        "SELECT c.*, a.full_name AS advisor_name, ch.full_name AS chairperson_name " +
+        "FROM clubs c " +
+        "LEFT JOIN users a ON c.advisor_id = a.user_id " +
+        "LEFT JOIN users ch ON c.chairperson_id = ch.user_id " +
+        "WHERE c.club_id = ? LIMIT 1";
 
     protected Connection getConnection() {
         return DBConnection.getConnection();
@@ -84,6 +90,28 @@ public class ClubDAO {
             preparedStatement.setInt(1, chairpersonId);
             ResultSet rs = preparedStatement.executeQuery();
             
+            if (rs.next()) {
+                c = new Club();
+                c.setClubId(rs.getInt("club_id"));
+                c.setClubName(rs.getString("club_name"));
+                c.setDescription(rs.getString("description"));
+                c.setAdvisorId(rs.getObject("advisor_id") != null ? rs.getInt("advisor_id") : null);
+                c.setChairpersonId(rs.getObject("chairperson_id") != null ? rs.getInt("chairperson_id") : null);
+                c.setAdvisorName(rs.getString("advisor_name"));
+                c.setChairpersonName(rs.getString("chairperson_name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return c;
+    }
+
+    public Club selectClubById(int clubId) {
+        Club c = null;
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(SELECT_CLUB_BY_ID)) {
+            ps.setInt(1, clubId);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 c = new Club();
                 c.setClubId(rs.getInt("club_id"));

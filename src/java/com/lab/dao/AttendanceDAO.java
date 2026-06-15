@@ -9,11 +9,14 @@ public class AttendanceDAO {
     
     // Adapted from previous Registration logic to use a unified `attendance` table mapped precisely to custom schema
     private static final String INSERT_ATTENDANCE = "INSERT INTO attendances (event_id, user_id, registration_date, status) VALUES (?, ?, NOW(), 'PENDING')";
+    private static final String INSERT_CHAIRPERSON_ATTENDANCE = 
+        "INSERT IGNORE INTO attendances (event_id, user_id, registration_date, status, position) " +
+        "VALUES (?, ?, NOW(), 'ATTENDED', 'Presiden Kelab')";
     private static final String CHECK_IF_REGISTERED = "SELECT COUNT(*) FROM attendances WHERE event_id = ? AND user_id = ?";
     private static final String COUNT_REGISTRATIONS_FOR_EVENT = "SELECT COUNT(*) FROM attendances WHERE event_id = ?";
     
     private static final String SELECT_ATTENDANCES_BY_EVENT = 
-        "SELECT a.*, u.full_name, u.email, v.full_name AS verifier_name " +
+        "SELECT a.*, u.full_name, u.email, v.full_name AS verifier_name, v.role AS verifier_role " +
         "FROM attendances a " +
         "JOIN users u ON a.user_id = u.user_id " +
         "LEFT JOIN users v ON a.verified_by = v.user_id " +
@@ -44,6 +47,19 @@ public class AttendanceDAO {
             
         } catch (SQLException ex) {
             // Fails silently if duplicate or constraint fails
+            ex.printStackTrace();
+        }
+        return rowInserted;
+    }
+
+    public boolean registerChairpersonAsParticipant(int eventId, int chairpersonId) {
+        boolean rowInserted = false;
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(INSERT_CHAIRPERSON_ATTENDANCE)) {
+            ps.setInt(1, eventId);
+            ps.setInt(2, chairpersonId);
+            rowInserted = ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return rowInserted;
@@ -104,6 +120,7 @@ public class AttendanceDAO {
                 a.setStudentName(rs.getString("full_name"));
                 a.setStudentEmail(rs.getString("email"));
                 a.setVerifierName(rs.getString("verifier_name"));
+                a.setVerifierRole(rs.getString("verifier_role"));
                 a.setPosition(rs.getString("position"));
                 list.add(a);
             }

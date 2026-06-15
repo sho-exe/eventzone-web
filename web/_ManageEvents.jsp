@@ -60,7 +60,7 @@
                             </button>
                         </div>
 
-                        <div>
+                        <div class="row">
                             <% List<Event> eventList = (List<Event>)
                                     request.getAttribute("eventList");
                                     if(eventList != null && !eventList.isEmpty()) {
@@ -163,63 +163,46 @@
                                                     </div>
                                                 </div>
 
-                                                <% if("APPROVED".equals(e.getStatus())) { %>
+                                                 <% if ("APPROVED".equals(e.getStatus())) { %>
                                                     <div class="mt-3">
                                                         <a href="attendances?action=manageAttendances&eventId=<%= e.getEventId() %>"
                                                             class="btn btn-save mt-0"
                                                             style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px; margin-top: 0 !important;">
-                                                            <i class="bx bx-group me-1"></i>
-                                                            Attendances
+                                                            <i class="bx bx-group me-1"></i> Attendances
                                                         </a>
                                                     </div>
-                                                    <% } %>
-                                                        <% if("PENDING".equals(e.getStatus())) { %>
-                                                            <div class="mt-3 d-flex gap-2">
-                                                                <button type="button"
-                                                                    class="btn btn-outline-primary w-50 edit-event-btn"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#editEventModal"
-                                                                    data-id="<%= e.getEventId() %>"
-                                                                    data-name="<%= e.getEventName().replace("
-                                                                    \"", "&quot;" ) %>"
-                                                                    data-desc="<%=
-                                                                        e.getDescription().replace("\"", "&quot;" ) %>"
-                                                                        data-date="<%= e.getDate() %>"
-                                                                            data-venue="<%=
-                                                                                e.getVenue().replace("\"", "&quot;" ) %>
-                                                                                "
-                                                                                data-quota="<%= e.getQuota() %>"
-                                                                                    data-cat="<%= e.getCategory() %>"
-                                                                                        data-sdg="<%= e.getSdgGoals()
-                                                                                            !=null ? e.getSdgGoals()
-                                                                                            : "" %>"
-                                                                                            style="display: flex;
-                                                                                            align-items: center;
-                                                                                            justify-content: center;
-                                                                                            font-size: 0.82rem; height:
-                                                                                            36px; margin-top: 0
-                                                                                            !important;">
-                                                                                            <i
-                                                                                                class="bx bx-edit-alt me-1"></i>
-                                                                                            Edit
-                                                                </button>
-                                                                <form action="events" method="POST" class="w-50 mb-0"
-                                                                    onsubmit="return confirm('Are you sure you want to delete this pending event?');">
-                                                                    <input type="hidden" name="action"
-                                                                        value="deleteEvent">
-                                                                    <input type="hidden" name="eventId"
-                                                                        value="<%= e.getEventId() %>">
-                                                                    <button type="submit"
-                                                                        class="btn btn-outline-danger w-100"
-                                                                        style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px; margin-top: 0 !important;">
-                                                                        <i class="bx bx-trash me-1"></i> Delete
-                                                                    </button>
-                                                                </form>
-                                                            </div>
-                                                            <% } %>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <% } else if ("PENDING".equals(e.getStatus())) { %>
+                                                    <div class="mt-3 d-flex gap-2">
+                                                        <button type="button"
+                                                            class="btn btn-outline-primary w-50 edit-event-btn"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#editEventModal"
+                                                            data-id="<%= e.getEventId() %>"
+                                                            data-name="<%= e.getEventName().replace("\"", "&quot;") %>"
+                                                            data-desc="<%= e.getDescription().replace("\"", "&quot;") %>"
+                                                            data-date="<%= e.getDate() %>"
+                                                            data-venue="<%= e.getVenue().replace("\"", "&quot;") %>"
+                                                            data-quota="<%= e.getQuota() %>"
+                                                            data-cat="<%= e.getCategory() %>"
+                                                            data-sdg="<%= e.getSdgGoals() != null ? e.getSdgGoals() : "" %>"
+                                                            style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px;">
+                                                            <i class="bx bx-edit-alt me-1"></i> Edit
+                                                        </button>
+                                                        <form action="events" method="POST" class="w-50 mb-0"
+                                                            onsubmit="return confirm('Are you sure you want to delete this pending event?');">
+                                                            <input type="hidden" name="action" value="deleteEvent">
+                                                            <input type="hidden" name="eventId" value="<%= e.getEventId() %>">
+                                                            <button type="submit" class="btn btn-outline-danger w-100"
+                                                                style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px;">
+                                                                <i class="bx bx-trash me-1"></i> Delete
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                <% } %>
+                                            </div><%-- card-inner --%>
+                                        </div><%-- card club-card --%>
+                                    </div><%-- col-lg-4 --%>
+
                                     <% /* Insert a full-width spacer row after every 3rd card */ if (eventIndex % 3==0)
                                         { %>
                                         <div class="col-12" style="margin-bottom: 20px;"></div>
