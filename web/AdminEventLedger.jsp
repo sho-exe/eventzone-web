@@ -88,7 +88,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row mt-4">
+                                                <div class="row mt-4 card">
                                                     <% List<Event> eventList = (List<Event>)
                                                             request.getAttribute("adminEventList");
                                                             if (eventList != null
@@ -344,9 +344,7 @@
                                                                 </div>
                                                             </div>
                                                             <% } } else {%>
-                                                                <div class="col-12 text-center py-5 text-muted">
-                                                                    <i
-                                                                        class="bx bx-check-circle fa-3x mb-3 text-success"></i><br>
+                                                                <div class="col-12 text-center py-5 text-muted mb-4">
                                                                     No events found in this category.
                                                                 </div>
                                                                 <% } %>
