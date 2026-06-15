@@ -138,7 +138,7 @@
               </div>
             </form>
 
-            <div class="mt-4 pt-3 border-top">
+<!--            <div class="mt-4 pt-3 border-top">
               <p class="text-center text-muted small fw-bold mb-3 text-uppercase" style="letter-spacing: 0.05em;">Quick Login (Demo Accounts)</p>
               <div class="row g-2">
                 <div class="col-6">
@@ -166,7 +166,7 @@
                   </button>
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>
