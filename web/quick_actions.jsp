@@ -9,11 +9,10 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <a href="events?action=browse" class="text-decoration-none">
-                        <div class="card h-100 card-action bg-soft-info">
+                        <div class="card h-100 card-premium-action premium-info">
                             <div class="card-body text-center">
                                 <div class="avatar avatar-md mx-auto mb-3">
-                                    <span class="avatar-initial rounded-circle bg-label-info"><i
-                                            class="bx bx-search fs-3"></i></span>
+                                    <span class="avatar-initial rounded-circle"><i class="bx bx-search fs-3"></i></span>
                                 </div>
                                 <h5 class="card-title text-dark">Explore Events</h5>
                                 <p class="card-text text-muted small">Discover and
@@ -25,10 +24,10 @@
 
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <a href="attendances?action=myAttendance" class="text-decoration-none">
-                        <div class="card h-100 card-action bg-soft-success">
+                        <div class="card h-100 card-premium-action premium-success">
                             <div class="card-body text-center">
                                 <div class="avatar avatar-md mx-auto mb-3">
-                                    <span class="avatar-initial rounded-circle bg-label-success"><i
+                                    <span class="avatar-initial rounded-circle"><i
                                             class="bx bx-clipboard fs-3"></i></span>
                                 </div>
                                 <h5 class="card-title text-dark">My Registrations</h5>
@@ -41,13 +40,12 @@
 
                 <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
                     <a href="merits?action=meritHistory" class="text-decoration-none">
-                        <div class="card h-100 card-action bg-soft-primary">
+                        <div class="card h-100 card-premium-action premium-warning">
                             <div class="card-body text-center">
                                 <div class="avatar avatar-md mx-auto mb-3">
-                                    <span class="avatar-initial rounded-circle bg-label-primary"><i
-                                            class="bx bx-medal fs-3"></i></span>
+                                    <span class="avatar-initial rounded-circle"><i class="bx bx-medal fs-3"></i></span>
                                 </div>
-                                <h5 class="card-title text-dark">Merit Transcript</h5>
+                                <h5 class="card-title text-dark">View Merits</h5>
                                 <p class="card-text text-muted small">Check your current
                                     point balance and transcript.</p>
                             </div>
@@ -58,12 +56,12 @@
 
             <% } else if ("ADVISOR".equals(role)) { %>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <a href="events?action=pending" class="text-decoration-none">
-                            <div class="card h-100 card-action bg-soft-info">
+                            <div class="card h-100 card-premium-action premium-blue">
                                 <div class="card-body text-center">
                                     <div class="avatar avatar-md mx-auto mb-3">
-                                        <span class="avatar-initial rounded-circle bg-label-info"><i
+                                        <span class="avatar-initial rounded-circle"><i
                                                 class="bx bx-check-circle fs-3"></i></span>
                                     </div>
                                     <h5 class="card-title text-dark">Pending Approvals
@@ -76,12 +74,12 @@
                         </a>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <a href="events?action=global" class="text-decoration-none">
-                            <div class="card h-100 card-action bg-soft-warning">
+                            <div class="card h-100 card-premium-action premium-info">
                                 <div class="card-body text-center">
                                     <div class="avatar avatar-md mx-auto mb-3">
-                                        <span class="avatar-initial rounded-circle bg-label-warning"><i
+                                        <span class="avatar-initial rounded-circle"><i
                                                 class="bx bx-award fs-3"></i></span>
                                     </div>
                                     <h5 class="card-title text-dark">Manage Events
@@ -93,12 +91,12 @@
                         </a>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <a href="events?action=clubEvents" class="text-decoration-none">
-                            <div class="card h-100 card-action bg-soft-success">
+                            <div class="card h-100 card-premium-action premium-danger">
                                 <div class="card-body text-center">
                                     <div class="avatar avatar-md mx-auto mb-3">
-                                        <span class="avatar-initial rounded-circle bg-label-success"><i
+                                        <span class="avatar-initial rounded-circle"><i
                                                 class="bx bx-history fs-3"></i></span>
                                     </div>
                                     <h5 class="card-title text-dark">Club Event History
@@ -110,12 +108,12 @@
                         </a>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <a href="merits?action=meritReports" class="text-decoration-none">
-                            <div class="card h-100 card-action bg-soft-primary">
+                            <div class="card h-100 card-premium-action premium-warning">
                                 <div class="card-body text-center">
                                     <div class="avatar avatar-md mx-auto mb-3">
-                                        <span class="avatar-initial rounded-circle bg-label-primary"><i
+                                        <span class="avatar-initial rounded-circle"><i
                                                 class="bx bx-bar-chart-alt-2 fs-3"></i></span>
                                     </div>
                                     <h5 class="card-title text-dark">Merit Reports</h5>
@@ -132,10 +130,10 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                             <a href="events?action=manage" class="text-decoration-none">
-                                <div class="card h-100 card-action bg-soft-info">
+                                <div class="card h-100 card-premium-action premium-info">
                                     <div class="card-body text-center">
                                         <div class="avatar avatar-md mx-auto mb-3">
-                                            <span class="avatar-initial rounded-circle bg-label-info"><i
+                                            <span class="avatar-initial rounded-circle"><i
                                                     class="bx bx-calendar-plus fs-3"></i></span>
                                         </div>
                                         <h5 class="card-title text-dark">Manage Events
@@ -149,17 +147,32 @@
                         </div>
 
                         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                            <a href="merits?action=meritHistory" class="text-decoration-none">
-                                <div class="card h-100 card-action bg-soft-primary">
+                            <a href="attendances?action=myAttendance" class="text-decoration-none">
+                                <div class="card h-100 card-premium-action premium-success">
                                     <div class="card-body text-center">
                                         <div class="avatar avatar-md mx-auto mb-3">
-                                            <span class="avatar-initial rounded-circle bg-label-primary"><i
+                                            <span class="avatar-initial rounded-circle"><i
+                                                    class="bx bx-clipboard fs-3"></i></span>
+                                        </div>
+                                        <h5 class="card-title text-dark">My Registrations</h5>
+                                        <p class="card-text text-muted small">View and manage
+                                            your current event registrations.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
+                            <a href="merits?action=meritHistory" class="text-decoration-none">
+                                <div class="card h-100 card-premium-action premium-warning">
+                                    <div class="card-body text-center">
+                                        <div class="avatar avatar-md mx-auto mb-3">
+                                            <span class="avatar-initial rounded-circle"><i
                                                     class="bx bx-medal fs-3"></i></span>
                                         </div>
-                                        <h5 class="card-title text-dark">View Merits
-                                        </h5>
-                                        <p class="card-text text-muted small">Check your
-                                            current point balance and transcript.</p>
+                                        <h5 class="card-title text-dark">View Merits</h5>
+                                        <p class="card-text text-muted small">Check your current
+                                            point balance and transcript.</p>
                                     </div>
                                 </div>
                             </a>
@@ -168,12 +181,12 @@
 
                     <% } else if ("HEPA".equals(role)) { %>
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                                 <a href="users?action=manage" class="text-decoration-none">
-                                    <div class="card h-100 card-action bg-soft-info">
+                                    <div class="card h-100 card-premium-action premium-primary">
                                         <div class="card-body text-center">
                                             <div class="avatar avatar-md mx-auto mb-3">
-                                                <span class="avatar-initial rounded-circle bg-label-info"><i
+                                                <span class="avatar-initial rounded-circle"><i
                                                         class="bx bx-group fs-3"></i></span>
                                             </div>
                                             <h5 class="card-title text-dark">Manage
@@ -186,12 +199,12 @@
                                 </a>
                             </div>
 
-                            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                                 <a href="clubs?action=manage" class="text-decoration-none">
-                                    <div class="card h-100 card-action bg-soft-secondary">
+                                    <div class="card h-100 card-premium-action premium-danger">
                                         <div class="card-body text-center">
                                             <div class="avatar avatar-md mx-auto mb-3">
-                                                <span class="avatar-initial rounded-circle bg-label-secondary"><i
+                                                <span class="avatar-initial rounded-circle"><i
                                                         class="bx bx-flag fs-3"></i></span>
                                             </div>
                                             <h5 class="card-title text-dark">Manage
@@ -204,12 +217,12 @@
                                 </a>
                             </div>
 
-                            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                                 <a href="events?action=global" class="text-decoration-none">
-                                    <div class="card h-100 card-action bg-soft-warning">
+                                    <div class="card h-100 card-premium-action premium-info">
                                         <div class="card-body text-center">
                                             <div class="avatar avatar-md mx-auto mb-3">
-                                                <span class="avatar-initial rounded-circle bg-label-warning"><i
+                                                <span class="avatar-initial rounded-circle"><i
                                                         class="bx bx-globe fs-3"></i></span>
                                             </div>
                                             <h5 class="card-title text-dark">Manage
@@ -222,13 +235,13 @@
                                 </a>
                             </div>
 
-                            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                                 <a href="merits?action=distributeMerits" class="text-decoration-none">
-                                    <div class="card h-100 card-action bg-soft-success">
+                                    <div class="card h-100 card-premium-action premium-warning">
                                         <div class="card-body text-center">
                                             <div class="avatar avatar-md mx-auto mb-3">
-                                                <span class="avatar-initial rounded-circle bg-label-success"><i
-                                                        class="bx bx-award fs-3"></i></span>
+                                                <span class="avatar-initial rounded-circle"><i
+                                                        class="bx bx-medal fs-3"></i></span>
                                             </div>
                                             <h5 class="card-title text-dark">Distribute
                                                 Merits</h5>

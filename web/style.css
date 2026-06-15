@@ -1190,3 +1190,189 @@ table .btn,
 .modal-header .btn-close-white:hover {
     background-color: rgba(255, 255, 255, 0.18) !important;
 }
+
+/* Premium Dashboard Quick Actions Styles */
+.card-premium-action {
+    border: 1.5px solid transparent !important;
+    border-radius: 16px !important;
+    background: #ffffff !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-premium-action .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.2rem 1.5rem !important;
+    height: 100%;
+    min-height: 180px;
+    z-index: 2;
+}
+
+.card-premium-action .avatar {
+    width: 60px !important;
+    height: 60px !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+.card-premium-action .card-title {
+    font-weight: 700 !important;
+    color: #2b303a !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.card-premium-action .card-text {
+    font-weight: 550 !important;
+    color: #4e5d78 !important;
+}
+
+/* Hover effects */
+.card-premium-action:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-premium-action:hover .avatar {
+    transform: scale(1.15) !important;
+}
+
+/* Premium Color Theme Overrides */
+
+/* Primary: Soft Royal Blue/Indigo */
+.premium-primary {
+    background-color: rgba(105, 108, 255, 0.25) !important;
+    border-color: transparent !important;
+}
+
+.premium-primary:hover {
+    background-color: rgba(105, 108, 255, 0.35) !important;
+    border-color: transparent !important;
+}
+
+.premium-primary .avatar-initial {
+    background-color: rgba(105, 108, 255, 0.22) !important;
+    color: #696cff !important;
+    border: none !important;
+}
+
+/* Success: Soft Emerald */
+.premium-success {
+    background-color: rgba(40, 199, 111, 0.25) !important;
+    border-color: transparent !important;
+}
+
+.premium-success:hover {
+    background-color: rgba(40, 199, 111, 0.35) !important;
+    border-color: transparent !important;
+}
+
+.premium-success .avatar-initial {
+    background-color: rgba(40, 199, 111, 0.22) !important;
+    color: #28c76f !important;
+    border: none !important;
+}
+
+/* Info: Soft Cyan/Teal */
+.premium-info {
+    background-color: rgba(3, 195, 236, 0.25) !important;
+    border-color: transparent !important;
+}
+
+.premium-info:hover {
+    background-color: rgba(3, 195, 236, 0.35) !important;
+    border-color: transparent !important;
+}
+
+.premium-info .avatar-initial {
+    background-color: rgba(3, 195, 236, 0.22) !important;
+    color: #03c3ec !important;
+    border: none !important;
+}
+
+/* Warning: Soft Amber/Orange */
+.premium-warning {
+    background-color: rgba(255, 171, 0, 0.25) !important;
+    border-color: transparent !important;
+}
+
+.premium-warning:hover {
+    background-color: rgba(255, 171, 0, 0.35) !important;
+    border-color: transparent !important;
+}
+
+.premium-warning .avatar-initial {
+    background-color: rgba(255, 171, 0, 0.22) !important;
+    color: #ffab00 !important;
+    border: none !important;
+}
+
+/* Yellow: Soft Yellow/Amber */
+.premium-yellow {
+    background-color: rgba(255, 193, 7, 0.25) !important;
+    border-color: transparent !important;
+}
+
+.premium-yellow:hover {
+    background-color: rgba(255, 193, 7, 0.35) !important;
+    border-color: transparent !important;
+}
+
+.premium-yellow .avatar-initial {
+    background-color: rgba(255, 193, 7, 0.22) !important;
+    color: #ffc107 !important;
+    border: none !important;
+}
+
+/* Blue: Soft Royal Blue */
+.premium-blue {
+    background-color: rgba(0, 123, 255, 0.25) !important;
+    border-color: transparent !important;
+}
+
+.premium-blue:hover {
+    background-color: rgba(0, 123, 255, 0.35) !important;
+    border-color: transparent !important;
+}
+
+.premium-blue .avatar-initial {
+    background-color: rgba(0, 123, 255, 0.22) !important;
+    color: #007bff !important;
+    border: none !important;
+}
+
+/* Danger: Soft Rose/Crimson */
+.premium-danger {
+    background-color: rgba(234, 84, 85, 0.25) !important;
+    border-color: transparent !important;
+}
+
+.premium-danger:hover {
+    background-color: rgba(234, 84, 85, 0.35) !important;
+    border-color: transparent !important;
+}
+
+.premium-danger .avatar-initial {
+    background-color: rgba(234, 84, 85, 0.22) !important;
+    color: #ea5455 !important;
+    border: none !important;
+}
+
+/* Secondary: Soft Slate/Gray */
+.premium-secondary {
+    background-color: rgba(133, 146, 163, 0.25) !important;
+    border-color: transparent !important;
+}
+
+.premium-secondary:hover {
+    background-color: rgba(133, 146, 163, 0.35) !important;
+    border-color: transparent !important;
+}
+
+.premium-secondary .avatar-initial {
+    background-color: rgba(133, 146, 163, 0.22) !important;
+    color: #8592a3 !important;
+    border: none !important;
+}
