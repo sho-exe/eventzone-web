@@ -38,7 +38,7 @@ public class StudentDashboardServlet extends HttpServlet {
         }
 
         request.setAttribute("profileUser", user);
-        request.getRequestDispatcher("StudentProfile.jsp").forward(request, response);
+        request.getRequestDispatcher("Profile.jsp").forward(request, response);
     }
 
     @Override
@@ -52,8 +52,8 @@ public class StudentDashboardServlet extends HttpServlet {
         }
 
         int userId = (int) session.getAttribute("userId");
-        String fullName   = request.getParameter("fullName");
-        String email      = request.getParameter("email");
+        String fullName = request.getParameter("fullName");
+        String email = request.getParameter("email");
         String newPassword = request.getParameter("newPassword");
 
         boolean updated = userDAO.updateUserProfile(userId, fullName, email, newPassword);
@@ -70,6 +70,6 @@ public class StudentDashboardServlet extends HttpServlet {
         // Reload profile page with fresh data
         User user = userDAO.getUserById(userId);
         request.setAttribute("profileUser", user);
-        request.getRequestDispatcher("StudentProfile.jsp").forward(request, response);
+        request.getRequestDispatcher("Profile.jsp").forward(request, response);
     }
 }

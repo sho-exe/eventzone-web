@@ -48,7 +48,7 @@ public class UserController extends HttpServlet {
             int userId = (int) session.getAttribute("userId");
             User user = userDAO.getUserById(userId);
             request.setAttribute("profileUser", user);
-            request.getRequestDispatcher("StudentProfile.jsp").forward(request, response);
+            request.getRequestDispatcher("Profile.jsp").forward(request, response);
 
         } else {
             response.sendRedirect("Homepage.jsp");
@@ -65,7 +65,8 @@ public class UserController extends HttpServlet {
             int userId = Integer.parseInt(request.getParameter("userId"));
             String newRole = request.getParameter("newRole");
             userDAO.updateUserRole(userId, newRole);
-            response.sendRedirect("users?action=manage&message=" + java.net.URLEncoder.encode("User role updated successfully!", "UTF-8"));
+            response.sendRedirect("users?action=manage&message="
+                    + java.net.URLEncoder.encode("User role updated successfully!", "UTF-8"));
 
         } else if ("updateProfile".equals(action)) {
             HttpSession session = request.getSession(false);
@@ -74,8 +75,8 @@ public class UserController extends HttpServlet {
                 return;
             }
             int userId = (int) session.getAttribute("userId");
-            String fullName    = request.getParameter("fullName");
-            String email       = request.getParameter("email");
+            String fullName = request.getParameter("fullName");
+            String email = request.getParameter("email");
             String newPassword = request.getParameter("newPassword");
 
             boolean updated = userDAO.updateUserProfile(userId, fullName, email, newPassword);
@@ -90,7 +91,7 @@ public class UserController extends HttpServlet {
 
             User user = userDAO.getUserById(userId);
             request.setAttribute("profileUser", user);
-            request.getRequestDispatcher("StudentProfile.jsp").forward(request, response);
+            request.getRequestDispatcher("Profile.jsp").forward(request, response);
 
         } else if ("createUser".equals(action)) {
             // HEPA only
@@ -102,7 +103,7 @@ public class UserController extends HttpServlet {
                 newUser.setEmail(request.getParameter("email"));
                 newUser.setFullName(request.getParameter("fullName"));
                 newUser.setRole(request.getParameter("role"));
-                
+
                 boolean created = userDAO.registerUser(newUser);
                 String msg = created ? "User created successfully!" : "Error: Username might already exist.";
                 response.sendRedirect("users?action=manage&message=" + java.net.URLEncoder.encode(msg, "UTF-8"));
@@ -115,9 +116,10 @@ public class UserController extends HttpServlet {
             HttpSession session = request.getSession(false);
             if (session != null && "HEPA".equals(session.getAttribute("accountType"))) {
                 int userId = Integer.parseInt(request.getParameter("userId"));
-                
+
                 boolean deleted = userDAO.deleteUser(userId);
-                String msg = deleted ? "User deleted successfully!" : "Error: Cannot delete user. They might be tied to existing records.";
+                String msg = deleted ? "User deleted successfully!"
+                        : "Error: Cannot delete user. They might be tied to existing records.";
                 response.sendRedirect("users?action=manage&message=" + java.net.URLEncoder.encode(msg, "UTF-8"));
             } else {
                 response.sendRedirect("Homepage.jsp");

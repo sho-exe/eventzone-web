@@ -606,7 +606,7 @@ table .btn,
     background: var(--bs-dark);
 }
 
-/* --- Student Profile Styles (StudentProfile.jsp) --- */
+/* --- Student Profile Styles (Profile.jsp) --- */
 .profile-card {
     border: none;
     border-radius: 20px;
