@@ -523,26 +523,22 @@
                                                                                                                 pos =
                                                                                                                 a.getPosition();
                                                                                                                 if
-                                                                                                                ("Presiden
-                                                                                                                Kelab".equals(pos))
+                                                                                                                ("Presiden Kelab".equals(pos))
                                                                                                                 {
                                                                                                                 expectedPoints
                                                                                                                 = 80; }
                                                                                                                 else if
-                                                                                                                ("Setiausaha
-                                                                                                                Kelab".equals(pos))
+                                                                                                                ("Setiausaha Kelab".equals(pos))
                                                                                                                 {
                                                                                                                 expectedPoints
                                                                                                                 = 60; }
                                                                                                                 else if
-                                                                                                                ("MT
-                                                                                                                Kelab".equals(pos))
+                                                                                                                ("MT Kelab".equals(pos))
                                                                                                                 {
                                                                                                                 expectedPoints
                                                                                                                 = 50; }
                                                                                                                 else if
-                                                                                                                ("AJK
-                                                                                                                Kelab".equals(pos))
+                                                                                                                ("AJK Kelab".equals(pos))
                                                                                                                 {
                                                                                                                 expectedPoints
                                                                                                                 = 40; }
@@ -602,8 +598,7 @@
                                                                                                                                 a.getStatus()%>
                                                                                                                         </span>
                                                                                                                     </td>
-                                                                                                                    <td class="text-end pe-3 fw-bold <%= isAttended ? "
-                                                                                                                        text-success"
+                                                                                                                    <td class="text-end pe-3 fw-bold <%= isAttended ? "text-success"
                                                                                                                         : "text-muted"
                                                                                                                         %>
                                                                                                                         ">
