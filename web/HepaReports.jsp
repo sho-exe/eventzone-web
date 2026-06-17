@@ -274,12 +274,7 @@
                             <div class="report-tabs-wrapper mb-4">
                                 <ul class="nav nav-tabs report-nav-tabs border-bottom-0 m-0" id="reportTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
-                                            <i class="bx bx-grid-alt fs-5"></i> Overview Report
-                                        </button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">
+                                        <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">
                                             <i class="bx bx-user fs-5"></i> Users Module
                                         </button>
                                     </li>
@@ -309,37 +304,8 @@
                             <div class="card shadow-sm border-0 mt-4">
                                 <div class="card-body tab-content" id="reportTabsContent">
                                     
-                                    <!-- OVERVIEW REPORT TAB -->
-                                    <div class="tab-pane show active" id="overview" role="tabpanel">
-                                        <h5 class="fw-bold mb-3 text-dark d-flex align-items-center">
-                                            <i class="bx bx-bar-chart-square text-danger me-2"></i> System Activity Summary
-                                        </h5>
-                                        <div class="row">
-                                            <div class="col-md-7 mb-4">
-                                                <p class="text-muted leading-relaxed">
-                                                    Welcome to the **EventZone Comprehensive Reports & Analytics Panel**. As a HEPA Administrator, this dynamic portal gives you a consolidated view of student involvement, club performance, event statistics, self-check-in rates, and merit-point distributions.
-                                                </p>
-                                                <div class="card bg-label-secondary border-0 p-3 mt-3">
-                                                    <h6 class="fw-bold text-dark mb-2"><i class="bx bx-info-circle me-1"></i> Quick Tips for HEPA Admin</h6>
-                                                    <ul class="text-dark mb-0 ps-3 small">
-                                                        <li class="mb-1">Click the <strong>Print / Export PDF</strong> button on the top right to download or print a beautifully compiled multi-page system ledger.</li>
-                                                        <li class="mb-1">Switch between tabs to inspect granular charts and leaderboard tables.</li>
-                                                        <li>Data metrics are synchronized in real-time with the active student registries.</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5 text-center d-flex align-items-center justify-content-center">
-                                                <div class="p-4 rounded-3 bg-label-danger-light border border-danger border-dashed" style="max-width: 350px;">
-                                                    <i class="bx bx-shield-quarter text-danger display-4 mb-3"></i>
-                                                    <h5 class="fw-bold text-danger mb-1">Administrative Ledger</h5>
-                                                    <p class="small text-muted mb-0">Authorized role: HEPA Admin. Confidential metrics pertaining to Computer Science & Mathematics Faculty.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <!-- USERS MODULE TAB -->
-                                    <div class="tab-pane" id="users" role="tabpanel">
+                                    <div class="tab-pane show active" id="users" role="tabpanel">
                                         <h5 class="fw-bold mb-4 text-dark"><i class="bx bx-user text-primary me-2"></i> Users Module Analytics</h5>
                                         <div class="row">
                                             <div class="col-lg-6 mb-4">
