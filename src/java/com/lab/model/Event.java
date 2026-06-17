@@ -14,6 +14,7 @@ public class Event {
     private String status;
     private String category;
     private String sdgGoals;
+    private String image;
 
     // Helper specific to UI mapping
     private String clubName;
@@ -54,6 +55,9 @@ public class Event {
 
     public String getSdgGoals() { return sdgGoals; }
     public void setSdgGoals(String sdgGoals) { this.sdgGoals = sdgGoals; }
+
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
 
     public String getClubName() { return clubName; }
     public void setClubName(String clubName) { this.clubName = clubName; }

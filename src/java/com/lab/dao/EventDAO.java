@@ -33,8 +33,8 @@ public class EventDAO {
             + "WHERE c.advisor_id = ? ORDER BY e.date DESC";
 
     private static final String INSERT_EVENT
-            = "INSERT INTO events (event_name, description, date, venue, quota, criteria, club_id, status, category, sdg_goals) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, 'PENDING', ?, ?)";
+            = "INSERT INTO events (event_name, description, date, venue, quota, criteria, club_id, status, category, sdg_goals, image) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, 'PENDING', ?, ?, ?)";
 
     private static final String UPDATE_EVENT_STATUS
             = "UPDATE events SET status = ? WHERE event_id = ?";
@@ -45,7 +45,7 @@ public class EventDAO {
             + "WHERE e.event_id = ?";
 
     private static final String UPDATE_EVENT
-            = "UPDATE events SET event_name = ?, description = ?, date = ?, venue = ?, quota = ?, criteria = ?, category = ?, sdg_goals = ? WHERE event_id = ?";
+            = "UPDATE events SET event_name = ?, description = ?, date = ?, venue = ?, quota = ?, criteria = ?, category = ?, sdg_goals = ?, image = ? WHERE event_id = ?";
 
     private static final String DELETE_EVENT
             = "DELETE FROM events WHERE event_id = ?";
@@ -74,6 +74,7 @@ public class EventDAO {
                 e.setStatus(rs.getString("status"));
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
+                e.setImage(rs.getString("image"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -100,6 +101,7 @@ public class EventDAO {
                 e.setCriteria(rs.getString("criteria"));
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
+                e.setImage(rs.getString("image"));
 
                 e.setClubId(rs.getInt("club_id"));
                 e.setStatus(rs.getString("status"));
@@ -131,6 +133,7 @@ public class EventDAO {
                 e.setStatus(rs.getString("status"));
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
+                e.setImage(rs.getString("image"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -160,6 +163,7 @@ public class EventDAO {
                 e.setStatus(rs.getString("status"));
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
+                e.setImage(rs.getString("image"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -189,6 +193,7 @@ public class EventDAO {
                 e.setStatus(rs.getString("status"));
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
+                e.setImage(rs.getString("image"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -211,6 +216,7 @@ public class EventDAO {
             preparedStatement.setInt(7, e.getClubId());
             preparedStatement.setString(8, e.getCategory());
             preparedStatement.setString(9, e.getSdgGoals());
+            preparedStatement.setString(10, e.getImage());
 
             rowInserted = preparedStatement.executeUpdate() > 0;
 
@@ -252,6 +258,7 @@ public class EventDAO {
                 e.setStatus(rs.getString("status"));
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
+                e.setImage(rs.getString("image"));
                 e.setClubName(rs.getString("club_name"));
             }
         } catch (SQLException ex) {
@@ -271,7 +278,8 @@ public class EventDAO {
             preparedStatement.setString(6, e.getCriteria());
             preparedStatement.setString(7, e.getCategory());
             preparedStatement.setString(8, e.getSdgGoals());
-            preparedStatement.setInt(9, e.getEventId());
+            preparedStatement.setString(9, e.getImage());
+            preparedStatement.setInt(10, e.getEventId());
             rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             ex.printStackTrace();

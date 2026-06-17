@@ -8,13 +8,20 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 @WebServlet("/events")
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024 * 2,  // 2MB
+    maxFileSize = 1024 * 1024 * 10,       // 10MB
+    maxRequestSize = 1024 * 1024 * 50     // 50MB
+)
 public class EventController extends HttpServlet {
 
     private EventDAO eventDAO;
@@ -111,6 +118,28 @@ public class EventController extends HttpServlet {
             newEvent.setCategory(request.getParameter("kategori"));
             String[] sdgArr = request.getParameterValues("sdgGoals");
             newEvent.setSdgGoals(sdgArr != null ? String.join(", ", sdgArr) : "");
+            
+            String imagePath = null;
+            try {
+                Part filePart = request.getPart("image");
+                if (filePart != null && filePart.getSize() > 0) {
+                    String fileName = filePart.getSubmittedFileName();
+                    if (fileName != null && !fileName.trim().isEmpty()) {
+                        fileName = System.currentTimeMillis() + "_" + fileName;
+                        String uploadPath = request.getServletContext().getRealPath("/uploads");
+                        java.io.File uploadDir = new java.io.File(uploadPath);
+                        if (!uploadDir.exists()) {
+                            uploadDir.mkdirs();
+                        }
+                        filePart.write(uploadPath + java.io.File.separator + fileName);
+                        imagePath = "uploads/" + fileName;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            newEvent.setImage(imagePath);
+            
             newEvent.setClubId(Integer.parseInt(request.getParameter("clubId")));
             eventDAO.insertEvent(newEvent);
             response.sendRedirect("events?action=manage");
@@ -129,6 +158,28 @@ public class EventController extends HttpServlet {
                 event.setCategory(request.getParameter("kategori"));
                 String[] sdgArr = request.getParameterValues("sdgGoals");
                 event.setSdgGoals(sdgArr != null ? String.join(", ", sdgArr) : "");
+                
+                String imagePath = event.getImage(); // Keep existing by default
+                try {
+                    Part filePart = request.getPart("image");
+                    if (filePart != null && filePart.getSize() > 0) {
+                        String fileName = filePart.getSubmittedFileName();
+                        if (fileName != null && !fileName.trim().isEmpty()) {
+                            fileName = System.currentTimeMillis() + "_" + fileName;
+                            String uploadPath = request.getServletContext().getRealPath("/uploads");
+                            java.io.File uploadDir = new java.io.File(uploadPath);
+                            if (!uploadDir.exists()) {
+                                uploadDir.mkdirs();
+                            }
+                            filePart.write(uploadPath + java.io.File.separator + fileName);
+                            imagePath = "uploads/" + fileName;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                event.setImage(imagePath);
+                
                 eventDAO.updateEvent(event);
             }
             response.sendRedirect("events?action=manage");

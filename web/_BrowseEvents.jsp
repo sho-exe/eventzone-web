@@ -27,6 +27,16 @@
 
                         <div class="col">
                             <div class="card h-100 event-card ">
+                                <% if (e.getImage() != null && !e.getImage().trim().isEmpty()) { 
+                                    String imgPath = e.getImage();
+                                    if (!imgPath.startsWith("http://") && !imgPath.startsWith("https://")) {
+                                        imgPath = request.getContextPath() + "/" + imgPath;
+                                    }
+                                %>
+                                    <div class="event-image-wrapper">
+                                        <img src="<%= imgPath %>" class="event-image" alt="<%= e.getEventName() %>" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60';">
+                                    </div>
+                                <% } %>
                                 <div class="card-body p-4">
                                     <div class="d-flex justify-content-between border-bottom pb-3 mb-3">
                                         <div>

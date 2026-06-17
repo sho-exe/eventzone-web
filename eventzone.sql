@@ -68,7 +68,8 @@ CREATE TABLE `events` (
   `category` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `club_id` int DEFAULT NULL,
   `status` varchar(50) COLLATE utf8mb4_general_ci DEFAULT 'PENDING',
-  `sdg_goals` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `sdg_goals` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -128,10 +129,10 @@ INSERT INTO `clubs` (`club_id`, `club_name`, `description`, `advisor_id`, `chair
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`event_id`, `event_name`, `description`, `date`, `venue`, `quota`, `criteria`, `category`, `club_id`, `status`, `sdg_goals`) VALUES
-(1, 'National Coding Hackathon', 'A 24-hour programming competition for students.', '2026-07-10', 'Main Hall B', 100, 'All IT Students', 'leadership', 1, 'APPROVED', 'SDG 4,SDG 8,SDG 9'),
-(2, 'RoboTech Exhibition', 'Showcase of student-designed robotic creations.', '2026-08-15', 'Exhibition Center', 150, 'Open to Public', 'entrepreneurship', 2, 'APPROVED', 'SDG 9,SDG 11'),
-(3, 'Acoustic Night', 'Live musical performances by student bands.', '2026-09-05', 'Auditorium 1', 200, 'General Admission', 'culture', 3, 'APPROVED', 'SDG 3,SDG 17');
+INSERT INTO `events` (`event_id`, `event_name`, `description`, `date`, `venue`, `quota`, `criteria`, `category`, `club_id`, `status`, `sdg_goals`, `image`) VALUES
+(1, 'National Coding Hackathon', 'A 24-hour programming competition for students.', '2026-07-10', 'Main Hall B', 100, 'All IT Students', 'leadership', 1, 'APPROVED', 'SDG 4,SDG 8,SDG 9', NULL),
+(2, 'RoboTech Exhibition', 'Showcase of student-designed robotic creations.', '2026-08-15', 'Exhibition Center', 150, 'Open to Public', 'entrepreneurship', 2, 'APPROVED', 'SDG 9,SDG 11', NULL),
+(3, 'Acoustic Night', 'Live musical performances by student bands.', '2026-09-05', 'Auditorium 1', 200, 'General Admission', 'culture', 3, 'APPROVED', 'SDG 3,SDG 17', NULL);
 
 --
 -- Dumping data for table `attendances`

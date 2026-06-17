@@ -78,6 +78,16 @@
                                     %>
                                     <div class="col-lg-4 col-md-6">
                                         <div class="card club-card position-relative">
+                                            <% if (e.getImage() != null && !e.getImage().trim().isEmpty()) { 
+                                                String imgPath = e.getImage();
+                                                if (!imgPath.startsWith("http://") && !imgPath.startsWith("https://")) {
+                                                    imgPath = request.getContextPath() + "/" + imgPath;
+                                                }
+                                            %>
+                                                <div class="event-image-wrapper">
+                                                    <img src="<%= imgPath %>" class="event-image" alt="<%= e.getEventName() %>" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60';">
+                                                </div>
+                                            <% } %>
                                             <div class="card-inner">
                                                 <div class="d-flex justify-content-between align-items-center mb-1">
                                                     <span class="club-id-badge badge-index mb-0">
@@ -185,6 +195,7 @@
                                                             data-quota="<%= e.getQuota() %>"
                                                             data-cat="<%= e.getCategory() %>"
                                                             data-sdg="<%= e.getSdgGoals() != null ? e.getSdgGoals() : "" %>"
+                                                            data-image="<%= e.getImage() != null ? e.getImage().replace("\"", "&quot;") : "" %>"
                                                             style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px;">
                                                             <i class="bx bx-edit-alt me-1"></i> Edit
                                                         </button>
@@ -228,7 +239,7 @@
                                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="events" method="POST">
+                                    <form action="events" method="POST" enctype="multipart/form-data">
                                         <div class="modal-body p-4 bg-light">
                                             <input type="hidden" name="action" value="proposeEvent">
                                             <input type="hidden" name="clubId" value="<%= myClub.getClubId() %>">
@@ -271,6 +282,11 @@
                                                     <input type="number" name="quota"
                                                         class="form-control border-primary" placeholder="0" required
                                                         min="1">
+                                                </div>
+
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label fw-bold">Event Image</label>
+                                                    <input type="file" name="image" class="form-control border-primary" accept="image/*">
                                                 </div>
 
                                                 <!-- <div class="col-md-12 mb-3">
@@ -497,7 +513,7 @@
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <form action="events" method="POST">
+                        <form action="events" method="POST" enctype="multipart/form-data">
                             <div class="modal-body p-4 bg-light">
                                 <input type="hidden" name="action" value="editEvent">
                                 <input type="hidden" name="eventId" id="editEventId">
@@ -540,6 +556,15 @@
                                             Limit</label>
                                         <input type="number" name="quota" id="editQuota"
                                             class="form-control border-primary" placeholder="0" required min="1">
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label fw-bold">Event Image <span class="text-muted fw-normal">(Leave blank to keep existing image)</span></label>
+                                        <input type="file" name="image" id="editImage" class="form-control border-primary" accept="image/*">
+                                        <div id="editImagePreviewContainer" class="mt-2 d-none">
+                                            <small class="text-muted d-block mb-1">Current Image Preview:</small>
+                                            <img id="editImagePreview" src="" alt="Current Event Image" style="height: 100px; border-radius: 8px; object-fit: cover;">
+                                        </div>
                                     </div>
 
                                     <div class="col-md-12 mb-3">
@@ -758,6 +783,24 @@
                                 document.getElementById('editVenue').value = btn.getAttribute('data-venue');
                                 document.getElementById('editQuota').value = btn.getAttribute('data-quota');
                                 document.getElementById('editKategori').value = btn.getAttribute('data-cat');
+                                 // Reset the file input value
+                                 document.getElementById('editImage').value = '';
+                                 
+                                 // Handle preview container
+                                 var imgVal = btn.getAttribute('data-image');
+                                 var previewContainer = document.getElementById('editImagePreviewContainer');
+                                 var previewImg = document.getElementById('editImagePreview');
+                                 if (imgVal && imgVal.trim() !== "") {
+                                     var finalPath = imgVal;
+                                     if (!finalPath.startsWith("http://") && !finalPath.startsWith("https://")) {
+                                         finalPath = window.location.pathname.substring(0, window.location.pathname.indexOf('/', 1)) + "/" + finalPath;
+                                     }
+                                     previewImg.src = finalPath;
+                                     previewContainer.classList.remove('d-none');
+                                 } else {
+                                     previewImg.src = "";
+                                     previewContainer.classList.add('d-none');
+                                 }
 
                                 // Reset checkboxes first
                                 var checkboxes = document.querySelectorAll('#editEventModal input[name="sdgGoals"]');
