@@ -205,7 +205,7 @@
                                                                                                                         class="badge bg-warning text-dark"><i
                                                                                                                             class="fas fa-hourglass-start me-1"></i>
                                                                                                                         PENDING
-                                                                                                                        MASS-PAYOUT</span>
+                                                                                                                    </span>
                                                                                                                     <% }
                                                                                                                         %>
                                                                                                         </td>

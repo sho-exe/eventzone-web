@@ -88,7 +88,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row mt-4 card">
+                                                <div class="row mt-4">
                                                     <% List<Event> eventList = (List<Event>)
                                                             request.getAttribute("adminEventList");
                                                             if (eventList != null

@@ -332,7 +332,7 @@
                                                                                         after every 3rd card */ if
                                                                                         (clubIndex % 3==0) { %>
                                                                                         <div class="col-12"
-                                                                                            style="margin-bottom: 200px;">
+                                                                                            style="margin-bottom: 260px;">
                                                                                         </div>
                                                                                         <% } } } else { %>
                                                                                             <div class="col-12">

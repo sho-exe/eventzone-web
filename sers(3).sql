@@ -105,7 +105,60 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `full_name`, `role`) VALUES
-(1, 'ahmad', 'ahmad123', 'admin@hepa.edu', 'Ahmad', 'HEPA');
+(1, 'ahmad', 'ahmad123', 'admin@hepa.edu', 'Ahmad', 'HEPA'),
+(2, 'ali', 'ali123', 'ali@advisor.edu', 'Ali Bin Abu', 'ADVISOR'),
+(3, 'charlie', 'charlie123', 'charlie@advisor.edu', 'Charlie Brown', 'ADVISOR'),
+(4, 'abu', 'abu123', 'abu@chairperson.edu', 'Abu Bin Ali', 'CHAIRPERSON'),
+(5, 'siti', 'siti123', 'siti@student.edu', 'Siti Aminah', 'STUDENT'),
+(6, 'tan', 'tan123', 'tan@student.edu', 'Tan Ah Kow', 'STUDENT'),
+(7, 'mutu', 'mutu123', 'mutu@student.edu', 'Mutu Samy', 'STUDENT'),
+(8, 'lim', 'lim123', 'lim@chairperson.edu', 'Lim Xiao Ming', 'CHAIRPERSON');
+
+--
+-- Dumping data for table `clubs`
+--
+
+INSERT INTO `clubs` (`club_id`, `club_name`, `description`, `advisor_id`, `chairperson_id`) VALUES
+(1, 'Computer Science Club', 'All things computing, programming, and software engineering.', 2, 4),
+(2, 'Robotics Club', 'Designing and programming automated robotic systems.', 2, 8),
+(3, 'Music Club', 'Cultivating musical talent and organizing stage performances.', 3, 4),
+(4, 'Sports Club', 'Promoting active lifestyles through competitive and leisure sports.', 3, 8),
+(5, 'Debate Society', 'Mastering arguments, critical thinking, and public speaking.', 2, 8);
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`event_id`, `event_name`, `description`, `date`, `venue`, `quota`, `criteria`, `category`, `club_id`, `status`, `sdg_goals`) VALUES
+(1, 'National Coding Hackathon', 'A 24-hour programming competition for students.', '2026-07-10', 'Main Hall B', 100, 'All IT Students', 'leadership', 1, 'APPROVED', 'SDG 4,SDG 8,SDG 9'),
+(2, 'RoboTech Exhibition', 'Showcase of student-designed robotic creations.', '2026-08-15', 'Exhibition Center', 150, 'Open to Public', 'entrepreneurship', 2, 'APPROVED', 'SDG 9,SDG 11'),
+(3, 'Acoustic Night', 'Live musical performances by student bands.', '2026-09-05', 'Auditorium 1', 200, 'General Admission', 'culture', 3, 'APPROVED', 'SDG 3,SDG 17'),
+(4, 'Inter-College Futsal Tournament', 'Annual futsal tournament among departments.', '2026-10-12', 'Sports Complex', 80, 'Registered Teams Only', 'sports', 4, 'APPROVED', 'SDG 3'),
+(5, 'Climate Action Debate', 'Public debate regarding national green policies.', '2026-11-20', 'Seminar Room 3', 50, 'Free Entry', 'leadership', 5, 'PENDING', 'SDG 13,SDG 16');
+
+--
+-- Dumping data for table `attendances`
+--
+
+INSERT INTO `attendances` (`attendance_id`, `event_id`, `user_id`, `registration_date`, `status`, `verified_by`, `position`) VALUES
+(1, 1, 5, '2026-06-16 10:00:00', 'ATTENDED', 1, 'Ahli Kelab'),
+(2, 1, 6, '2026-06-16 10:05:00', 'ATTENDED', 1, 'Ahli Kelab'),
+(3, 2, 6, '2026-06-16 10:10:00', 'ATTENDED', 1, 'Ahli Kelab'),
+(4, 2, 7, '2026-06-16 10:15:00', 'ATTENDED', 1, 'Ahli Kelab'),
+(5, 3, 5, '2026-06-16 10:20:00', 'ATTENDED', 1, 'Ahli Kelab'),
+(6, 4, 7, '2026-06-16 10:25:00', 'REGISTERED', NULL, 'Ahli Kelab'),
+(7, 4, 5, '2026-06-16 10:30:00', 'ABSENT', 1, 'Ahli Kelab');
+
+--
+-- Dumping data for table `merits`
+--
+
+INSERT INTO `merits` (`merit_id`, `user_id`, `event_id`, `points`, `awarded_date`) VALUES
+(1, 5, 1, 10, '2026-06-17 09:00:00'),
+(2, 6, 1, 10, '2026-06-17 09:00:00'),
+(3, 6, 2, 8, '2026-06-17 09:05:00'),
+(4, 7, 2, 8, '2026-06-17 09:05:00'),
+(5, 5, 3, 5, '2026-06-17 09:10:00');
 
 --
 -- Indexes for dumped tables
