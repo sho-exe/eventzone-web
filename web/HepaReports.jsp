@@ -40,12 +40,7 @@
     /* Metric Card Enhancements */
     .metric-card {
         border-radius: 12px;
-        transition: all 0.3s ease;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    }
-    .metric-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     }
     .icon-box-soft {
         width: 48px;
@@ -92,7 +87,6 @@
         padding: 10px 18px !important;
         color: #697a8d !important;
         background: transparent !important;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex;
         align-items: center;
         gap: 8px;
@@ -108,11 +102,7 @@
         background: linear-gradient(135deg, var(--role-accent), var(--role-accent-hex)) !important;
         box-shadow: 0 4px 12px var(--role-accent-light) !important;
     }
-    
-    /* Table hover */
-    .table-hover tbody tr {
-        transition: background-color 0.2s ease;
-    }
+
 
     /* Print Custom Styles */
     @media print {
@@ -320,7 +310,7 @@
                                 <div class="card-body tab-content" id="reportTabsContent">
                                     
                                     <!-- OVERVIEW REPORT TAB -->
-                                    <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                                    <div class="tab-pane show active" id="overview" role="tabpanel">
                                         <h5 class="fw-bold mb-3 text-dark d-flex align-items-center">
                                             <i class="bx bx-bar-chart-square text-danger me-2"></i> System Activity Summary
                                         </h5>
@@ -349,7 +339,7 @@
                                     </div>
 
                                     <!-- USERS MODULE TAB -->
-                                    <div class="tab-pane fade" id="users" role="tabpanel">
+                                    <div class="tab-pane" id="users" role="tabpanel">
                                         <h5 class="fw-bold mb-4 text-dark"><i class="bx bx-user text-primary me-2"></i> Users Module Analytics</h5>
                                         <div class="row">
                                             <div class="col-lg-6 mb-4">
@@ -409,7 +399,7 @@
                                     </div>
 
                                     <!-- CLUBS MODULE TAB -->
-                                    <div class="tab-pane fade" id="clubs" role="tabpanel">
+                                    <div class="tab-pane" id="clubs" role="tabpanel">
                                         <h5 class="fw-bold mb-3 text-dark"><i class="bx bx-flag text-success me-2"></i> Clubs Module Analytics</h5>
                                         <div class="card border shadow-none">
                                             <div class="card-header bg-transparent py-3 border-bottom d-flex justify-content-between align-items-center">
@@ -458,7 +448,7 @@
                                     </div>
 
                                     <!-- EVENTS MODULE TAB -->
-                                    <div class="tab-pane fade" id="events" role="tabpanel">
+                                    <div class="tab-pane" id="events" role="tabpanel">
                                         <h5 class="fw-bold mb-4 text-dark"><i class="bx bx-calendar text-warning me-2"></i> Events Module Analytics</h5>
                                         <div class="row">
                                             <!-- Chart 1: Status -->
@@ -551,7 +541,7 @@
                                     </div>
 
                                     <!-- ATTENDANCE MODULE TAB -->
-                                    <div class="tab-pane fade" id="attendance" role="tabpanel">
+                                    <div class="tab-pane" id="attendance" role="tabpanel">
                                         <h5 class="fw-bold mb-4 text-dark"><i class="bx bx-checkbox-checked text-info me-2"></i> Attendance Module Analytics</h5>
                                         <div class="row">
                                             <div class="col-lg-6 mb-4">
@@ -605,7 +595,7 @@
                                     </div>
 
                                     <!-- MERITS MODULE TAB -->
-                                    <div class="tab-pane fade" id="merits" role="tabpanel">
+                                    <div class="tab-pane" id="merits" role="tabpanel">
                                         <h5 class="fw-bold mb-4 text-dark"><i class="bx bx-award text-danger me-2"></i> Merits Module Analytics</h5>
                                         <div class="row g-4 mb-4">
                                             <div class="col-md-6 col-lg-4">
