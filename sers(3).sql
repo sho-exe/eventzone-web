@@ -112,7 +112,10 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `full_name`, `r
 (5, 'siti', 'siti123', 'siti@student.edu', 'Siti Aminah', 'STUDENT'),
 (6, 'tan', 'tan123', 'tan@student.edu', 'Tan Ah Kow', 'STUDENT'),
 (7, 'mutu', 'mutu123', 'mutu@student.edu', 'Mutu Samy', 'STUDENT'),
-(8, 'lim', 'lim123', 'lim@chairperson.edu', 'Lim Xiao Ming', 'CHAIRPERSON');
+(8, 'lim', 'lim123', 'lim@chairperson.edu', 'Lim Xiao Ming', 'CHAIRPERSON'),
+(9, 'david', 'david123', 'david@chairperson.edu', 'David Smith', 'CHAIRPERSON'),
+(10, 'emma', 'emma123', 'emma@chairperson.edu', 'Emma Watson', 'CHAIRPERSON'),
+(11, 'frank', 'frank123', 'frank@chairperson.edu', 'Frank Castle', 'CHAIRPERSON');
 
 --
 -- Dumping data for table `clubs`
@@ -121,9 +124,9 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `full_name`, `r
 INSERT INTO `clubs` (`club_id`, `club_name`, `description`, `advisor_id`, `chairperson_id`) VALUES
 (1, 'Computer Science Club', 'All things computing, programming, and software engineering.', 2, 4),
 (2, 'Robotics Club', 'Designing and programming automated robotic systems.', 2, 8),
-(3, 'Music Club', 'Cultivating musical talent and organizing stage performances.', 3, 4),
-(4, 'Sports Club', 'Promoting active lifestyles through competitive and leisure sports.', 3, 8),
-(5, 'Debate Society', 'Mastering arguments, critical thinking, and public speaking.', 2, 8);
+(3, 'Music Club', 'Cultivating musical talent and organizing stage performances.', 3, 9),
+(4, 'Sports Club', 'Promoting active lifestyles through competitive and leisure sports.', 3, 10),
+(5, 'Debate Society', 'Mastering arguments, critical thinking, and public speaking.', 2, 11);
 
 --
 -- Dumping data for table `events`
@@ -141,13 +144,13 @@ INSERT INTO `events` (`event_id`, `event_name`, `description`, `date`, `venue`, 
 --
 
 INSERT INTO `attendances` (`attendance_id`, `event_id`, `user_id`, `registration_date`, `status`, `verified_by`, `position`) VALUES
-(1, 1, 5, '2026-06-16 10:00:00', 'ATTENDED', 1, 'Ahli Kelab'),
+(1, 1, 5, '2026-06-16 10:00:00', 'ATTENDED', 1, 'AJK Kelab'),
 (2, 1, 6, '2026-06-16 10:05:00', 'ATTENDED', 1, 'Ahli Kelab'),
-(3, 2, 6, '2026-06-16 10:10:00', 'ATTENDED', 1, 'Ahli Kelab'),
-(4, 2, 7, '2026-06-16 10:15:00', 'ATTENDED', 1, 'Ahli Kelab'),
-(5, 3, 5, '2026-06-16 10:20:00', 'ATTENDED', 1, 'Ahli Kelab'),
+(3, 2, 6, '2026-06-16 10:10:00', 'ATTENDED', 1, 'Presiden Kelab'),
+(4, 2, 7, '2026-06-16 10:15:00', 'ATTENDED', 1, 'Setiausaha Kelab'),
+(5, 3, 5, '2026-06-16 10:20:00', 'ATTENDED', 1, 'MT Kelab'),
 (6, 4, 7, '2026-06-16 10:25:00', 'REGISTERED', NULL, 'Ahli Kelab'),
-(7, 4, 5, '2026-06-16 10:30:00', 'ABSENT', 1, 'Ahli Kelab');
+(7, 4, 5, '2026-06-16 10:30:00', 'ABSENT', 1, 'AJK Kelab');
 
 --
 -- Dumping data for table `merits`

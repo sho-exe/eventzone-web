@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="com.lab.dao.UserDAO,com.lab.model.User,java.util.List" %>
 <!DOCTYPE html>
 <html lang="en" class="light-style customizer-hide">
 
@@ -97,6 +97,36 @@
     .quick-login-btn:active, .quick-login-btn.active {
       transform: scale(0.95);
     }
+    
+    .quick-login-container::-webkit-scrollbar {
+      width: 5px;
+    }
+    .quick-login-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .quick-login-container::-webkit-scrollbar-thumb {
+      background: rgba(105, 108, 255, 0.15);
+      border-radius: 10px;
+    }
+    .quick-login-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(105, 108, 255, 0.35);
+    }
+    .quick-login-card {
+      transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border: 1px solid rgba(105, 108, 255, 0.1) !important;
+      border-radius: 12px !important;
+      background: rgba(105, 108, 255, 0.02) !important;
+      cursor: pointer;
+    }
+    .quick-login-card:hover {
+      transform: translateY(-2px);
+      border-color: #696cff !important;
+      background: #ffffff !important;
+      box-shadow: 0 5px 15px rgba(105, 108, 255, 0.1) !important;
+    }
+    .quick-login-card:active {
+      transform: scale(0.96);
+    }
   </style>
 </head>
 
@@ -138,52 +168,82 @@
               </div>
             </form>
 
-<!--            <div class="mt-4 pt-3 border-top">
-              <p class="text-center text-muted small fw-bold mb-3 text-uppercase" style="letter-spacing: 0.05em;">Quick Login (Demo Accounts)</p>
-              <div class="row g-2">
-                <div class="col-6">
-                  <button type="button" class="btn btn-outline-danger btn-sm w-100 d-flex flex-column align-items-center py-2 quick-login-btn" data-username="ahmad" data-password="ahmad123">
-                    <span class="badge bg-label-danger mb-1 fw-bold">HEPA</span>
-                    <span class="small text-muted font-monospace">ahmad</span>
-                  </button>
-                </div>
-                <div class="col-6">
-                  <button type="button" class="btn btn-outline-success btn-sm w-100 d-flex flex-column align-items-center py-2 quick-login-btn" data-username="sarah" data-password="sarah123">
-                    <span class="badge bg-label-success mb-1 fw-bold">Advisor</span>
-                    <span class="small text-muted font-monospace">sarah</span>
-                  </button>
-                </div>
-                <div class="col-6">
-                  <button type="button" class="btn btn-outline-warning btn-sm w-100 d-flex flex-column align-items-center py-2 quick-login-btn" data-username="sho" data-password="sho123">
-                    <span class="badge bg-label-warning mb-1 fw-bold">Chairperson</span>
-                    <span class="small text-muted font-monospace">sho</span>
-                  </button>
-                </div>
-                <div class="col-6">
-                  <button type="button" class="btn btn-outline-primary btn-sm w-100 d-flex flex-column align-items-center py-2 quick-login-btn" data-username="ali" data-password="ali123">
-                    <span class="badge bg-label-primary mb-1 fw-bold">Student</span>
-                    <span class="small text-muted font-monospace">ali</span>
-                  </button>
+            <%
+              UserDAO userDAO = new UserDAO();
+              List<User> allUsers = userDAO.selectAllUsers();
+            %>
+            <div class="mt-4 pt-3 border-top">
+              <p class="text-center text-muted small fw-bold mb-3 text-uppercase" style="letter-spacing: 0.05em; font-size: 0.75rem;">
+                <i class="bx bx-bolt-circle me-1 text-primary"></i> Quick Login (Click to Sign In)
+              </p>
+              <div class="quick-login-container" style="max-height: 250px; overflow-y: auto; padding-right: 5px;">
+                <div class="row g-2">
+                  <% 
+                    if (allUsers != null && !allUsers.isEmpty()) {
+                      for (User u : allUsers) {
+                        String roleClass = "primary";
+                        if ("HEPA".equalsIgnoreCase(u.getRole())) {
+                          roleClass = "danger";
+                        } else if ("ADVISOR".equalsIgnoreCase(u.getRole())) {
+                          roleClass = "success";
+                        } else if ("CHAIRPERSON".equalsIgnoreCase(u.getRole())) {
+                          roleClass = "warning";
+                        }
+                  %>
+                    <div class="col-6">
+                      <div class="card quick-login-card p-3 text-center h-100 d-flex flex-column align-items-center justify-content-between"
+                           data-username="<%= u.getUsername() %>" 
+                           data-password="<%= u.getPassword() %>">
+                        <span class="badge bg-label-<%= roleClass %> mb-2 fw-bold text-uppercase" style="font-size: 0.65rem; padding: 4px 8px;">
+                          <%= u.getRole() %>
+                        </span>
+                        <div class="fw-semibold text-dark text-truncate w-100 mb-1" style="font-size: 0.85rem;" title="<%= u.getFullName() %>">
+                          <%= u.getFullName() %>
+                        </div>
+                        <span class="small text-muted font-monospace" style="font-size: 0.72rem;">
+                          @<%= u.getUsername() %>
+                        </span>
+                      </div>
+                    </div>
+                  <% 
+                      }
+                    } else {
+                  %>
+                    <div class="col-12 text-center text-muted small py-3">
+                      No users found in database.
+                    </div>
+                  <% } %>
                 </div>
               </div>
-            </div>-->
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Javascript to Auto-Fill Credentials -->
+  <!-- Javascript to Auto-Fill Credentials and Auto-Submit -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('.quick-login-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.getElementById('username').value = this.getAttribute('data-username');
-          document.getElementById('password').value = this.getAttribute('data-password');
+      document.querySelectorAll('.quick-login-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const usernameInput = document.getElementById('username');
+          const passwordInput = document.getElementById('password');
+          const form = document.getElementById('formAuthentication');
+
+          usernameInput.value = this.getAttribute('data-username');
+          passwordInput.value = this.getAttribute('data-password');
+
+          // Visual cue for auto-fill
+          usernameInput.style.backgroundColor = '#e8f0fe';
+          passwordInput.style.backgroundColor = '#e8f0fe';
+
+          // Animate the card click
+          this.style.transform = 'scale(0.95)';
           
-          // Add instant press effect
-          this.classList.add('active');
-          setTimeout(() => this.classList.remove('active'), 150);
+          setTimeout(() => {
+            form.submit();
+          }, 250);
         });
       });
     });

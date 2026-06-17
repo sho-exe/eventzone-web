@@ -71,6 +71,7 @@ public class UserDAO {
                 User user = new User();
                 user.setUserId(rs.getInt("user_id"));
                 user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
                 user.setEmail(rs.getString("email"));
                 user.setFullName(rs.getString("full_name"));
                 user.setRole(rs.getString("role"));
