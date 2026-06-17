@@ -62,23 +62,51 @@
     .bg-danger-soft  { background-color: rgba(234, 84, 85, 0.12); color: #ea5455; }
     .bg-info-soft    { background-color: rgba(0, 207, 221, 0.12); color: #00cfdd; }
 
-    /* Tabs Styling */
-    .nav-tabs .nav-link {
-        border: none;
-        border-bottom: 2px solid transparent;
-        color: #566a7f;
+    /* Modern Premium Tabs Styling for Reports */
+    .report-tabs-wrapper {
+        background: #ffffff !important;
+        padding: 8px;
+        border-radius: 12px;
+        border: 1px solid #d9dee3;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) !important;
+    }
+    
+    .report-nav-tabs {
+        border-bottom: none !important;
+        gap: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 !important;
+        margin: 0 !important;
+        list-style: none;
+    }
+    
+    .report-nav-tabs .nav-item {
+        margin-bottom: 0;
+    }
+    
+    .report-nav-tabs .nav-link {
+        border: none !important;
+        border-radius: 8px !important;
         font-weight: 600;
-        padding: 1rem 1.25rem;
-        transition: all 0.2s ease;
+        padding: 10px 18px !important;
+        color: #697a8d !important;
+        background: transparent !important;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
-    .nav-tabs .nav-link:hover {
-        color: var(--role-accent);
-        border-bottom-color: rgba(234, 84, 85, 0.2);
+    
+    .report-nav-tabs .nav-link:hover {
+        color: var(--role-accent) !important;
+        background-color: var(--role-accent-light) !important;
     }
-    .nav-tabs .nav-link.active {
-        color: var(--role-accent);
-        border-bottom-color: var(--role-accent);
-        background-color: transparent;
+    
+    .report-nav-tabs .nav-link.active {
+        color: #ffffff !important;
+        background: linear-gradient(135deg, var(--role-accent), var(--role-accent-hex)) !important;
+        box-shadow: 0 4px 12px var(--role-accent-light) !important;
     }
     
     /* Table hover */
@@ -93,6 +121,8 @@
         .content-footer, 
         .btn, 
         .nav-tabs, 
+        .report-tabs-wrapper,
+        .report-nav-tabs,
         .layout-overlay,
         .page-tips-container {
             display: none !important;
@@ -188,8 +218,8 @@
                                     <i class="bx bx-bar-chart-square text-danger me-2" style="font-size: 2rem;"></i>
                                     Generate Reports
                                 </h4>
-                                <button class="btn btn-danger d-flex align-items-center" onclick="window.print()" style="font-weight: 600;">
-                                    <i class="bx bx-printer me-1" style="font-size: 1.2rem;"></i>
+                                <button class="btn btn-primary d-flex align-items-center" onclick="window.print()" style="font-weight: 600;">
+                                    <i class="bx bx-printer me-1" style="font-weight: 800; font-size: 1.2rem;"></i>
                                     Print / Export PDF
                                 </button>
                             </div>
@@ -251,41 +281,42 @@
                             </div>
 
                             <!-- Report Modules Tabbed Structure -->
-                            <div class="card shadow-sm border-0 mb-4">
-                                <div class="card-header p-0 border-bottom">
-                                    <ul class="nav nav-tabs card-header-tabs m-0" id="reportTabs" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
-                                                Overview Report
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">
-                                                Users Module
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="clubs-tab" data-bs-toggle="tab" data-bs-target="#clubs" type="button" role="tab">
-                                                Clubs Module
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button" role="tab">
-                                                Events Module
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button" role="tab">
-                                                Attendance Module
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="merits-tab" data-bs-toggle="tab" data-bs-target="#merits" type="button" role="tab">
-                                                Merits Module
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="report-tabs-wrapper mb-4">
+                                <ul class="nav nav-tabs report-nav-tabs border-bottom-0 m-0" id="reportTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
+                                            <i class="bx bx-grid-alt fs-5"></i> Overview Report
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">
+                                            <i class="bx bx-user fs-5"></i> Users Module
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="clubs-tab" data-bs-toggle="tab" data-bs-target="#clubs" type="button" role="tab">
+                                            <i class="bx bx-flag fs-5"></i> Clubs Module
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button" role="tab">
+                                            <i class="bx bx-calendar fs-5"></i> Events Module
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button" role="tab">
+                                            <i class="bx bx-checkbox-checked fs-5"></i> Attendance Module
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="merits-tab" data-bs-toggle="tab" data-bs-target="#merits" type="button" role="tab">
+                                            <i class="bx bx-award fs-5"></i> Merits Module
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="card shadow-sm border-0 mt-4">
                                 <div class="card-body tab-content" id="reportTabsContent">
                                     
                                     <!-- OVERVIEW REPORT TAB -->
@@ -656,6 +687,8 @@
                         </div>
                         <!-- / Content -->
 
+                        <jsp:include page="footer.jsp" />
+
                         <div class="content-backdrop fade"></div>
                     </div>
                     <!-- Content wrapper -->
@@ -667,8 +700,6 @@
             <div class="layout-overlay layout-menu-toggle"></div>
         </div>
         <!-- / Layout wrapper -->
-
-        <jsp:include page="footer.jsp" />
 
         <!-- ApexCharts JS -->
         <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/apex-charts/apexcharts.js"></script>
