@@ -190,10 +190,16 @@
                                                                                         <input type="hidden"
                                                                                             name="attendanceId"
                                                                                             value="<%= a.getAttendanceId()%>">
-                                                                                        <select name="position"
-                                                                                            class="form-select form-select-sm fw-bold border-primary text-dark"
-                                                                                            style="min-width: 160px;"
-                                                                                            onchange="this.form.submit()">
+                                                                                         <select name="position"
+                                                                                             class="form-select form-select-sm fw-bold border-primary text-dark"
+                                                                                             style="min-width: 160px;"
+                                                                                             onchange="this.form.submit()">
+                                                                                            <option value="Peserta biasa"
+                                                                                                <%="Peserta biasa"
+                                                                                                .equals(a.getPosition())
+                                                                                                ? "selected" : "" %>
+                                                                                                >Peserta biasa (10)
+                                                                                            </option>
                                                                                             <option value="Ahli Kelab"
                                                                                                 <%="Ahli Kelab"
                                                                                                 .equals(a.getPosition())

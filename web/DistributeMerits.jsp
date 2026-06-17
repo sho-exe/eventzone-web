@@ -113,11 +113,7 @@
                                                                                                     systematically drop
                                                                                                     merit points to its
                                                                                                     verified
-                                                                                                    attendees. Doing
-                                                                                                    this locks
-                                                                                                    the specific event
-                                                                                                    transcript
-                                                                                                    permanently.
+                                                                                                    attendees.
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -210,6 +206,19 @@
                                                                                         </div>
                                                                                         <div class="col-md-2 col-sm-4">
                                                                                             <div
+                                                                                                class="p-3 bg-white text-center rounded-3 border border-light shadow-xs h-100">
+                                                                                                <span
+                                                                                                    class="badge bg-label-primary mb-2">Peserta
+                                                                                                    Biasa</span>
+                                                                                                <h4
+                                                                                                    class="fw-bold mb-0 text-dark">
+                                                                                                    10</h4>
+                                                                                                <small
+                                                                                                    class="text-muted">Merits</small>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!-- <div class="col-md-2 col-sm-4">
+                                                                                            <div
                                                                                                 class="p-3 bg-white text-center rounded-3 border border-light shadow-xs h-100 d-flex flex-column align-items-center justify-content-center">
                                                                                                 <span
                                                                                                     class="badge bg-label-secondary mb-2">Status
@@ -222,7 +231,7 @@
                                                                                                     status receives
                                                                                                     merits.</small>
                                                                                             </div>
-                                                                                        </div>
+                                                                                        </div> -->
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -317,15 +326,25 @@
                                                                                                                     </span>
                                                                                                                 </td>
                                                                                                                 <td>
-                                                                                                                    <span
-                                                                                                                        class="badge bg-info-soft text-info"><i
-                                                                                                                            class="fas fa-bullseye me-1"></i>
-                                                                                                                        <%=
-                                                                                                                            e.getCriteria()%>
-                                                                                                                            |
-                                                                                                                            <%=
-                                                                                                                                e.getCategory()%>
-                                                                                                                    </span>
+                                                                                                                    <div
+                                                                                                                        class="d-flex flex-column gap-1">
+                                                                                                                        <span
+                                                                                                                            class="badge bg-label-secondary w-fit"
+                                                                                                                            style="width: fit-content;">
+                                                                                                                            <i
+                                                                                                                                class="fas fa-tag me-1"></i>
+                                                                                                                            <%= e.getCategory()
+                                                                                                                                %>
+                                                                                                                        </span>
+                                                                                                                        <span
+                                                                                                                            class="badge bg-label-primary font-monospace w-fit"
+                                                                                                                            style="width: fit-content; font-size: 0.72rem;">
+                                                                                                                            <i
+                                                                                                                                class="fas fa-globe me-1"></i>
+                                                                                                                            <%= e.getSdgGoals()
+                                                                                                                                %>
+                                                                                                                        </span>
+                                                                                                                    </div>
                                                                                                                 </td>
                                                                                                                 <td>
                                                                                                                     <% if
@@ -455,10 +474,11 @@
                                                                                                     <span
                                                                                                         class="badge bg-label-info"
                                                                                                         style="font-size: 0.8rem;">Category:
-                                                                                                        <%=
-                                                                                                            e.getCriteria()%>
+                                                                                                        <%= e.getCategory()
+                                                                                                            %>
                                                                                                             | <%=
-                                                                                                                e.getCategory()%>
+                                                                                                                e.getSdgGoals()
+                                                                                                                %>
                                                                                                     </span>
                                                                                                 </div>
                                                                                                 <h6
@@ -542,6 +562,11 @@
                                                                                                                 {
                                                                                                                 expectedPoints
                                                                                                                 = 40; }
+                                                                                                                else if
+                                                                                                                ("Peserta biasa".equals(pos))
+                                                                                                                {
+                                                                                                                expectedPoints
+                                                                                                                = 10; }
                                                                                                                 else {
                                                                                                                 expectedPoints
                                                                                                                 = 20; }
@@ -598,7 +623,7 @@
                                                                                                                                 a.getStatus()%>
                                                                                                                         </span>
                                                                                                                     </td>
-                                                                                                                    <td class="text-end pe-3 fw-bold <%= isAttended ? "text-success"
+                                                                                                                    <td class="text-end pe-3 fw-bold <%= isAttended ? " text-success"
                                                                                                                         : "text-muted"
                                                                                                                         %>
                                                                                                                         ">

@@ -129,6 +129,7 @@ public class EventDAO {
                 e.setCriteria(rs.getString("criteria"));
                 e.setClubId(rs.getInt("club_id"));
                 e.setStatus(rs.getString("status"));
+                e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);

@@ -125,6 +125,8 @@ public class MeritDAO {
                             points = 50;
                         } else if ("AJK Kelab".equals(pos)) {
                             points = 40;
+                        } else if ("Peserta biasa".equals(pos)) {
+                            points = 10;
                         } else {
                             points = 20; // Ahli Kelab (20)
                         }
