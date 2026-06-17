@@ -139,7 +139,7 @@
                                                                 <h6 class="text-muted text-uppercase small fw-bold">
                                                                     Accumulated Merits</h6>
                                                             </div>
-                                                            <h3 class="card-title text-nowrap mb-1 text-primary">
+                                                            <h3 class="card-title text-nowrap mb-1 text-primary fw-bold fs-2">
                                                                 ${totalMerits != null ? totalMerits : '0'}</h3>
                                                             <small class="text-muted">Verified through events
                                                                 attended</small>
@@ -155,7 +155,7 @@
                                                                 <h6 class="text-muted text-uppercase small fw-bold">
                                                                     Upcoming Events</h6>
                                                             </div>
-                                                            <h3 class="card-title text-nowrap mb-1 text-success">
+                                                            <h3 class="card-title text-nowrap mb-1 text-success fw-bold fs-2">
                                                                 ${upcomingEventCount != null ? upcomingEventCount : '0'}
                                                             </h3>
                                                             <small class="text-muted">Confirmed registrations this
@@ -177,7 +177,7 @@
                                                                     <h6 class="text-muted text-uppercase small fw-bold">
                                                                         Events Pending Review</h6>
                                                                 </div>
-                                                                <h3 class="card-title text-nowrap mb-1 text-warning">
+                                                                <h3 class="card-title text-nowrap mb-1 text-warning fw-bold fs-2">
                                                                     ${pendingApprovalCount != null ?
                                                                     pendingApprovalCount : '0'}</h3>
                                                                 <small class="text-muted">New proposals from your Club
@@ -194,7 +194,7 @@
                                                                     <h6 class="text-muted text-uppercase small fw-bold">
                                                                         Club Participation</h6>
                                                                 </div>
-                                                                <h3 class="card-title text-nowrap mb-1 text-success">
+                                                                <h3 class="card-title text-nowrap mb-1 text-success fw-bold fs-2">
                                                                     ${clubParticipantCount != null ?
                                                                     clubParticipantCount : '0'}</h3>
                                                                 <small class="text-muted">Total students active in your
@@ -214,7 +214,7 @@
                                                                     <div class="card-title d-flex align-items-start justify-content-between">
                                                                         <h6 class="text-muted text-uppercase small fw-bold">Club Events Proposed</h6>
                                                                     </div>
-                                                                    <h3 class="card-title text-nowrap mb-1 text-primary">${chairpersonClubEvents != null ? chairpersonClubEvents : '0'}</h3>
+                                                                    <h3 class="card-title text-nowrap mb-1 text-primary fw-bold fs-2">${chairpersonClubEvents != null ? chairpersonClubEvents : '0'}</h3>
                                                                     <small class="text-muted">Total events created by your club</small>
                                                                 </div>
                                                             </div>
@@ -226,7 +226,7 @@
                                                                     <div class="card-title d-flex align-items-start justify-content-between">
                                                                         <h6 class="text-muted text-uppercase small fw-bold">Total Registrations</h6>
                                                                     </div>
-                                                                    <h3 class="card-title text-nowrap mb-1 text-success">${chairpersonTotalRegistrations != null ? chairpersonTotalRegistrations : '0'}</h3>
+                                                                    <h3 class="card-title text-nowrap mb-1 text-success fw-bold fs-2">${chairpersonTotalRegistrations != null ? chairpersonTotalRegistrations : '0'}</h3>
                                                                     <small class="text-muted">Total attendees across all your club's events</small>
                                                                 </div>
                                                             </div>
@@ -238,7 +238,7 @@
                                                                     <div class="card-title d-flex align-items-start justify-content-between">
                                                                         <h6 class="text-muted text-uppercase small fw-bold">Accumulated Merits</h6>
                                                                     </div>
-                                                                    <h3 class="card-title text-nowrap mb-1 text-info">${totalMerits != null ? totalMerits : '0'}</h3>
+                                                                    <h3 class="card-title text-nowrap mb-1 text-info fw-bold fs-2">${totalMerits != null ? totalMerits : '0'}</h3>
                                                                     <small class="text-muted">Verified through events attended</small>
                                                                 </div>
                                                             </div>
@@ -259,7 +259,7 @@
                                                                                 Total Registered Users</h6>
                                                                         </div>
                                                                         <h3
-                                                                            class="card-title text-nowrap mb-1 text-primary">
+                                                                            class="card-title text-nowrap mb-1 text-primary fw-bold fs-2">
                                                                             ${totalUserCount != null ? totalUserCount :
                                                                             '0'}</h3>
                                                                         <small class="text-muted">Total students and
@@ -278,7 +278,7 @@
                                                                                 Pending Merit Batches</h6>
                                                                         </div>
                                                                         <h3
-                                                                            class="card-title text-nowrap mb-1 text-danger">
+                                                                            class="card-title text-nowrap mb-1 text-danger fw-bold fs-2">
                                                                             ${pendingMeritBatches != null ?
                                                                             pendingMeritBatches : '0'}</h3>
                                                                         <small class="text-muted">Events with verified
@@ -297,7 +297,7 @@
                                                                                 Active Clubs</h6>
                                                                         </div>
                                                                         <h3
-                                                                            class="card-title text-nowrap mb-1 text-warning">
+                                                                            class="card-title text-nowrap mb-1 text-warning fw-bold fs-2">
                                                                             ${activeClubCount != null ? activeClubCount
                                                                             : '0'}</h3>
                                                                         <small class="text-muted">Active clubs

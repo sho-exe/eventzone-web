@@ -207,6 +207,12 @@
                                     </a>
                                 </li>
                                 <li class="menu-item">
+                                    <a href="reports?action=view" class="menu-link">
+                                        <i class="menu-icon tf-icons bx bx-bar-chart-square"></i>
+                                        <div data-i18n="Generate Reports">Generate Reports</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
                                     <a href="users?action=profile" class="menu-link">
                                         <i class="menu-icon tf-icons bx bx-user"></i>
                                         <div data-i18n="Update Profile">Update Profile</div>
