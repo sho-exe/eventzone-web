@@ -210,7 +210,8 @@ public class EventController extends HttpServlet {
                 if (event != null) {
                     Club club = clubDAO.selectClubById(event.getClubId());
                     if (club != null && club.getChairpersonId() != null && club.getChairpersonId() > 0) {
-                        regDAO.registerChairpersonAsParticipant(eventId, club.getChairpersonId());
+                        int approverId = (int) session.getAttribute("userId");
+                        regDAO.registerChairpersonAsParticipant(eventId, club.getChairpersonId(), approverId);
                     }
                 }
             }
