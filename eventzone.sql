@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 15, 2026 at 11:02 AM
+-- Generation Time: Jun 18, 2026 at 06:43 AM
 -- Server version: 9.6.0
 -- PHP Version: 8.5.7
 
@@ -32,10 +32,21 @@ CREATE TABLE `attendances` (
   `event_id` int NOT NULL,
   `user_id` int NOT NULL,
   `registration_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` varchar(50) COLLATE utf8mb4_general_ci DEFAULT 'REGISTERED',
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'REGISTERED',
   `verified_by` int DEFAULT NULL,
-  `position` varchar(100) COLLATE utf8mb4_general_ci DEFAULT 'Ahli Kelab'
+  `position` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'Ahli Kelab'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `attendances`
+--
+
+INSERT INTO `attendances` (`attendance_id`, `event_id`, `user_id`, `registration_date`, `status`, `verified_by`, `position`) VALUES
+(1, 1, 5, '2026-06-16 02:00:00', 'ATTENDED', 1, 'AJK Kelab'),
+(2, 1, 6, '2026-06-16 02:05:00', 'ATTENDED', 1, 'Ahli Kelab'),
+(3, 2, 6, '2026-06-16 02:10:00', 'ATTENDED', 1, 'Presiden Kelab'),
+(21, 20, 4, '2026-06-18 06:39:34', 'ATTENDED', 2, 'Presiden Kelab'),
+(22, 20, 7, '2026-06-18 06:40:04', 'ATTENDED', 4, 'Peserta biasa');
 
 -- --------------------------------------------------------
 
@@ -45,11 +56,20 @@ CREATE TABLE `attendances` (
 
 CREATE TABLE `clubs` (
   `club_id` int NOT NULL,
-  `club_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text COLLATE utf8mb4_general_ci,
+  `club_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `advisor_id` int DEFAULT NULL,
   `chairperson_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `clubs`
+--
+
+INSERT INTO `clubs` (`club_id`, `club_name`, `description`, `advisor_id`, `chairperson_id`) VALUES
+(1, 'Computer Science Club', 'All things computing, programming, and software engineering.', 2, 4),
+(2, 'Robotics Club', 'Designing and programming automated robotic systems.', 2, 8),
+(3, 'Music Club', 'Cultivating musical talent and organizing stage performances.', 3, 9);
 
 -- --------------------------------------------------------
 
@@ -59,18 +79,28 @@ CREATE TABLE `clubs` (
 
 CREATE TABLE `events` (
   `event_id` int NOT NULL,
-  `event_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text COLLATE utf8mb4_general_ci,
+  `event_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `date` date DEFAULT NULL,
-  `venue` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `venue` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `quota` int DEFAULT NULL,
-  `criteria` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `category` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `criteria` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `category` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `club_id` int DEFAULT NULL,
-  `status` varchar(50) COLLATE utf8mb4_general_ci DEFAULT 'PENDING',
-  `sdg_goals` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'PENDING',
+  `sdg_goals` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`event_id`, `event_name`, `description`, `date`, `venue`, `quota`, `criteria`, `category`, `club_id`, `status`, `sdg_goals`, `image`) VALUES
+(1, 'National Coding Hackathon', 'A 24-hour programming competition for students.', '2026-07-10', 'Main Hall B', 100, 'All IT Students', 'leadership', 1, 'APPROVED', 'SDG 4,SDG 8,SDG 9', 'uploads/1781715930744_PXL_20260612_021146136.jpg'),
+(2, 'RoboTech Exhibition', 'Showcase of student-designed robotic creations.', '2026-08-15', 'Exhibition Center', 150, 'Open to Public', 'entrepreneurship', 2, 'APPROVED', 'SDG 9,SDG 11', NULL),
+(3, 'Acoustic Night', 'Live musical performances by student bands.', '2026-09-05', 'Auditorium 1', 200, 'General Admission', 'culture', 3, 'APPROVED', 'SDG 3,SDG 17', NULL),
+(20, 'heheh', 'heheh', '2026-06-18', 'heheh', 10, NULL, 'leadership', 1, 'APPROVED', 'SDG 1', 'uploads/1781764761283_Screenshot 2026-06-13 at 10.45.58.png');
 
 -- --------------------------------------------------------
 
@@ -86,6 +116,17 @@ CREATE TABLE `merits` (
   `awarded_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `merits`
+--
+
+INSERT INTO `merits` (`merit_id`, `user_id`, `event_id`, `points`, `awarded_date`) VALUES
+(1, 5, 1, 10, '2026-06-17 01:00:00'),
+(2, 6, 1, 10, '2026-06-17 01:00:00'),
+(3, 6, 2, 8, '2026-06-17 01:05:00'),
+(15, 4, 20, 80, '2026-06-18 06:41:18'),
+(16, 7, 20, 10, '2026-06-18 06:41:18');
+
 -- --------------------------------------------------------
 
 --
@@ -94,11 +135,11 @@ CREATE TABLE `merits` (
 
 CREATE TABLE `users` (
   `user_id` int NOT NULL,
-  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `full_name` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `role` varchar(50) COLLATE utf8mb4_general_ci DEFAULT 'STUDENT'
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `full_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'STUDENT'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -115,42 +156,6 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `full_name`, `r
 (7, 'ismail', 'ismail123', 'ismail@student.edu', 'Ismail', 'STUDENT'),
 (8, 'khalid', 'khalid123', 'khalid@chairperson.edu', 'Khalid', 'CHAIRPERSON'),
 (9, 'aiman', 'aiman123', 'aiman@chairperson.edu', 'Aiman', 'CHAIRPERSON');
-
---
--- Dumping data for table `clubs`
---
-
-INSERT INTO `clubs` (`club_id`, `club_name`, `description`, `advisor_id`, `chairperson_id`) VALUES
-(1, 'Computer Science Club', 'All things computing, programming, and software engineering.', 2, 4),
-(2, 'Robotics Club', 'Designing and programming automated robotic systems.', 2, 8),
-(3, 'Music Club', 'Cultivating musical talent and organizing stage performances.', 3, 9);
-
---
--- Dumping data for table `events`
---
-
-INSERT INTO `events` (`event_id`, `event_name`, `description`, `date`, `venue`, `quota`, `criteria`, `category`, `club_id`, `status`, `sdg_goals`, `image`) VALUES
-(1, 'National Coding Hackathon', 'A 24-hour programming competition for students.', '2026-07-10', 'Main Hall B', 100, 'All IT Students', 'leadership', 1, 'APPROVED', 'SDG 4,SDG 8,SDG 9', NULL),
-(2, 'RoboTech Exhibition', 'Showcase of student-designed robotic creations.', '2026-08-15', 'Exhibition Center', 150, 'Open to Public', 'entrepreneurship', 2, 'APPROVED', 'SDG 9,SDG 11', NULL),
-(3, 'Acoustic Night', 'Live musical performances by student bands.', '2026-09-05', 'Auditorium 1', 200, 'General Admission', 'culture', 3, 'APPROVED', 'SDG 3,SDG 17', NULL);
-
---
--- Dumping data for table `attendances`
---
-
-INSERT INTO `attendances` (`attendance_id`, `event_id`, `user_id`, `registration_date`, `status`, `verified_by`, `position`) VALUES
-(1, 1, 5, '2026-06-16 10:00:00', 'ATTENDED', 1, 'AJK Kelab'),
-(2, 1, 6, '2026-06-16 10:05:00', 'ATTENDED', 1, 'Ahli Kelab'),
-(3, 2, 6, '2026-06-16 10:10:00', 'ATTENDED', 1, 'Presiden Kelab');
-
---
--- Dumping data for table `merits`
---
-
-INSERT INTO `merits` (`merit_id`, `user_id`, `event_id`, `points`, `awarded_date`) VALUES
-(1, 5, 1, 10, '2026-06-17 09:00:00'),
-(2, 6, 1, 10, '2026-06-17 09:00:00'),
-(3, 6, 2, 8, '2026-06-17 09:05:00');
 
 --
 -- Indexes for dumped tables
@@ -203,31 +208,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `attendance_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `attendance_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `clubs`
 --
 ALTER TABLE `clubs`
-  MODIFY `club_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `club_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `event_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `merits`
 --
 ALTER TABLE `merits`
-  MODIFY `merit_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `merit_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
