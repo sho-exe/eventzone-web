@@ -12,13 +12,13 @@
                                 <jsp:include page="navbar.jsp" />
                                 <div class="content-wrapper" style="padding: 0px 30px;">
                                     <div class="flex-grow-1 container-p-y">
-                                        <% Event targetEvent=(Event) request.getAttribute("targetEvent"); // Check if
-                                            today is the event day boolean isEventDay=targetEvent !=null &&
+                                        <% Event targetEvent=(Event) request.getAttribute("targetEvent"); // Check if today is the event day 
+                                                    boolean isEventDay=targetEvent !=null &&
                                             targetEvent.getDate() !=null &&
                                             targetEvent.getDate().toString().equals(java.time.LocalDate.now().toString());
-                                            // QR token for chairperson String qrToken=targetEvent !=null ?
-                                            java.util.UUID.nameUUIDFromBytes((targetEvent.getEventId() + "SECRET_SERS"
-                                            ).getBytes()).toString() : "" ; String
+                                            // QR token for chairperson 
+                                            String qrToken=targetEvent !=null ?
+                                            java.util.UUID.nameUUIDFromBytes((targetEvent.getEventId() + "SECRET_SERS").getBytes()).toString() : "" ; String
                                             baseUrl=request.getRequestURL().toString().replace(request.getRequestURI(),
                                             request.getContextPath()); String qrUrl=baseUrl
                                             + "/attendances?action=scanQR&eventId=" + (targetEvent !=null ?
@@ -411,8 +411,7 @@
                                             mark their attendance for <strong>
                                                 <%= targetEvent.getEventName()%>
                                             </strong>.</p>
-                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<%= java.net.URLEncoder.encode(qrUrl, "
-                                            UTF - 8")%>" alt="Attendance QR Code" class="img-fluid rounded-2 border p-2
+                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<%= java.net.URLEncoder.encode(qrUrl, "UTF - 8")%>" alt="Attendance QR Code" class="img-fluid rounded-2 border p-2
                                         shadow-sm mb-3" style="max-width: 220px;">
                                         <div class="alert alert-info py-2 px-3 small mb-0">
                                             <i class="bx bx-info-circle me-1"></i>Only students with <strong>approved
