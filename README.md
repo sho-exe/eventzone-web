@@ -9,13 +9,26 @@ These inefficiencies are low student participation, ghost registrations where st
 </div>
 
 ## System Modules
-| No. | Module | Description | Member |
-| :---: | :--- | :--- | :---: |
-| 1 | **Manage Users** | <ul><li>Handles user login.</li><li>Role-based access control for all four user types.</li><li>Admin HEPA manages user profiles and role assignments.</li></ul> | Shukri [Leader] |
-| 2 | **Manage Clubs** | <ul><li>Manages club creation.</li><li>Assigns Club Advisors and Chairpersons.</li><li>Scoped to one specific faculty.</li></ul> | Shukri |
-| 3 | **Manage Events** | **Core module.**<ul><li>Manages event creation including venue details.</li><li>Enforces capacity control.</li><li>Handles registration approval and rejection.</li><li>Auto-rejects new registrations when venue capacity is full.</li></ul> | Iqbal |
-| 4 | **Manage Attendance** | **Core module.**<ul><li>Handles student self-check-in.</li><li>Allows Chairperson verification.</li><li>Tracks attendance history for HEPA and Advisors.</li></ul> | Shukri |
-| 5 | **Manage Merits** | **Core module.**<ul><li>Calculates and assigns merit points based on criteria.</li><li>Viewable by students and Advisors.</li><li>Includes merit summary across all semesters.</li></ul> | Adly |
+
+| No | Module | Description | Type | Member |
+|----|--------|-------------|------|--------|
+| 1 | Manage Users | Handles user login and role-based access control for all four user types. Admin HEPA manages user profiles and role assignments. | — | Iqbal |
+| 2 | Manage Clubs | Manages club creation, assignment of Club Advisors and Chairpersons, scoped to one faculty. | Core | Adly |
+| 3 | Manage Events | Manages event creation including venue details, capacity control, registration approval/rejection, and auto-rejects new registrations when venue capacity is full. | — | Shukri *(Leader)* |
+| 4 | View Events | Allows Students to browse and view event listings, details, venue, and registration status. Read-only access extending from Manage Events. | Extends M3 | Shukri |
+| 5 | Manage Attendance | Handles student self-check-in, Chairperson verification, and attendance history tracking for HEPA and Advisors. | Core | Iqbal |
+| 6 | Manage Merits | Admin HEPA calculates and assigns merit points to students based on attendance and event criteria. Includes merit summary management across all semesters. | — | Adly |
+| 7 | View Merits | Allows Students to view merit point summaries, breakdown by event, and history across semesters. Read-only access extending from Manage Merits. | Extends M6 | Adly |
+ 
+## User Roles
+ 
+| Role | Description |
+|------|-------------|
+| Student | Browse events, self-check-in attendances, view own merits |
+| Chairperson | Manage events, verify attendance |
+| Advisor | Approve Events, View attendance history |
+| Admin HEPA | Full access — manage users, clubs, events, merits |
+
 
 ## Group Members
 | No. | Name | Matric No. |
