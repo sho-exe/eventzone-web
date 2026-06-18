@@ -602,6 +602,10 @@ table .btn,
     background: var(--bs-warning);
 }
 
+.timeline-item.self-checked-in::before {
+    background: #ff9f43;
+}
+
 .timeline-item.declined::before {
     background: var(--bs-dark);
 }

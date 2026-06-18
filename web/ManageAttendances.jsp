@@ -38,13 +38,13 @@
                                                 <div class="d-flex align-items-center">
                                                     <% if ("CHAIRPERSON".equals(session.getAttribute("accountType")))
                                                         {%>
-                                                        <!--                                <button class="btn btn-sm btn-dark ms-3 fw-bold"
-                                        data-bs-toggle="modal" data-bs-target="#qrCodeModal"
-                                        <%=!isEventDay
-                                                ? "disabled title='QR code is only available on the event day'"
-                                                : ""%>>
-                                    <i class="bx bx-qr-scan me-1"></i> Show QR Code
-                                </button>-->
+                                                         <!-- <button class="btn btn-sm btn-dark ms-3 fw-bold"
+                                                                     data-bs-toggle="modal" data-bs-target="#qrCodeModal"
+                                                                     <%=!isEventDay
+                                                                             ? "disabled title='QR code is only available on the event day'"
+                                                                             : ""%>>
+                                                                     <i class="bx bx-qr-scan me-1"></i> Show QR Code
+                                                                 </button> -->
                                                         <% }%>
                                                             <span class="badge bg-danger ms-3"><i
                                                                     class="fas fa-map-marker-alt me-1"></i>
@@ -104,16 +104,18 @@
                                                                         request.getAttribute("roster");
                                                                         if (roster != null && !roster.isEmpty()) {
                                                                         for (Attendance a : roster) {
-                                                                        boolean isPending
-                                                                        = "PENDING".equals(a.getStatus());
-                                                                        boolean isRegistered
-                                                                        = "REGISTERED".equals(a.getStatus());
-                                                                        boolean isDeclined
-                                                                        = "DECLINED".equals(a.getStatus());
-                                                                        boolean isAttended
-                                                                        = "ATTENDED".equals(a.getStatus());
-                                                                        boolean isMissed
-                                                                        = "MISSED".equals(a.getStatus());
+                                                                         boolean isPending
+                                                                         = "PENDING".equals(a.getStatus());
+                                                                         boolean isRegistered
+                                                                         = "REGISTERED".equals(a.getStatus());
+                                                                         boolean isSelfCheckedIn
+                                                                         = "SELF_CHECKED_IN".equals(a.getStatus());
+                                                                         boolean isDeclined
+                                                                         = "DECLINED".equals(a.getStatus());
+                                                                         boolean isAttended
+                                                                         = "ATTENDED".equals(a.getStatus());
+                                                                         boolean isMissed
+                                                                         = "MISSED".equals(a.getStatus());
                                                                         %>
                                                                         <tr>
                                                                             <td class="ps-4">
@@ -125,7 +127,7 @@
                                                                                     <div>
                                                                                         <strong
                                                                                             class="text-dark d-block mb-1">
-                                                                                            <<%= a.getStudentName()%>
+                                                                                            <%= a.getStudentName()%>
                                                                                         </strong>
                                                                                         <span
                                                                                             class="text-muted small"><i
@@ -153,6 +155,10 @@
                                                                                             class="badge bg-info text-white"><i
                                                                                                 class="fas fa-check me-1"></i>APPROVED
                                                                                             &amp; AWAITING EVENT</span>
+                                                                                    <% } else if (isSelfCheckedIn) { %>
+                                                                                        <span
+                                                                                            class="badge bg-warning text-dark"><i
+                                                                                                class="fas fa-fingerprint me-1"></i>SELF CHECKED-IN</span>
                                                                                         <% } else if (isAttended) { %>
                                                                                             <span
                                                                                                 class="badge bg-success"><i
@@ -177,7 +183,7 @@
                                                                             <td>
                                                                                 <% if
                                                                                     ("CHAIRPERSON".equals(session.getAttribute("accountType"))
-                                                                                    && (isPending || isRegistered)) {%>
+                                                                                    && (isPending || isRegistered || isSelfCheckedIn)) {%>
                                                                                     <form action="attendances"
                                                                                         method="POST"
                                                                                         class="d-inline-block m-0">
@@ -312,14 +318,14 @@
                                                                                                     class="fas fa-times me-1"></i>Decline</button>
                                                                                         </form>
                                                                                     </div>
-                                                                                    <% } else if (isRegistered) { %>
+                                                                                    <% } else if (isRegistered || isSelfCheckedIn) { %>
                                                                                         <div
                                                                                             class="d-flex justify-content-end gap-2">
                                                                                             <% if (isEventDay) {%>
                                                                                                 <form
                                                                                                     action="attendances"
                                                                                                     method="POST"
-                                                                                                    onsubmit="return confirm('Confirm <%= a.getStudentName()%> is present?');">
+                                                                                                    onsubmit="return confirm('<%= isSelfCheckedIn ? "Verify " + a.getStudentName() + " is present?" : "Confirm " + a.getStudentName() + " is present?" %>');">
                                                                                                     <input type="hidden"
                                                                                                         name="eventId"
                                                                                                         value="<%= targetEvent.getEventId()%>">
@@ -332,7 +338,7 @@
                                                                                                     <button
                                                                                                         type="submit"
                                                                                                         class="btn btn-sm btn-success fw-bold shadow-sm"><i
-                                                                                                            class="fas fa-check-double me-1"></i>Attend</button>
+                                                                                                            class="<%= isSelfCheckedIn ? "fas fa-user-check me-1" : "fas fa-check-double me-1" %>"></i><%= isSelfCheckedIn ? "Verify" : "Attend" %></button>
                                                                                                 </form>
                                                                                                 <form
                                                                                                     action="attendances"
@@ -411,7 +417,7 @@
                                             mark their attendance for <strong>
                                                 <%= targetEvent.getEventName()%>
                                             </strong>.</p>
-                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<%= java.net.URLEncoder.encode(qrUrl, "UTF - 8")%>" alt="Attendance QR Code" class="img-fluid rounded-2 border p-2
+                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<%= java.net.URLEncoder.encode(qrUrl, "UTF-8")%>" alt="Attendance QR Code" class="img-fluid rounded-2 border p-2
                                         shadow-sm mb-3" style="max-width: 220px;">
                                         <div class="alert alert-info py-2 px-3 small mb-0">
                                             <i class="bx bx-info-circle me-1"></i>Only students with <strong>approved

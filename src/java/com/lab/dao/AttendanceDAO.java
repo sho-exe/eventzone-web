@@ -131,13 +131,17 @@ public class AttendanceDAO {
         return list;
     }
 
-    public boolean updateAttendanceStatus(int attendanceId, String status, int verifiedBy) {
+    public boolean updateAttendanceStatus(int attendanceId, String status, Integer verifiedBy) {
         boolean rowUpdated = false;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ATTENDANCE_STATUS)) {
             
             preparedStatement.setString(1, status);
-            preparedStatement.setInt(2, verifiedBy);
+            if (verifiedBy == null || verifiedBy == 0) {
+                preparedStatement.setNull(2, java.sql.Types.INTEGER);
+            } else {
+                preparedStatement.setInt(2, verifiedBy);
+            }
             preparedStatement.setInt(3, attendanceId);
             rowUpdated = preparedStatement.executeUpdate() > 0;
             

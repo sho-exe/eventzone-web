@@ -86,18 +86,28 @@ public class AttendanceController extends HttpServlet {
                 request.getRequestDispatcher("Homepage.jsp").forward(request, response);
                 return;
             }
-            // Mark the student's registration as ATTENDED
+            // Mark the student's registration as SELF_CHECKED_IN
             List<Attendance> roster = attendanceDAO.getAttendancesForEvent(eventId);
             int attendanceId = -1;
+            String currentStatus = null;
             for (Attendance a : roster) {
-                if (a.getUserId() == userId && "REGISTERED".equals(a.getStatus())) {
+                if (a.getUserId() == userId) {
                     attendanceId = a.getAttendanceId();
+                    currentStatus = a.getStatus();
                     break;
                 }
             }
             if (attendanceId > 0) {
-                attendanceDAO.updateAttendanceStatus(attendanceId, "ATTENDED", userId);
-                response.sendRedirect("attendances?action=myAttendance&qrSuccess=1");
+                if ("REGISTERED".equals(currentStatus)) {
+                    attendanceDAO.updateAttendanceStatus(attendanceId, "SELF_CHECKED_IN", null);
+                    response.sendRedirect("attendances?action=myAttendance&qrSuccess=1");
+                } else if ("SELF_CHECKED_IN".equals(currentStatus)) {
+                    response.sendRedirect("attendances?action=myAttendance&qrAlreadyCheckedIn=1");
+                } else if ("ATTENDED".equals(currentStatus)) {
+                    response.sendRedirect("attendances?action=myAttendance&qrAlreadyVerified=1");
+                } else {
+                    response.sendRedirect("attendances?action=myAttendance&qrError=1");
+                }
             } else {
                 response.sendRedirect("attendances?action=myAttendance&qrError=1");
             }
@@ -121,7 +131,26 @@ public class AttendanceController extends HttpServlet {
         String accountType = (String) session.getAttribute("accountType");
         int userId = (int) session.getAttribute("userId");
 
-        if ("assignPosition".equals(action) && "CHAIRPERSON".equals(accountType)) {
+        if ("selfCheckIn".equals(action)) {
+            int attendanceId = Integer.parseInt(request.getParameter("attendanceId"));
+            List<Attendance> myRegistrations = attendanceDAO.getStudentRegistrations(userId);
+            boolean valid = false;
+            for (Attendance a : myRegistrations) {
+                if (a.getAttendanceId() == attendanceId && "REGISTERED".equals(a.getStatus())) {
+                    if (a.getEventDate() != null && a.getEventDate().toString().equals(java.time.LocalDate.now().toString())) {
+                        valid = true;
+                    }
+                    break;
+                }
+            }
+            if (valid) {
+                attendanceDAO.updateAttendanceStatus(attendanceId, "SELF_CHECKED_IN", null);
+                response.sendRedirect("attendances?action=myAttendance&checkInSuccess=1");
+            } else {
+                response.sendRedirect("attendances?action=myAttendance&checkInError=1");
+            }
+
+        } else if ("assignPosition".equals(action) && "CHAIRPERSON".equals(accountType)) {
             int eventId = Integer.parseInt(request.getParameter("eventId"));
             int attendanceId = Integer.parseInt(request.getParameter("attendanceId"));
             String position = request.getParameter("position");
