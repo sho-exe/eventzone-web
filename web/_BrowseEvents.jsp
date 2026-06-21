@@ -21,15 +21,19 @@
 
                         <div class="col-lg-4 col-md-6">
                             <div class="card club-card position-relative">
-                                <% if (e.getImage() !=null && !e.getImage().trim().isEmpty()) { String
-                                    imgPath=e.getImage(); if (!imgPath.startsWith("http://") &&
-                                    !imgPath.startsWith("https://")) { imgPath=request.getContextPath() + "/" + imgPath;
-                                    } %>
-                                    <div class="event-image-wrapper">
-                                        <img src="<%= imgPath %>" class="event-image" alt="<%= e.getEventName() %>"
-                                            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60';">
-                                    </div>
-                                    <% } %>
+                                <% 
+                                    String imgPath = e.getImage();
+                                    if (imgPath != null && !imgPath.trim().isEmpty()) {
+                                        if (!imgPath.startsWith("http://") && !imgPath.startsWith("https://")) {
+                                            imgPath = request.getContextPath() + "/" + imgPath;
+                                        }
+                                    } else {
+                                        imgPath = request.getContextPath() + "/resources/assets/img/default-event.png";
+                                    }
+                                %>
+                                <div class="event-image-wrapper">
+                                    <img src="<%= imgPath %>" class="event-image" alt="<%= e.getEventName() %>" onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/assets/img/default-event.png';">
+                                </div>
                                         <div class="card-inner">
                                             <div class="d-flex justify-content-between align-items-center mb-1">
                                                 <span class="club-id-badge badge-index mb-0"

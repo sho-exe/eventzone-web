@@ -112,6 +112,19 @@
                                                             <div class="col-12">
                                                                 <div
                                                                     class="card club-card position-relative shadow-sm border-0 mb-4">
+                                                                    <% 
+                                                                        String imgPath = e.getImage();
+                                                                        if (imgPath != null && !imgPath.trim().isEmpty()) {
+                                                                            if (!imgPath.startsWith("http://") && !imgPath.startsWith("https://")) {
+                                                                                imgPath = request.getContextPath() + "/" + imgPath;
+                                                                            }
+                                                                        } else {
+                                                                            imgPath = request.getContextPath() + "/resources/assets/img/default-event.png";
+                                                                        }
+                                                                    %>
+                                                                    <div class="event-image-wrapper">
+                                                                        <img src="<%= imgPath %>" class="event-image" alt="<%= e.getEventName() %>" onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/assets/img/default-event.png';">
+                                                                    </div>
                                                                     <div class="card-inner p-4">
                                                                         <div class="row">
                                                                             <!-- Col 1: Index and Basic Meta Information (Club Badge, Status Badge, ID) -->
