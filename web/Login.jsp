@@ -174,7 +174,7 @@
             %>
             <div class="mt-4 pt-3 border-top">
               <p class="text-center text-muted small fw-bold mb-3 text-uppercase" style="letter-spacing: 0.05em; font-size: 0.75rem;">
-                <i class="bx bx-bolt-circle me-1 text-primary"></i> Quick Login (Click to Sign In)
+                <i class="bx bx-bolt-circle me-1 text-primary"></i> Quick Login [DEV]
               </p>
               <div class="quick-login-container" style="max-height: 250px; overflow-y: auto; padding-right: 5px;">
                 <div class="row g-2">
