@@ -2,13 +2,18 @@
     <%@page import="com.lab.model.Event" %>
         <div class=" flex-grow-1 container-p-y">
 
-            <h4 class="fw-bold py-3 mb-4">
-                Explore
-                Campus Events
-            </h4>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold py-3 mb-0">
+                    Explore Campus Events
+                </h4>
+                <div class="d-flex align-items-center gap-2">
+                    <label for="eventDateFilter" class="form-label mb-0 text-nowrap fw-semibold">Filter by Date:</label>
+                    <input type="date" id="eventDateFilter" class="form-control" style="max-width: 200px;">
+                    <button type="button" id="clearDateFilter" class="btn btn-outline-secondary btn-sm" style="display:none;">Clear</button>
+                </div>
+            </div>
 
-
-            <div class="row">
+            <div class="row" id="eventsContainer">
                 <% List<Event> eventCatalog = (List<Event>)
                         request.getAttribute("eventCatalog");
                         if(eventCatalog != null && !eventCatalog.isEmpty()) {
@@ -19,7 +24,7 @@
                         int spotsLeft = e.getQuota() - e.getCurrentEnrollments();
                         %>
 
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-4 col-md-6 event-card-wrapper" data-event-date="<%= e.getDate() %>">
                             <div class="card club-card position-relative">
                                 <% 
                                     String imgPath = e.getImage();
@@ -175,7 +180,13 @@
                             <div class="col-12" style="margin-bottom: 530px;"></div>
                             <% } %>
 
-                                <% } } else { %>
+                                <% } %>
+                                <div id="noFilterResults" class="col-12 text-center py-5 text-muted w-100" style="display: none; margin-top: -300px;">
+                                    <i class="bx bx-calendar-x fa-3x mb-3 text-light" style="font-size: 3rem;"></i>
+                                    <h5 class="fw-bold">No Events on this Date</h5>
+                                    <p>Try selecting a different date or clear the filter to see all upcoming events.</p>
+                                </div>
+                                <% } else { %>
                                     <div class="col-12 text-center py-5 text-muted w-100">
                                         <i class="bx bx-folder-open fa-3x mb-3 text-light" style="font-size: 3rem;"></i>
                                         <h5 class="fw-bold">No Events Found</h5>
@@ -184,5 +195,46 @@
                                     </div>
                                     <% } %>
             </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const dateFilter = document.getElementById("eventDateFilter");
+                    const clearFilter = document.getElementById("clearDateFilter");
+                    const eventCards = document.querySelectorAll(".event-card-wrapper");
+
+                    dateFilter.addEventListener("change", function () {
+                        const selectedDate = this.value; // Format: YYYY-MM-DD
+                        if (selectedDate) {
+                            clearFilter.style.display = "inline-block";
+                        } else {
+                            clearFilter.style.display = "none";
+                        }
+
+                        let visibleCount = 0;
+                        eventCards.forEach(card => {
+                            if (!selectedDate || card.getAttribute("data-event-date") === selectedDate) {
+                                card.style.display = "block";
+                                visibleCount++;
+                            } else {
+                                card.style.display = "none";
+                            }
+                        });
+
+                        const noResultsMsg = document.getElementById("noFilterResults");
+                        if (noResultsMsg) {
+                            if (visibleCount === 0 && selectedDate) {
+                                noResultsMsg.style.display = "block";
+                            } else {
+                                noResultsMsg.style.display = "none";
+                            }
+                        }
+                    });
+
+                    clearFilter.addEventListener("click", function () {
+                        dateFilter.value = "";
+                        dateFilter.dispatchEvent(new Event("change"));
+                    });
+                });
+            </script>
 
         </div>
