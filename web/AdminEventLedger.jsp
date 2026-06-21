@@ -57,13 +57,18 @@
                                             <!-- Content -->
                                             <div class=" flex-grow-1 container-p-y">
 
-                                                <h4 class="fw-bold py-3 mb-4 d-flex align-items-center">
-                                                    <%= title%>
-                                                        <i class="bx bx-info-circle text-info ms-2"
-                                                            style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;"
-                                                            data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse"
-                                                            title="Toggle Page Guide"></i>
-                                                </h4>
+                                                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                                                    <h4 class="fw-bold py-3 m-0 d-flex align-items-center">
+                                                        <%= title%>
+                                                            <i class="bx bx-info-circle text-info ms-2"
+                                                                style="cursor: pointer; font-size: 1.5rem; vertical-align: middle;"
+                                                                data-bs-toggle="collapse" data-bs-target="#pageTipsCollapse"
+                                                                title="Toggle Page Guide"></i>
+                                                    </h4>
+                                                    <div class="d-flex align-items-center flex-nowrap gap-2">
+                                                        <input type="text" id="adminEventSearch" class="form-control" placeholder="Search events..." style="width: 250px;">
+                                                    </div>
+                                                </div>
 
                                                 <div class="collapse show mb-4" id="pageTipsCollapse">
                                                     <div class="card border-0 bg-label-info shadow-none"
@@ -109,7 +114,7 @@
                                                             badgeColor = "bg-label-danger";
                                                             icon = "bx-x-circle"; }
                                                             %>
-                                                            <div class="col-12">
+                                                            <div class="col-12 admin-event-card-wrapper">
                                                                 <div
                                                                     class="card club-card position-relative shadow-sm border-0 mb-4">
                                                                     <% 
@@ -155,7 +160,7 @@
                                                                                         <%= e.getClubName()%>
                                                                                     </span>
                                                                                 </div>
-                                                                                <h5 class="fw-bold text-dark mb-2"
+                                                                                <h5 class="fw-bold text-dark mb-2 admin-event-title"
                                                                                     style="font-size: 1.4rem; line-height: 1.3;">
                                                                                     <%= e.getEventName()%>
                                                                                 </h5>
@@ -377,6 +382,30 @@
                             </div>
 
                             <% }%>
+                            
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    var searchInput = document.getElementById('adminEventSearch');
+                                    if (searchInput) {
+                                        searchInput.addEventListener('keyup', function () {
+                                            var filter = this.value.toLowerCase();
+                                            var eventCards = document.querySelectorAll('.admin-event-card-wrapper');
+
+                                            eventCards.forEach(function (card) {
+                                                var titleEl = card.querySelector('.admin-event-title');
+                                                if (titleEl) {
+                                                    var titleText = titleEl.textContent || titleEl.innerText;
+                                                    if (titleText.toLowerCase().indexOf(filter) > -1) {
+                                                        card.style.display = "";
+                                                    } else {
+                                                        card.style.display = "none";
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                });
+                            </script>
                     <jsp:include page="footer.jsp" />
 </body>
 

@@ -50,14 +50,16 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-between align-items-center mt-4 mb-3">
-                            <h5 class="fw-bold text-dark mb-0"><i class="fas fa-list me-2"></i> Club
-                                Event Archive</h5>
-                            <button type="button" class="btn btn-primary " data-bs-toggle="modal"
-                                style="font-weight: 1000" data-bs-target="#proposeEventModal">
-                                <i class="fas fa-paper-plane me-1"></i> Propose New
-                                Event
-                            </button>
+                        <div class="d-flex justify-content-between align-items-center mt-4 mb-3 flex-wrap gap-2">
+                            <h5 class="fw-bold text-dark mb-0"><i class="fas fa-list me-2"></i> Club Event Archive</h5>
+                            <div class="d-flex align-items-center flex-nowrap gap-2">
+                                <input type="text" id="manageEventsSearch" class="form-control"
+                                    placeholder="Search events..." style="width: 250px; margin-bottom: -15px">
+                                <button type="button" class="btn btn-primary text-nowrap" data-bs-toggle="modal"
+                                    style="font-weight: 1000" data-bs-target="#proposeEventModal">
+                                    <i class="fas fa-paper-plane me-1"></i> Propose New Event
+                                </button>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -76,191 +78,184 @@
                                     badgeColor = "bg-danger text-white";
                                     icon = "bx-x-circle"; }
                                     %>
-                                    <div class="col-lg-4 col-md-6">
+                                    <div class="col-lg-4 col-md-6 manage-event-card-wrapper">
                                         <div class="card club-card position-relative">
-                                            <% 
-                                                String imgPath = e.getImage();
-                                                if (imgPath != null && !imgPath.trim().isEmpty()) {
-                                                    if (!imgPath.startsWith("http://") && !imgPath.startsWith("https://")) {
-                                                        imgPath = request.getContextPath() + "/" + imgPath;
-                                                    }
-                                                } else {
-                                                    imgPath = request.getContextPath() + "/resources/assets/img/default-event.png";
-                                                }
-                                            %>
-                                            <div class="event-image-wrapper">
-                                                <img src="<%= imgPath %>" class="event-image" alt="<%= e.getEventName() %>" onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/assets/img/default-event.png';">
-                                            </div>
-                                                    <div class="card-inner">
-                                                        <div
-                                                            class="d-flex justify-content-between align-items-center mb-1">
-                                                            <span class="club-id-badge badge-index mb-0">
-                                                                <%= eventIndex %>
-                                                            </span>
-                                                            <span class="club-id-badge badge-id mb-0">
-                                                                ID: <%= e.getEventId() %>
-                                                            </span>
-                                                        </div>
+                                            <% String imgPath=e.getImage(); if (imgPath !=null &&
+                                                !imgPath.trim().isEmpty()) { if (!imgPath.startsWith("http://") &&
+                                                !imgPath.startsWith("https://")) { imgPath=request.getContextPath()
+                                                + "/" + imgPath; } } else { imgPath=request.getContextPath()
+                                                + "/resources/assets/img/default-event.png" ; } %>
+                                                <div class="event-image-wrapper">
+                                                    <img src="<%= imgPath %>" class="event-image"
+                                                        alt="<%= e.getEventName() %>"
+                                                        onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/assets/img/default-event.png';">
+                                                </div>
+                                                <div class="card-inner">
+                                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                                        <span class="club-id-badge badge-index mb-0">
+                                                            <%= eventIndex %>
+                                                        </span>
+                                                        <span class="club-id-badge badge-id mb-0">
+                                                            ID: <%= e.getEventId() %>
+                                                        </span>
+                                                    </div>
 
-                                                        <div class="mb-3">
-                                                            <h5 class="fw-bold text-dark mb-1"
-                                                                style="font-size: 1.1rem; line-height: 1.3;">
-                                                                <%= e.getEventName() %>
-                                                            </h5>
-                                                            <span class="badge <%= badgeColor %>"
-                                                                style="font-size: 0.72rem; padding: 4px 8px;"><i
-                                                                    class="bx <%= icon %> me-1"></i>
-                                                                <%= e.getStatus() %>
-                                                            </span>
-                                                        </div>
+                                                    <div class="mb-3">
+                                                        <h5 class="fw-bold text-dark mb-1 manage-event-title"
+                                                            style="font-size: 1.1rem; line-height: 1.3;">
+                                                            <%= e.getEventName() %>
+                                                        </h5>
+                                                        <span class="badge <%= badgeColor %>"
+                                                            style="font-size: 0.72rem; padding: 4px 8px;"><i
+                                                                class="bx <%= icon %> me-1"></i>
+                                                            <%= e.getStatus() %>
+                                                        </span>
+                                                    </div>
 
-                                                        <p class="text-muted small mb-3"
-                                                            style="min-height: 55px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">
-                                                            <%= e.getDescription() %>
-                                                        </p>
+                                                    <p class="text-muted small mb-3"
+                                                        style="min-height: 55px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">
+                                                        <%= e.getDescription() %>
+                                                    </p>
 
-                                                        <hr class="divider-soft">
+                                                    <hr class="divider-soft">
 
-                                                        <div class="assign-section mt-3">
-                                                            <div class="mb-2 d-flex align-items-center gap-2">
-                                                                <i class="bx bx-calendar text-primary fs-5"></i>
-                                                                <div>
-                                                                    <small class="text-muted d-block"
-                                                                        style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Date
-                                                                        & Time</small>
-                                                                    <span class="fs-6 text-dark fw-semibold">
-                                                                        <%= e.getDate() %>
-                                                                            <% if (e.getTime() !=null) { %>
-                                                                                <%= e.getTime().toString().substring(0,
-                                                                                    5) %>
-                                                                                    <%= e.getEndTime() !=null ? " - " +
-                                                                                        e.getEndTime().toString().substring(0,
-                                                                                        5) : "" %>
-                                                                                        <% } %>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-2 d-flex align-items-center gap-2">
-                                                                <i class="bx bx-map-pin text-danger fs-5"></i>
-                                                                <div>
-                                                                    <small class="text-muted d-block"
-                                                                        style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Venue</small>
-                                                                    <span class="fs-6 text-dark fw-semibold">
-                                                                        <%= e.getVenue() %>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-2 d-flex align-items-center gap-2">
-                                                                <i class="bx bx-group text-info fs-5"></i>
-                                                                <div>
-                                                                    <small class="text-muted d-block"
-                                                                        style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Quota</small>
-                                                                    <span class="fs-6 text-dark fw-semibold">
-                                                                        <%= e.getQuota() %> Pax
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-2 d-flex align-items-center gap-2">
-                                                                <i class="bx bx-purchase-tag-alt text-success fs-5"></i>
-                                                                <div>
-                                                                    <small class="text-muted d-block"
-                                                                        style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Category</small>
-                                                                    <span class="fs-6 text-dark fw-semibold"
-                                                                        style="text-transform: capitalize;">
-                                                                        <%= e.getCategory() !=null ? e.getCategory()
-                                                                            : "N/A" %>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-0 d-flex align-items-center gap-2">
-                                                                <i class="bx bx-globe text-primary fs-5"></i>
-                                                                <div>
-                                                                    <small class="text-muted d-block"
-                                                                        style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">SDG
-                                                                        Goals</small>
-                                                                    <span class="fs-6 text-dark fw-semibold">
-                                                                        <%= e.getSdgGoals() !=null &&
-                                                                            !e.getSdgGoals().isEmpty() ? e.getSdgGoals()
-                                                                            : "N/A" %>
-                                                                    </span>
-                                                                </div>
+                                                    <div class="assign-section mt-3">
+                                                        <div class="mb-2 d-flex align-items-center gap-2">
+                                                            <i class="bx bx-calendar text-primary fs-5"></i>
+                                                            <div>
+                                                                <small class="text-muted d-block"
+                                                                    style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Date
+                                                                    & Time</small>
+                                                                <span class="fs-6 text-dark fw-semibold">
+                                                                    <%= e.getDate() %>
+                                                                        <% if (e.getTime() !=null) { %>
+                                                                            <%= e.getTime().toString().substring(0, 5)
+                                                                                %>
+                                                                                <%= e.getEndTime() !=null ? " - " +
+                                                                                    e.getEndTime().toString().substring(0,
+                                                                                    5) : "" %>
+                                                                                    <% } %>
+                                                                </span>
                                                             </div>
                                                         </div>
-
-                                                        <% if ("APPROVED".equals(e.getStatus())) { %>
-                                                            <div class="mt-3">
-                                                                <a href="attendances?action=manageAttendances&eventId=<%= e.getEventId() %>"
-                                                                    class="btn btn-save mt-0"
-                                                                    style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px; margin-top: 0 !important;">
-                                                                    <i class="bx bx-group me-1"></i> Attendances
-                                                                </a>
+                                                        <div class="mb-2 d-flex align-items-center gap-2">
+                                                            <i class="bx bx-map-pin text-danger fs-5"></i>
+                                                            <div>
+                                                                <small class="text-muted d-block"
+                                                                    style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Venue</small>
+                                                                <span class="fs-6 text-dark fw-semibold">
+                                                                    <%= e.getVenue() %>
+                                                                </span>
                                                             </div>
-                                                            <% } else if ("PENDING".equals(e.getStatus())) { %>
-                                                                <div class="mt-3 d-flex gap-2">
-                                                                    <button type="button"
-                                                                        class="btn btn-outline-primary w-50 edit-event-btn"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#editEventModal"
-                                                                        data-id="<%= e.getEventId() %>"
-                                                                        data-name="<%= e.getEventName().replace("\"", "&quot;" ) %>"
-                                                                        data-desc="<%=
-                                                                            e.getDescription().replace("\"", "&quot;" )
-                                                                            %>"
-                                                                            data-date="<%= e.getDate() %>"
-                                                                                data-time="<%= e.getTime() !=null ?
-                                                                                    e.getTime().toString().substring(0,
+                                                        </div>
+                                                        <div class="mb-2 d-flex align-items-center gap-2">
+                                                            <i class="bx bx-group text-info fs-5"></i>
+                                                            <div>
+                                                                <small class="text-muted d-block"
+                                                                    style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Quota</small>
+                                                                <span class="fs-6 text-dark fw-semibold">
+                                                                    <%= e.getQuota() %> Pax
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-2 d-flex align-items-center gap-2">
+                                                            <i class="bx bx-purchase-tag-alt text-success fs-5"></i>
+                                                            <div>
+                                                                <small class="text-muted d-block"
+                                                                    style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Category</small>
+                                                                <span class="fs-6 text-dark fw-semibold"
+                                                                    style="text-transform: capitalize;">
+                                                                    <%= e.getCategory() !=null ? e.getCategory() : "N/A"
+                                                                        %>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-0 d-flex align-items-center gap-2">
+                                                            <i class="bx bx-globe text-primary fs-5"></i>
+                                                            <div>
+                                                                <small class="text-muted d-block"
+                                                                    style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">SDG
+                                                                    Goals</small>
+                                                                <span class="fs-6 text-dark fw-semibold">
+                                                                    <%= e.getSdgGoals() !=null &&
+                                                                        !e.getSdgGoals().isEmpty() ? e.getSdgGoals()
+                                                                        : "N/A" %>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <% if ("APPROVED".equals(e.getStatus())) { %>
+                                                        <div class="mt-3">
+                                                            <a href="attendances?action=manageAttendances&eventId=<%= e.getEventId() %>"
+                                                                class="btn btn-save mt-0"
+                                                                style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px; margin-top: 0 !important;">
+                                                                <i class="bx bx-group me-1"></i> Attendances
+                                                            </a>
+                                                        </div>
+                                                        <% } else if ("PENDING".equals(e.getStatus())) { %>
+                                                            <div class="mt-3 d-flex gap-2">
+                                                                <button type="button"
+                                                                    class="btn btn-outline-primary w-50 edit-event-btn"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#editEventModal"
+                                                                    data-id="<%= e.getEventId() %>"
+                                                                    data-name="<%= e.getEventName().replace("\"", "&quot;" ) %>"
+                                                                    data-desc="<%=
+                                                                        e.getDescription().replace("\"", "&quot;" ) %>"
+                                                                        data-date="<%= e.getDate() %>"
+                                                                            data-time="<%= e.getTime() !=null ?
+                                                                                e.getTime().toString().substring(0, 5)
+                                                                                : "" %>"
+                                                                                data-endtime="<%= e.getEndTime() !=null
+                                                                                    ?
+                                                                                    e.getEndTime().toString().substring(0,
                                                                                     5) : "" %>"
-                                                                                    data-endtime="<%= e.getEndTime()
-                                                                                        !=null ?
-                                                                                        e.getEndTime().toString().substring(0,
-                                                                                        5) : "" %>"
-                                                                                        data-venue="<%=
-                                                                                            e.getVenue().replace("\"", "&quot;"
-                                                                                            ) %>"
-                                                                                            data-quota="<%= e.getQuota()
-                                                                                                %>"
-                                                                                                data-cat="<%=
-                                                                                                    e.getCategory() %>"
-                                                                                                    data-sdg="<%=
-                                                                                                        e.getSdgGoals()
+                                                                                    data-venue="<%=
+                                                                                        e.getVenue().replace("\"", "&quot;"
+                                                                                        ) %>"
+                                                                                        data-quota="<%= e.getQuota() %>"
+                                                                                            data-cat="<%=
+                                                                                                e.getCategory() %>"
+                                                                                                data-sdg="<%=
+                                                                                                    e.getSdgGoals()
+                                                                                                    !=null ?
+                                                                                                    e.getSdgGoals() : ""
+                                                                                                    %>"
+                                                                                                    data-image="<%=
+                                                                                                        e.getImage()
                                                                                                         !=null ?
-                                                                                                        e.getSdgGoals()
-                                                                                                        : "" %>"
-                                                                                                        data-image="<%=
-                                                                                                            e.getImage()
-                                                                                                            !=null ?
-                                                                                                            e.getImage().replace("\"", "&quot;"
-                                                                                                            ) : "" %>"
-                                                                                                            style="display:
-                                                                                                            flex;
-                                                                                                            align-items:
-                                                                                                            center;
-                                                                                                            justify-content:
-                                                                                                            center;
-                                                                                                            font-size:
-                                                                                                            0.82rem;
-                                                                                                            height:
-                                                                                                            36px;">
-                                                                                                            <i
-                                                                                                                class="bx bx-edit-alt me-1"></i>
-                                                                                                            Edit
+                                                                                                        e.getImage().replace("\"", "&quot;"
+                                                                                                        ) : "" %>"
+                                                                                                        style="display:
+                                                                                                        flex;
+                                                                                                        align-items:
+                                                                                                        center;
+                                                                                                        justify-content:
+                                                                                                        center;
+                                                                                                        font-size:
+                                                                                                        0.82rem;
+                                                                                                        height:
+                                                                                                        36px;">
+                                                                                                        <i
+                                                                                                            class="bx bx-edit-alt me-1"></i>
+                                                                                                        Edit
+                                                                </button>
+                                                                <form action="events" method="POST" class="w-50 mb-0"
+                                                                    onsubmit="return confirm('Are you sure you want to delete this pending event?');">
+                                                                    <input type="hidden" name="action"
+                                                                        value="deleteEvent">
+                                                                    <input type="hidden" name="eventId"
+                                                                        value="<%= e.getEventId() %>">
+                                                                    <button type="submit"
+                                                                        class="btn btn-outline-danger w-100"
+                                                                        style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px;">
+                                                                        <i class="bx bx-trash me-1"></i> Delete
                                                                     </button>
-                                                                    <form action="events" method="POST"
-                                                                        class="w-50 mb-0"
-                                                                        onsubmit="return confirm('Are you sure you want to delete this pending event?');">
-                                                                        <input type="hidden" name="action"
-                                                                            value="deleteEvent">
-                                                                        <input type="hidden" name="eventId"
-                                                                            value="<%= e.getEventId() %>">
-                                                                        <button type="submit"
-                                                                            class="btn btn-outline-danger w-100"
-                                                                            style="display: flex; align-items: center; justify-content: center; font-size: 0.82rem; height: 36px;">
-                                                                            <i class="bx bx-trash me-1"></i> Delete
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
-                                                                <% } %>
-                                                    </div><%-- card-inner --%>
+                                                                </form>
+                                                            </div>
+                                                            <% } %>
+                                                </div><%-- card-inner --%>
                                         </div><%-- card club-card --%>
                                     </div><%-- col-lg-4 --%>
 
@@ -891,5 +886,26 @@
                                 }
                             });
                         });
+
+                        // Handle event search filtering
+                        var searchInput = document.getElementById('manageEventsSearch');
+                        if (searchInput) {
+                            searchInput.addEventListener('keyup', function () {
+                                var filter = this.value.toLowerCase();
+                                var eventCards = document.querySelectorAll('.manage-event-card-wrapper');
+
+                                eventCards.forEach(function (card) {
+                                    var titleEl = card.querySelector('.manage-event-title');
+                                    if (titleEl) {
+                                        var titleText = titleEl.textContent || titleEl.innerText;
+                                        if (titleText.toLowerCase().indexOf(filter) > -1) {
+                                            card.style.display = "";
+                                        } else {
+                                            card.style.display = "none";
+                                        }
+                                    }
+                                });
+                            });
+                        }
                     });
                 </script>

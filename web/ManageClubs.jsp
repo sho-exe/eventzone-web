@@ -33,7 +33,8 @@
                                                 <!-- Content -->
                                                 <div class="flex-grow-1 container-p-y">
 
-                                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                                    <div
+                                                        class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                                                         <h4 class="fw-bold m-0 py-3 d-flex align-items-center">
                                                             Manage Clubs
                                                             <i class="bx bx-info-circle text-info ms-2"
@@ -42,11 +43,18 @@
                                                                 data-bs-target="#pageTipsCollapse"
                                                                 title="Toggle Page Guide"></i>
                                                         </h4>
-                                                        <button class="btn btn-primary" style="font-weight: 600;"
-                                                            data-bs-toggle="modal" data-bs-target="#createClubModal">
-                                                            <i class="bx bx-plus me-1" style="font-weight: 800;"></i>
-                                                            New Club
-                                                        </button>
+                                                        <div class="d-flex align-items-center flex-nowrap gap-2">
+                                                            <input type="text" id="manageClubsSearch"
+                                                                class="form-control" placeholder="Search clubs..."
+                                                                style="width: 250px; margin-bottom: -15px;">
+                                                            <button class="btn btn-primary text-nowrap"
+                                                                style="font-weight: 600;" data-bs-toggle="modal"
+                                                                data-bs-target="#createClubModal">
+                                                                <i class="bx bx-plus me-1"
+                                                                    style="font-weight: 800;"></i>
+                                                                New Club
+                                                            </button>
+                                                        </div>
                                                     </div>
 
                                                     <% String message=request.getParameter("message"); %>
@@ -118,7 +126,8 @@
                                                                                     for (Club c : clubList) {
                                                                                     clubIndex++;
                                                                                     %>
-                                                                                    <div class="col-lg-4 col-md-6">
+                                                                                    <div
+                                                                                        class="col-lg-4 col-md-6 manage-club-card-wrapper">
                                                                                         <div
                                                                                             class="card club-card position-relative">
 
@@ -168,7 +177,7 @@
                                                                                                         <input
                                                                                                             type="text"
                                                                                                             name="clubName"
-                                                                                                            class="club-name-input"
+                                                                                                            class="club-name-input manage-club-title"
                                                                                                             value="<%= c.getClubName()%>"
                                                                                                             required
                                                                                                             style="padding-right: 24px !important;"
@@ -435,9 +444,30 @@
                                                     }, 1000);
                                                 }
                                             }
+
+                                            // Handle club search filtering
+                                            var searchInput = document.getElementById('manageClubsSearch');
+                                            if (searchInput) {
+                                                searchInput.addEventListener('keyup', function () {
+                                                    var filter = this.value.toLowerCase();
+                                                    var clubCards = document.querySelectorAll('.manage-club-card-wrapper');
+
+                                                    clubCards.forEach(function (card) {
+                                                        var titleEl = card.querySelector('.manage-club-title');
+                                                        if (titleEl) {
+                                                            var titleText = titleEl.value; // It's an input field
+                                                            if (titleText.toLowerCase().indexOf(filter) > -1) {
+                                                                card.style.display = "";
+                                                            } else {
+                                                                card.style.display = "none";
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                            }
                                         });
                                     </script>
-                        <jsp:include page="footer.jsp" />
-</body>
+                                    <jsp:include page="footer.jsp" />
+                    </body>
 
                     </html>
