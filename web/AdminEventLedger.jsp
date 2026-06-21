@@ -125,7 +125,7 @@
                                                                     <div class="event-image-wrapper">
                                                                         <img src="<%= imgPath %>" class="event-image" alt="<%= e.getEventName() %>" onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/resources/assets/img/default-event.png';">
                                                                     </div>
-                                                                    <div class="card-inner p-4">
+                                                                    <div class="card-inner p-4" style="padding-bottom: 4rem !important;">
                                                                         <div class="row">
                                                                             <!-- Col 1: Index and Basic Meta Information (Club Badge, Status Badge, ID) -->
                                                                             <div
@@ -170,7 +170,7 @@
                                                                                 class="col-lg-4 col-md-12 col-12 mt-4 mt-lg-0 ps-lg-4 d-flex flex-column justify-content-between">
                                                                                 <div class="row g-2 mb-3">
                                                                                     <div
-                                                                                        class="col-6 d-flex align-items-center gap-2">
+                                                                                        class="col-12 d-flex align-items-center gap-2">
                                                                                         <span
                                                                                             class="detail-icon bg-label-primary">
                                                                                             <i
@@ -184,6 +184,7 @@
                                                                                                 class="fw-semibold text-dark text-nowrap"
                                                                                                 style="font-size: 0.82rem;">
                                                                                                 <%= e.getDate()%>
+                                                                                                
                                                                                                 <% if (e.getTime() != null) { %>
                                                                                                     <%= e.getTime().toString().substring(0, 5) %>
                                                                                                     <%= e.getEndTime() != null ? " - " + e.getEndTime().toString().substring(0, 5) : "" %>
@@ -192,7 +193,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div
-                                                                                        class="col-6 d-flex align-items-center gap-2">
+                                                                                        class="col-12 d-flex align-items-center gap-2">
                                                                                         <span
                                                                                             class="detail-icon bg-label-danger">
                                                                                             <i
