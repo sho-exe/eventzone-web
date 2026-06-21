@@ -31,10 +31,14 @@
                     <div class="content-wrapper" style="padding: 0px 30px;">
                         <!-- Content -->
                         <div class="flex-grow-1 container-p-y">
-
-                            <h4 class="fw-bold py-3 mb-4">
-                                Merit Transcript
-                            </h4>
+                            <div class="d-flex justify-content-between align-items-center mb-4 py-3">
+                                <h4 class="fw-bold m-0">
+                                    Merit Transcript
+                                </h4>
+                                <button onclick="window.print()" class="btn btn-primary d-flex align-items-center gap-2 no-print" style="margin-top: 0 !important;">
+                                    <i class="bx bx-printer fs-4"></i> Print Record
+                                </button>
+                            </div>
 
                             <div class="row mb-4">
                                 <div class="col-12 col-md-6 mb-3">

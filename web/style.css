@@ -1420,3 +1420,45 @@ table .btn,
     border: 1.5px solid var(--role-accent);
     text-transform: uppercase;
 }
+
+/* --- Print Styles --- */
+@media print {
+    /* Hide layout wrapper menus, navbar, footer, buttons, and overlays */
+    .layout-menu,
+    .layout-navbar,
+    .content-footer,
+    .layout-overlay,
+    .content-backdrop,
+    .no-print {
+        display: none !important;
+    }
+    
+    /* Reset padding, margins and layout wrapper size */
+    html, body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    
+    .layout-wrapper,
+    .layout-container,
+    .layout-page,
+    .content-wrapper,
+    .container-p-y {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    
+    /* Ensure tables print properly */
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    .table-responsive {
+        overflow: visible !important;
+    }
+}
