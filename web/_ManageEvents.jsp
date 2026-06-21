@@ -26,6 +26,26 @@
                     </div>
                     <% } else { %>
 
+                        <% String message=request.getParameter("message"); %>
+                        <% if (message !=null && !message.trim().isEmpty()) { 
+                            boolean isError=message.startsWith("Error"); 
+                            String alertClass=isError ? "alert-danger" : "alert-success";
+                            String iconClass=isError ? "bx-error-circle" : "bx-check-circle"; 
+                            String badgeTextClass=isError ? "text-danger" : "text-success"; 
+                        %>
+                            <div class="alert <%= alertClass %> border-0 shadow-sm mb-4 alert-dismissible fade show"
+                                role="alert" id="successAlert">
+                                <i class="bx <%= iconClass %> me-2"></i>
+                                <%= message%>
+                                <% if (!isError) { %>
+                                    <span class="badge bg-white <%= badgeTextClass %> ms-2 countdown-badge"
+                                        style="font-size: 0.75rem; vertical-align: middle;">3s</span>
+                                <% } %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        <% } %>
+
                         <div class="collapse show mb-4" id="pageTipsCollapse">
                             <div class="card border-0 bg-label-info shadow-none" style="border-radius: 12px;">
                                 <div class="card-body p-3">

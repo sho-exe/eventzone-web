@@ -156,6 +156,13 @@ public class EventController extends HttpServlet {
             newEvent.setImage(imagePath);
             
             newEvent.setClubId(Integer.parseInt(request.getParameter("clubId")));
+
+            // Check for venue and time conflicts
+            if (eventDAO.hasConflict(newEvent.getVenue(), newEvent.getDate(), newEvent.getTime(), newEvent.getEndTime(), 0)) {
+                response.sendRedirect("events?action=manage&message=Error:+Venue+and+time+conflict+with+an+existing+event!");
+                return;
+            }
+
             eventDAO.insertEvent(newEvent);
             response.sendRedirect("events?action=manage");
 
@@ -213,6 +220,12 @@ public class EventController extends HttpServlet {
                 }
                 event.setImage(imagePath);
                 
+                // Check for venue and time conflicts
+                if (eventDAO.hasConflict(event.getVenue(), event.getDate(), event.getTime(), event.getEndTime(), event.getEventId())) {
+                    response.sendRedirect("events?action=manage&message=Error:+Venue+and+time+conflict+with+an+existing+event!");
+                    return;
+                }
+
                 eventDAO.updateEvent(event);
             }
             response.sendRedirect("events?action=manage");

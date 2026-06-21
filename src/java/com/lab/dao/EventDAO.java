@@ -252,6 +252,30 @@ public class EventDAO {
         return rowUpdated;
     }
 
+    public boolean hasConflict(String venue, java.sql.Date date, java.sql.Time startTime, java.sql.Time endTime, int excludeEventId) {
+        if (startTime == null || endTime == null || venue == null || date == null) return false;
+        String query = "SELECT COUNT(*) FROM events WHERE venue = ? AND date = ? AND status != 'REJECTED' AND time < ? AND end_time > ?";
+        if (excludeEventId > 0) {
+            query += " AND event_id != ?";
+        }
+        try (Connection connection = getConnection(); PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, venue);
+            ps.setDate(2, date);
+            ps.setTime(3, endTime);
+            ps.setTime(4, startTime);
+            if (excludeEventId > 0) {
+                ps.setInt(5, excludeEventId);
+            }
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public Event selectEventById(int eventId) {
         Event e = null;
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_EVENT_BY_ID)) {
