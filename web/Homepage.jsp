@@ -35,7 +35,7 @@
                         <div class="layout-overlay layout-menu-toggle"></div>
                     </div>
 
-                    <script <jsp:include page="footer.jsp" />
+                    <jsp:include page="footer.jsp" />
 
                     <% } %>
         </body>
