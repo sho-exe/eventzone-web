@@ -137,7 +137,7 @@
                             <div class="layout-overlay layout-menu-toggle"></div>
                         </div>
 
-                        <jsp:include page="footer.jsp" />
+
 
                         <% } %>
             </body>

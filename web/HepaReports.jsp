@@ -643,7 +643,7 @@
                         </div>
                         <!-- / Content -->
 
-                        <jsp:include page="footer.jsp" />
+
 
                         <div class="content-backdrop fade"></div>
                     </div>

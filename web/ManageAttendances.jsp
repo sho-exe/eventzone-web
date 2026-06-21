@@ -433,7 +433,7 @@
                         </div>
                         <% }%>
 
-                            <jsp:include page="footer.jsp" />
+
                             <script>
                                 document.addEventListener("DOMContentLoaded", function () {
                                     // Remove active class from all menu items

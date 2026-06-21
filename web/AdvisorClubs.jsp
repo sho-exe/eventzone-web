@@ -187,7 +187,7 @@
                                 </div>
                                 <!-- / Layout wrapper -->
 
-                                <jsp:include page="footer.jsp" />
+
 
                                 <% } %>
                                  <script>
