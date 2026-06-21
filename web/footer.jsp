@@ -33,7 +33,11 @@
             if ($contentWrapper.length > 0) {
                 var $footer = $('#layout-footer');
                 $footer.insertAfter($contentWrapper);
-                $footer.show();
+                if (window.location.pathname.includes('Homepage.jsp') || window.location.pathname.endsWith('/')) {
+                    $footer.show();
+                } else {
+                    $footer.hide();
+                }
             }
         });
     </script>

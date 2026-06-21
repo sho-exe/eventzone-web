@@ -331,8 +331,13 @@
 
                                                 <div class="col-md-3 mb-3">
                                                     <label class="form-label fw-bold">Location / Venue</label>
-                                                    <input type="text" name="venue" class="form-control border-primary"
-                                                        placeholder="e.g., Main Hall B" required>
+                                                    <select name="venue" class="form-select border-primary" required>
+                                                        <option value="" disabled selected>Select Venue</option>
+                                                        <option value="DSM">DSM</option>
+                                                        <option value="IBH-01">IBH-01</option>
+                                                        <option value="MP1">MP1</option>
+                                                        <option value="DS1-02">DS1-02</option>
+                                                    </select>
                                                 </div>
 
                                                 <div class="col-md-2 mb-3">
@@ -603,9 +608,13 @@
 
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label fw-bold">Location / Venue</label>
-                                        <input type="text" name="venue" id="editVenue"
-                                            class="form-control border-primary" placeholder="e.g., Main Hall B"
-                                            required>
+                                        <select name="venue" id="editVenue" class="form-select border-primary" required>
+                                            <option value="" disabled selected>Select Venue</option>
+                                            <option value="DSM">DSM</option>
+                                            <option value="IBH-01">IBH-01</option>
+                                            <option value="MP1">MP1</option>
+                                            <option value="DS1-02">DS1-02</option>
+                                        </select>
                                     </div>
 
                                     <div class="col-md-2 mb-3">
