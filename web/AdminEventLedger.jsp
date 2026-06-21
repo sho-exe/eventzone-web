@@ -166,11 +166,15 @@
                                                                                         <div>
                                                                                             <small
                                                                                                 class="text-muted d-block"
-                                                                                                style="font-size: 0.65rem; text-transform: uppercase;">Date</small>
+                                                                                                style="font-size: 0.65rem; text-transform: uppercase;">Date & Time</small>
                                                                                             <span
                                                                                                 class="fw-semibold text-dark text-nowrap"
                                                                                                 style="font-size: 0.82rem;">
                                                                                                 <%= e.getDate()%>
+                                                                                                <% if (e.getTime() != null) { %>
+                                                                                                    <%= e.getTime().toString().substring(0, 5) %>
+                                                                                                    <%= e.getEndTime() != null ? " - " + e.getEndTime().toString().substring(0, 5) : "" %>
+                                                                                                <% } %>
                                                                                             </span>
                                                                                         </div>
                                                                                     </div>

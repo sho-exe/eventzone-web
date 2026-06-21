@@ -122,9 +122,13 @@
                                                         <i class="bx bx-calendar text-primary fs-5"></i>
                                                         <div>
                                                             <small class="text-muted d-block"
-                                                                style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Date</small>
+                                                                style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Date & Time</small>
                                                             <span class="fs-6 text-dark fw-semibold">
                                                                 <%= e.getDate() %>
+                                                                <% if (e.getTime() != null) { %>
+                                                                    <%= e.getTime().toString().substring(0, 5) %>
+                                                                    <%= e.getEndTime() != null ? " - " + e.getEndTime().toString().substring(0, 5) : "" %>
+                                                                <% } %>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -191,6 +195,8 @@
                                                             data-name="<%= e.getEventName().replace("\"", "&quot;") %>"
                                                             data-desc="<%= e.getDescription().replace("\"", "&quot;") %>"
                                                             data-date="<%= e.getDate() %>"
+                                                            data-time="<%= e.getTime() != null ? e.getTime().toString().substring(0, 5) : "" %>"
+                                                            data-endtime="<%= e.getEndTime() != null ? e.getEndTime().toString().substring(0, 5) : "" %>"
                                                             data-venue="<%= e.getVenue().replace("\"", "&quot;") %>"
                                                             data-quota="<%= e.getQuota() %>"
                                                             data-cat="<%= e.getCategory() %>"
@@ -261,44 +267,35 @@
                                                         required></textarea>
                                                 </div>
 
-                                                <div class="col-md-5 mb-3">
-                                                    <label class="form-label fw-bold">Target
-                                                        Date</label>
-                                                    <input type="date" name="date" class="form-control border-primary"
-                                                        required>
-                                                </div>
-
-                                                <div class="col-md-5 mb-3">
-                                                    <label class="form-label fw-bold">Location
-                                                        /
-                                                        Venue</label>
-                                                    <input type="text" name="venue" class="form-control border-primary"
-                                                        placeholder="e.g., Main Hall B" required>
+                                                <div class="col-md-3 mb-3">
+                                                    <label class="form-label fw-bold">Target Date</label>
+                                                    <input type="date" name="date" class="form-control border-primary" required>
                                                 </div>
 
                                                 <div class="col-md-2 mb-3">
-                                                    <label class="form-label fw-bold">Quota
-                                                        Limit</label>
-                                                    <input type="number" name="quota"
-                                                        class="form-control border-primary" placeholder="0" required
-                                                        min="1">
+                                                    <label class="form-label fw-bold">Start Time</label>
+                                                    <input type="time" name="time" class="form-control border-primary" required>
+                                                </div>
+
+                                                <div class="col-md-2 mb-3">
+                                                    <label class="form-label fw-bold">End Time</label>
+                                                    <input type="time" name="endTime" class="form-control border-primary">
+                                                </div>
+
+                                                <div class="col-md-3 mb-3">
+                                                    <label class="form-label fw-bold">Location / Venue</label>
+                                                    <input type="text" name="venue" class="form-control border-primary" placeholder="e.g., Main Hall B" required>
+                                                </div>
+
+                                                <div class="col-md-2 mb-3">
+                                                    <label class="form-label fw-bold">Quota Limit</label>
+                                                    <input type="number" name="quota" class="form-control border-primary" placeholder="0" required min="1">
                                                 </div>
 
                                                 <div class="col-md-12 mb-3">
                                                     <label class="form-label fw-bold">Event Image</label>
                                                     <input type="file" name="image" class="form-control border-primary" accept="image/*">
                                                 </div>
-
-                                                <!-- <div class="col-md-12 mb-3">
-                                                                    <label class="form-label fw-bold">Merit Decision
-                                                                        Criteria <span
-                                                                            class="text-muted fw-normal">(Optional
-                                                                            context)</span></label>
-                                                                    <input type="text" name="criteria"
-                                                                        class="form-control"
-                                                                        placeholder="e.g., Activity Level, Hardcoded specific tier...">
-                                                                </div> -->
-
 
                                                 <div class="col-md-12 mb-3">
                                                     <label class="form-label fw-bold">Select
@@ -535,27 +532,29 @@
                                             required></textarea>
                                     </div>
 
-                                    <div class="col-md-5 mb-3">
-                                        <label class="form-label fw-bold">Target
-                                            Date</label>
-                                        <input type="date" name="date" id="editDate" class="form-control border-primary"
-                                            required>
-                                    </div>
-
-                                    <div class="col-md-5 mb-3">
-                                        <label class="form-label fw-bold">Location
-                                            /
-                                            Venue</label>
-                                        <input type="text" name="venue" id="editVenue"
-                                            class="form-control border-primary" placeholder="e.g., Main Hall B"
-                                            required>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label fw-bold">Target Date</label>
+                                        <input type="date" name="date" id="editDate" class="form-control border-primary" required>
                                     </div>
 
                                     <div class="col-md-2 mb-3">
-                                        <label class="form-label fw-bold">Quota
-                                            Limit</label>
-                                        <input type="number" name="quota" id="editQuota"
-                                            class="form-control border-primary" placeholder="0" required min="1">
+                                        <label class="form-label fw-bold">Start Time</label>
+                                        <input type="time" name="time" id="editTime" class="form-control border-primary" required>
+                                    </div>
+
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label fw-bold">End Time</label>
+                                        <input type="time" name="endTime" id="editEndTime" class="form-control border-primary">
+                                    </div>
+
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label fw-bold">Location / Venue</label>
+                                        <input type="text" name="venue" id="editVenue" class="form-control border-primary" placeholder="e.g., Main Hall B" required>
+                                    </div>
+
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label fw-bold">Quota Limit</label>
+                                        <input type="number" name="quota" id="editQuota" class="form-control border-primary" placeholder="0" required min="1">
                                     </div>
 
                                     <div class="col-md-12 mb-3">
@@ -780,6 +779,8 @@
                                 document.getElementById('editEventName').value = btn.getAttribute('data-name');
                                 document.getElementById('editDescription').value = btn.getAttribute('data-desc');
                                 document.getElementById('editDate').value = btn.getAttribute('data-date');
+                                document.getElementById('editTime').value = btn.getAttribute('data-time');
+                                document.getElementById('editEndTime').value = btn.getAttribute('data-endtime');
                                 document.getElementById('editVenue').value = btn.getAttribute('data-venue');
                                 document.getElementById('editQuota').value = btn.getAttribute('data-quota');
                                 document.getElementById('editKategori').value = btn.getAttribute('data-cat');

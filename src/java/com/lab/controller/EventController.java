@@ -111,6 +111,20 @@ public class EventController extends HttpServlet {
             newEvent.setEventName(request.getParameter("eventName"));
             newEvent.setDescription(request.getParameter("description"));
             newEvent.setDate(Date.valueOf(request.getParameter("date")));
+            String timeStr = request.getParameter("time");
+            if (timeStr != null && !timeStr.trim().isEmpty()) {
+                if (timeStr.length() == 5) {
+                    timeStr += ":00";
+                }
+                newEvent.setTime(java.sql.Time.valueOf(timeStr));
+            }
+            String endTimeStr = request.getParameter("endTime");
+            if (endTimeStr != null && !endTimeStr.trim().isEmpty()) {
+                if (endTimeStr.length() == 5) {
+                    endTimeStr += ":00";
+                }
+                newEvent.setEndTime(java.sql.Time.valueOf(endTimeStr));
+            }
             newEvent.setVenue(request.getParameter("venue"));
             newEvent.setQuota(request.getParameter("quota") != null && !request.getParameter("quota").isEmpty()
                     ? Integer.parseInt(request.getParameter("quota"))
@@ -152,6 +166,24 @@ public class EventController extends HttpServlet {
                 event.setEventName(request.getParameter("eventName"));
                 event.setDescription(request.getParameter("description"));
                 event.setDate(Date.valueOf(request.getParameter("date")));
+                String timeStr = request.getParameter("time");
+                if (timeStr != null && !timeStr.trim().isEmpty()) {
+                    if (timeStr.length() == 5) {
+                        timeStr += ":00";
+                    }
+                    event.setTime(java.sql.Time.valueOf(timeStr));
+                } else {
+                    event.setTime(null);
+                }
+                String endTimeStr = request.getParameter("endTime");
+                if (endTimeStr != null && !endTimeStr.trim().isEmpty()) {
+                    if (endTimeStr.length() == 5) {
+                        endTimeStr += ":00";
+                    }
+                    event.setEndTime(java.sql.Time.valueOf(endTimeStr));
+                } else {
+                    event.setEndTime(null);
+                }
                 event.setVenue(request.getParameter("venue"));
                 event.setQuota(request.getParameter("quota") != null && !request.getParameter("quota").isEmpty()
                         ? Integer.parseInt(request.getParameter("quota"))

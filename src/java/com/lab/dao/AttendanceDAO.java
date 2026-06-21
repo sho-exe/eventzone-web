@@ -26,7 +26,7 @@ public class AttendanceDAO {
         "UPDATE attendances SET status = ?, verified_by = ? WHERE attendance_id = ?";
         
     private static final String SELECT_STUDENT_REGISTRATIONS = 
-        "SELECT a.*, e.event_name, e.date AS event_date, e.venue AS event_venue, c.club_name " +
+        "SELECT a.*, e.event_name, e.date AS event_date, e.time AS event_time, e.end_time AS event_end_time, e.venue AS event_venue, c.club_name " +
         "FROM attendances a " +
         "JOIN events e ON a.event_id = e.event_id " +
         "JOIN clubs c ON e.club_id = c.club_id " +
@@ -184,6 +184,8 @@ public class AttendanceDAO {
                 
                 a.setEventName(rs.getString("event_name"));
                 a.setEventDate(rs.getDate("event_date"));
+                a.setEventTime(rs.getTime("event_time"));
+                a.setEventEndTime(rs.getTime("event_end_time"));
                 a.setEventVenue(rs.getString("event_venue"));
                 a.setClubName(rs.getString("club_name"));
                 a.setPosition(rs.getString("position"));

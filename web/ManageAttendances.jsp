@@ -50,10 +50,14 @@
                                                                     class="fas fa-map-marker-alt me-1"></i>
                                                                 <%= targetEvent.getVenue()%>
                                                             </span>
-                                                            <span class="badge bg-primary ms-2"><i
-                                                                    class="far fa-calendar-alt me-1"></i>
-                                                                <%= targetEvent.getDate()%>
-                                                            </span>
+                                                             <span class="badge bg-primary ms-2"><i
+                                                                     class="far fa-calendar-alt me-1"></i>
+                                                                 <%= targetEvent.getDate()%>
+                                                                 <% if (targetEvent.getTime() != null) { %>
+                                                                     <%= targetEvent.getTime().toString().substring(0, 5) %>
+                                                                     <%= targetEvent.getEndTime() != null ? " - " + targetEvent.getEndTime().toString().substring(0, 5) : "" %>
+                                                                 <% } %>
+                                                             </span>
                                                 </div>
                                             </div>
 

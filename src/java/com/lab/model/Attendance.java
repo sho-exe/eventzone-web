@@ -21,6 +21,8 @@ public class Attendance {
     private String eventName;
     private String clubName;
     private java.sql.Date eventDate;
+    private java.sql.Time eventTime;
+    private java.sql.Time eventEndTime;
     private String eventVenue;
 
     public Attendance() {}
@@ -66,6 +68,12 @@ public class Attendance {
 
     public java.sql.Date getEventDate() { return eventDate; }
     public void setEventDate(java.sql.Date eventDate) { this.eventDate = eventDate; }
+
+    public java.sql.Time getEventTime() { return eventTime; }
+    public void setEventTime(java.sql.Time eventTime) { this.eventTime = eventTime; }
+
+    public java.sql.Time getEventEndTime() { return eventEndTime; }
+    public void setEventEndTime(java.sql.Time eventEndTime) { this.eventEndTime = eventEndTime; }
 
     public String getEventVenue() { return eventVenue; }
     public void setEventVenue(String eventVenue) { this.eventVenue = eventVenue; }

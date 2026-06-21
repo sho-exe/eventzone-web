@@ -76,9 +76,13 @@
                                             <i class="bx bx-calendar text-primary fs-5"></i>
                                             <div>
                                                 <small class="text-muted d-block"
-                                                    style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Date</small>
+                                                    style="font-size: 0.7rem; text-transform: uppercase; font-weight: 600;">Date & Time</small>
                                                 <span class="fs-6 text-dark fw-semibold">
                                                     <%= e.getDate() %>
+                                                    <% if (e.getTime() != null) { %>
+                                                        <%= e.getTime().toString().substring(0, 5) %>
+                                                        <%= e.getEndTime() != null ? " - " + e.getEndTime().toString().substring(0, 5) : "" %>
+                                                    <% } %>
                                                 </span>
                                             </div>
                                         </div>

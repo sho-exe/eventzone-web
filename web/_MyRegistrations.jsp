@@ -139,6 +139,10 @@
                                                         <div class="col-sm-6 mb-2 mb-sm-0">
                                                             <i class="far fa-calendar-alt text-danger me-1"></i>
                                                             Event Date: <%= a.getEventDate() %>
+                                                            <% if (a.getEventTime() != null) { %>
+                                                                <%= a.getEventTime().toString().substring(0, 5) %>
+                                                                <%= a.getEventEndTime() != null ? " - " + a.getEventEndTime().toString().substring(0, 5) : "" %>
+                                                            <% } %>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <i class="fas fa-map-marker-alt text-info me-1"></i>

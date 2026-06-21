@@ -135,7 +135,7 @@ public class ReportDAO {
     // 3d. Events Module: Recent Events details
     public List<Map<String, Object>> getRecentEvents() {
         List<Map<String, Object>> list = new ArrayList<>();
-        String sql = "SELECT e.event_id, e.event_name, e.date, e.venue, e.quota, e.status, e.category, c.club_name, " +
+        String sql = "SELECT e.event_id, e.event_name, e.date, e.time, e.end_time, e.venue, e.quota, e.status, e.category, c.club_name, " +
                      "(SELECT COUNT(*) FROM attendances a WHERE a.event_id = e.event_id) as registered_count, " +
                      "(SELECT COUNT(*) FROM attendances a WHERE a.event_id = e.event_id AND a.status = 'ATTENDED') as attended_count " +
                      "FROM events e " +
@@ -149,6 +149,8 @@ public class ReportDAO {
                 map.put("eventId", rs.getInt("event_id"));
                 map.put("eventName", rs.getString("event_name"));
                 map.put("date", rs.getDate("date"));
+                map.put("time", rs.getTime("time"));
+                map.put("endTime", rs.getTime("end_time"));
                 map.put("venue", rs.getString("venue"));
                 map.put("quota", rs.getInt("quota"));
                 map.put("status", rs.getString("status"));

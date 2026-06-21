@@ -7,6 +7,8 @@ public class Event {
     private String eventName;
     private String description;
     private Date date;
+    private java.sql.Time time;
+    private java.sql.Time endTime;
     private String venue;
     private int quota;
     private String criteria;
@@ -34,6 +36,12 @@ public class Event {
 
     public Date getDate() { return date; }
     public void setDate(Date date) { this.date = date; }
+
+    public java.sql.Time getTime() { return time; }
+    public void setTime(java.sql.Time time) { this.time = time; }
+
+    public java.sql.Time getEndTime() { return endTime; }
+    public void setEndTime(java.sql.Time endTime) { this.endTime = endTime; }
 
     public String getVenue() { return venue; }
     public void setVenue(String venue) { this.venue = venue; }
