@@ -33,6 +33,30 @@
     --role-accent-light: <%= accentLight %> !important;
     --role-accent-hex: <%= accentHex %> !important;
   }
+  body {
+    background: radial-gradient(circle at 10% 20%, rgba(105, 108, 255, 0.08) 0%, rgba(198, 204, 255, 0.08) 90%), #f5f5f9 !important;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .authentication-wrapper.authentication-basic {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .card {
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 15px 35px rgba(105, 108, 255, 0.08) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(15px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .card:hover {
+    box-shadow: 0 20px 45px rgba(105, 108, 255, 0.15) !important;
+  }
   .text-primary {
     color: <%= accentColor %> !important;
   }
@@ -54,7 +78,7 @@
 <body>
   <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
-      <div class="authentication-inner text-center">
+      <div class="authentication-inner text-center" style="max-width: 440px; width: 100%; margin: 0 auto;">
         <div class="card">
           <div class="card-body p-5">
             <h2 class="mb-4 fw-bold text-primary">Logged Out Successfully</h2>
@@ -62,8 +86,7 @@
             <div class="spinner-border text-primary mb-4" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
-            <p class="text-muted small">Redirecting you to the login page in <span id="countdown">3</span>
-              seconds...</p>
+            <p class="text-muted small">Redirecting you to the login page in <span id="countdown">3</span> seconds...</p>
             <a href="Login.jsp" class="btn btn-outline-primary mt-3">Return to Login Now</a>
           </div>
         </div>
