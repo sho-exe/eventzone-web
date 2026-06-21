@@ -77,6 +77,7 @@ public class EventDAO {
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setImage(rs.getString("image"));
+                e.setSupportingText(rs.getString("supporting_text"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -106,6 +107,7 @@ public class EventDAO {
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setImage(rs.getString("image"));
+                e.setSupportingText(rs.getString("supporting_text"));
 
                 e.setClubId(rs.getInt("club_id"));
                 e.setStatus(rs.getString("status"));
@@ -140,6 +142,7 @@ public class EventDAO {
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setImage(rs.getString("image"));
+                e.setSupportingText(rs.getString("supporting_text"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -172,6 +175,7 @@ public class EventDAO {
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setImage(rs.getString("image"));
+                e.setSupportingText(rs.getString("supporting_text"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -204,6 +208,7 @@ public class EventDAO {
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setImage(rs.getString("image"));
+                e.setSupportingText(rs.getString("supporting_text"));
                 e.setClubName(rs.getString("club_name"));
                 events.add(e);
             }
@@ -246,6 +251,21 @@ public class EventDAO {
             preparedStatement.setInt(2, eventId);
             rowUpdated = preparedStatement.executeUpdate() > 0;
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
+    }
+
+    private static final String UPDATE_EVENT_STATUS_WITH_REASON = "UPDATE events SET status = ?, supporting_text = ? WHERE event_id = ?";
+
+    public boolean updateEventStatusWithReason(int eventId, String status, String supportingText) {
+        boolean rowUpdated = false;
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_EVENT_STATUS_WITH_REASON)) {
+            preparedStatement.setString(1, status);
+            preparedStatement.setString(2, supportingText);
+            preparedStatement.setInt(3, eventId);
+            rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -297,6 +317,7 @@ public class EventDAO {
                 e.setCategory(rs.getString("category"));
                 e.setSdgGoals(rs.getString("sdg_goals"));
                 e.setImage(rs.getString("image"));
+                e.setSupportingText(rs.getString("supporting_text"));
                 e.setClubName(rs.getString("club_name"));
             }
         } catch (SQLException ex) {

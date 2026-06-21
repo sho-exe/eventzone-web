@@ -247,11 +247,25 @@ public class EventController extends HttpServlet {
         } else if (("approve".equals(action) || "reject".equals(action))
                 && ("ADVISOR".equals(accountType) || "HEPA".equals(accountType))) {
             int eventId = Integer.parseInt(request.getParameter("eventId"));
-            String status = "approve".equals(action) ? "APPROVED" : "REJECTED";
-            eventDAO.updateEventStatus(eventId, status);
+            String supportingText = request.getParameter("supportingText");
+            
+            String newStatus = "REJECTED"; // default for reject
+            if ("approve".equals(action)) {
+                if ("ADVISOR".equals(accountType)) {
+                    newStatus = "PENDING_HEPA";
+                } else if ("HEPA".equals(accountType)) {
+                    newStatus = "APPROVED";
+                }
+            }
 
-            // Auto-register the club's chairperson as a participant when approved
-            if ("APPROVED".equals(status)) {
+            if ("ADVISOR".equals(accountType)) {
+                eventDAO.updateEventStatusWithReason(eventId, newStatus, supportingText);
+            } else {
+                eventDAO.updateEventStatus(eventId, newStatus);
+            }
+
+            // Auto-register the club's chairperson as a participant when fully approved
+            if ("APPROVED".equals(newStatus)) {
                 Event event = eventDAO.selectEventById(eventId);
                 if (event != null) {
                     Club club = clubDAO.selectClubById(event.getClubId());
@@ -261,13 +275,11 @@ public class EventController extends HttpServlet {
                     }
                 }
             }
-
-            // Redirect back to context
-            String referer = request.getHeader("referer");
-            if (referer != null && referer.contains("global")) {
-                response.sendRedirect("events?action=global");
+            
+            if ("HEPA".equals(accountType)) {
+                response.sendRedirect("events?action=global&message=Success:+Event+status+updated+to+" + newStatus);
             } else {
-                response.sendRedirect("events?action=pending");
+                response.sendRedirect("events?action=pending&message=Success:+Event+status+updated+to+" + newStatus);
             }
 
         } else if ("register".equals(action) && ("STUDENT".equals(accountType) || "CHAIRPERSON".equals(accountType))) {

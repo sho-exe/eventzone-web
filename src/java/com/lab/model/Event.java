@@ -17,6 +17,7 @@ public class Event {
     private String category;
     private String sdgGoals;
     private String image;
+    private String supportingText;
 
     // Helper specific to UI mapping
     private String clubName;
@@ -66,6 +67,9 @@ public class Event {
 
     public String getImage() { return image; }
     public void setImage(String image) { this.image = image; }
+
+    public String getSupportingText() { return supportingText; }
+    public void setSupportingText(String supportingText) { this.supportingText = supportingText; }
 
     public String getClubName() { return clubName; }
     public void setClubName(String clubName) { this.clubName = clubName; }

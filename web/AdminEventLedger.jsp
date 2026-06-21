@@ -101,8 +101,7 @@
                                                             int eventIndex = 0;
                                                             for (Event e : eventList) {
                                                             eventIndex++;
-                                                            boolean isPendingRow
-                                                            = "PENDING".equals(e.getStatus());
+                                                            boolean isPendingRow = isHepa ? "PENDING_HEPA".equals(e.getStatus()) : "PENDING".equals(e.getStatus());
                                                             boolean isApproved
                                                             = "APPROVED".equals(e.getStatus());
                                                             String badgeColor = "bg-label-warning"; // PENDING
@@ -110,9 +109,12 @@
                                                             if("APPROVED".equals(e.getStatus())) {
                                                             badgeColor = "bg-label-success";
                                                             icon = "bx-check-circle"; }
-                                                            if("REJECTED".equals(e.getStatus())) {
+                                                            else if("REJECTED".equals(e.getStatus())) {
                                                             badgeColor = "bg-label-danger";
                                                             icon = "bx-x-circle"; }
+                                                            else if("PENDING_HEPA".equals(e.getStatus())) {
+                                                            badgeColor = "bg-label-info";
+                                                            icon = "bx-loader-circle"; }
                                                             %>
                                                             <div class="col-12 admin-event-card-wrapper">
                                                                 <div
@@ -164,10 +166,20 @@
                                                                                     style="font-size: 1.4rem; line-height: 1.3;">
                                                                                     <%= e.getEventName()%>
                                                                                 </h5>
-                                                                                <p class="text-muted mb-0"
+                                                                                <p class="text-muted mb-3"
                                                                                     style="line-height: 1.5; font-size: 0.95rem;">
                                                                                     <%= e.getDescription()%>
                                                                                 </p>
+                                                                                <% if (e.getSupportingText() != null && !e.getSupportingText().trim().isEmpty()) { %>
+                                                                                    <div class="p-3 bg-light rounded border-start border-4 border-info">
+                                                                                        <small class="text-info fw-bold d-block mb-1">
+                                                                                            <i class="bx bx-message-detail me-1"></i>Advisor Remark:
+                                                                                        </small>
+                                                                                        <span class="text-dark small" style="line-height: 1.4;">
+                                                                                            <%= e.getSupportingText() %>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                <% } %>
                                                                             </div>
 
                                                                             <!-- Col 3: Details & Actions -->
@@ -291,43 +303,60 @@
                                                                                     class="d-flex flex-nowrap align-items-stretch gap-2 w-100">
                                                                                     <% if (isPendingRow && !isHistory) {
                                                                                         %>
-                                                                                        <form action="events"
-                                                                                            method="POST"
-                                                                                            class="mb-0 flex-grow-1 d-flex"
-                                                                                            onsubmit="return confirm('APPROVE: Are you sure you want to authorize this event?');">
-                                                                                            <input type="hidden"
-                                                                                                name="eventId"
-                                                                                                value="<%= e.getEventId()%>">
-                                                                                            <input type="hidden"
-                                                                                                name="action"
-                                                                                                value="approve">
-                                                                                            <button type="submit"
-                                                                                                class="btn-approve-action w-100 d-flex align-items-center justify-content-center"
-                                                                                                style="height: 38px;">
-                                                                                                <i
-                                                                                                    class="bx bx-check me-1"></i>
-                                                                                                Approve
+                                                                                        <% if (!isHepa) { %>
+                                                                                            <button type="button"
+                                                                                                class="btn-approve-action w-100 d-flex align-items-center justify-content-center mb-0 flex-grow-1"
+                                                                                                style="height: 38px;"
+                                                                                                data-bs-toggle="modal" data-bs-target="#actionModal"
+                                                                                                onclick="setupActionModal('<%= e.getEventId() %>', 'approve')">
+                                                                                                <i class="bx bx-check me-1"></i> Approve
                                                                                             </button>
-                                                                                        </form>
-                                                                                        <form action="events"
-                                                                                            method="POST"
-                                                                                            class="mb-0 flex-grow-1 d-flex"
-                                                                                            onsubmit="return confirm('REJECT: Are you sure you want to reject this event?');">
-                                                                                            <input type="hidden"
-                                                                                                name="eventId"
-                                                                                                value="<%= e.getEventId()%>">
-                                                                                            <input type="hidden"
-                                                                                                name="action"
-                                                                                                value="reject">
-                                                                                            <button type="submit"
-                                                                                                class="btn-reject-action w-100 d-flex align-items-center justify-content-center"
-                                                                                                style="height: 34;"
-                                                                                                title="Reject Event">
-                                                                                                <i
-                                                                                                    class="bx bx-x me-1"></i>
-                                                                                                Reject
+                                                                                            <button type="button"
+                                                                                                class="btn-reject-action w-100 d-flex align-items-center justify-content-center mb-0 flex-grow-1"
+                                                                                                style="height: 38px;"
+                                                                                                data-bs-toggle="modal" data-bs-target="#actionModal"
+                                                                                                onclick="setupActionModal('<%= e.getEventId() %>', 'reject')">
+                                                                                                <i class="bx bx-x me-1"></i> Reject
                                                                                             </button>
-                                                                                        </form>
+                                                                                        <% } else { %>
+                                                                                            <form action="events"
+                                                                                                method="POST"
+                                                                                                class="mb-0 flex-grow-1 d-flex"
+                                                                                                onsubmit="return confirm('APPROVE: Are you sure you want to authorize this event?');">
+                                                                                                <input type="hidden"
+                                                                                                    name="eventId"
+                                                                                                    value="<%= e.getEventId()%>">
+                                                                                                <input type="hidden"
+                                                                                                    name="action"
+                                                                                                    value="approve">
+                                                                                                <button type="submit"
+                                                                                                    class="btn-approve-action w-100 d-flex align-items-center justify-content-center"
+                                                                                                    style="height: 38px;">
+                                                                                                    <i
+                                                                                                        class="bx bx-check me-1"></i>
+                                                                                                    Approve
+                                                                                                </button>
+                                                                                            </form>
+                                                                                            <form action="events"
+                                                                                                method="POST"
+                                                                                                class="mb-0 flex-grow-1 d-flex"
+                                                                                                onsubmit="return confirm('REJECT: Are you sure you want to reject this event?');">
+                                                                                                <input type="hidden"
+                                                                                                    name="eventId"
+                                                                                                    value="<%= e.getEventId()%>">
+                                                                                                <input type="hidden"
+                                                                                                    name="action"
+                                                                                                    value="reject">
+                                                                                                <button type="submit"
+                                                                                                    class="btn-reject-action w-100 d-flex align-items-center justify-content-center"
+                                                                                                    style="height: 38px;"
+                                                                                                    title="Reject Event">
+                                                                                                    <i
+                                                                                                        class="bx bx-x me-1"></i>
+                                                                                                    Reject
+                                                                                                </button>
+                                                                                            </form>
+                                                                                        <% } %>
                                                                                         <% } else { %>
                                                                                             <span
                                                                                                 class="badge bg-label-secondary flex-grow-1 d-flex align-items-center justify-content-center border text-muted m-0"
@@ -382,8 +411,43 @@
                             </div>
 
                             <% }%>
+                            <!-- Advisor Action Modal -->
+                            <div class="modal fade" id="actionModal" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fw-bold" id="actionModalTitle">Action</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="events" method="POST">
+                                            <div class="modal-body">
+                                                <input type="hidden" name="eventId" id="actionModalEventId">
+                                                <input type="hidden" name="action" id="actionModalAction">
+                                                <div class="mb-3">
+                                                    <label for="supportingText" class="form-label fw-semibold">Supporting Text / Remark</label>
+                                                    <textarea class="form-control" name="supportingText" id="supportingText" rows="3" required placeholder="Provide a justification or remark for this action..."></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary" id="actionModalSubmitBtn">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             
                             <script>
+                                function setupActionModal(eventId, action) {
+                                    document.getElementById('actionModalEventId').value = eventId;
+                                    document.getElementById('actionModalAction').value = action;
+                                    var title = action === 'approve' ? 'Approve Event' : 'Reject Event';
+                                    var btnClass = action === 'approve' ? 'btn-primary' : 'btn-danger';
+                                    document.getElementById('actionModalTitle').innerText = title;
+                                    document.getElementById('actionModalSubmitBtn').className = 'btn ' + btnClass;
+                                    document.getElementById('actionModalSubmitBtn').innerText = title;
+                                }
+
                                 document.addEventListener("DOMContentLoaded", function () {
                                     var searchInput = document.getElementById('adminEventSearch');
                                     if (searchInput) {
