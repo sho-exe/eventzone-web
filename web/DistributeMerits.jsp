@@ -284,10 +284,12 @@
                                                                                                         for (Event e :
                                                                                                         approvedEvents)
                                                                                                         {
-                                                                                                        boolean
-                                                                                                        isAlreadyDistributed
-                                                                                                        =
-                                                                                                        meritDAO.isDistributed(e.getEventId());
+                                                                                                         boolean
+                                                                                                         isAlreadyDistributed
+                                                                                                         =
+                                                                                                         meritDAO.isDistributed(e.getEventId());
+                                                                                                         List<com.lab.model.Attendance> attendeesForCheck = attendanceDAO.getAttendancesForEvent(e.getEventId());
+                                                                                                         boolean hasAttendees = (attendeesForCheck != null && !attendeesForCheck.isEmpty());
                                                                                                         %>
                                                                                                         <% String
                                                                                                             temporary=isAlreadyDistributed
@@ -398,8 +400,18 @@
                                                                                                                                     Revoke</button>
                                                                                                                             </form>
                                                                                                                         </div>
-                                                                                                                        <% } else
-                                                                                                                            {%>
+                                                                                                                        <% } else if (!hasAttendees) { %>
+                                                                                                                             <button
+                                                                                                                                 type="button"
+                                                                                                                                 class="btn btn-sm btn-secondary fw-bold px-3 opacity-50"
+                                                                                                                                 disabled
+                                                                                                                                 title="No attendees registered for this event yet">
+                                                                                                                                 <i
+                                                                                                                                     class="fas fa-ban me-1"></i>
+                                                                                                                                 No Attendees
+                                                                                                                             </button>
+                                                                                                                         <% } else
+                                                                                                                             {%>
                                                                                                                             <button
                                                                                                                                 type="button"
                                                                                                                                 class="btn btn-sm btn-success fw-bold px-3"
