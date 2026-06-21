@@ -83,7 +83,7 @@
                                                                          %>
                                                                          <div class="col-lg-4 col-md-6">
                                                                              <div class="card club-card position-relative">
-                                                                                 <form action="ClubController?action=advisor" method="POST">
+                                                                                 <form action="clubs" method="POST">
                                                                                      <input type="hidden" name="action" value="assignChairperson">
                                                                                      <input type="hidden" name="clubId" value="<%= c.getClubId() %>">
  
