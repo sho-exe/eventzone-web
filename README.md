@@ -14,7 +14,7 @@ These inefficiencies are low student participation, ghost registrations where st
 |----|--------|-------------|------|--------|
 | 1 | Manage Users | Handles user login and role-based access control for all four user types. Admin HEPA manages user profiles and role assignments. | — | Iqbal |
 | 2 | Manage Clubs | Manages club creation, assignment of Club Advisors and Chairpersons, scoped to one faculty. | Core | Adly |
-| 3 | Manage Events | Manages event creation including venue details, capacity control, registration approval/rejection, and auto-rejects new registrations when venue capacity is full. | — | Shukri *(Leader)* |
+| 3 | Manage Events | Manages event creation including venue details, capacity control, registration approval/rejection, and auto-rejects new registrations when venue capacity is full. | Core | Shukri *(Leader)* |
 | 4 | View Events | Allows Students to browse and view event listings, details, venue, and registration status. Read-only access extending from Manage Events. | Extends M3 | Shukri |
 | 5 | Manage Attendance | Handles student self-check-in, Chairperson verification, and attendance history tracking for HEPA and Advisors. | Core | Iqbal |
 | 6 | Manage Merits | Admin HEPA calculates and assigns merit points to students based on attendance and event criteria. Includes merit summary management across all semesters. | — | Adly |
